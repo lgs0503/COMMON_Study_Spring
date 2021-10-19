@@ -46,7 +46,7 @@ public class AdminController {
 	 * name : adminloginPage
 	 * description : 로그인화면을 보여준다.
 	 */
-	@RequestMapping(value = "/admin.do")
+	@RequestMapping(value = "/admin")
 	public String adminloginPage() throws Exception {
 
 		return "admin/login";
@@ -56,7 +56,7 @@ public class AdminController {
 	 * name : adminRegisterPage
 	 * description : 회원가입 화면을 보여준다.
 	 */
-	@RequestMapping(value = "/register.do")
+	@RequestMapping(value = "/register")
 	public String adminRegisterPage() throws Exception {
 
 		return "admin/register";
@@ -67,7 +67,7 @@ public class AdminController {
 	 * description : 비밀번호 찾기 화면을 보여준다.
 	 */
 
-	@RequestMapping(value = "/findpw.do")
+	@RequestMapping(value = "/findpw")
 	public String findpwPage() throws Exception {
 
 		return "admin/findpw";
@@ -77,7 +77,7 @@ public class AdminController {
 	 * name : loginProcess (AJAX)
      * description : 로그인을 한다.
 	 */
-	@RequestMapping(value = "/loginProcess.do")
+	@RequestMapping(value = "/cmmn/loginProcess")
 	public @ResponseBody String loginProcess(@RequestParam Map<String, Object> param
 			                                  , HttpSession session
 			                                  , HttpServletRequest request) throws Exception {
@@ -97,7 +97,7 @@ public class AdminController {
 	 * name : registerProcess (AJAX)
 	 * description : 회원가입을 한다.
 	 */
-	@RequestMapping(value = "/registerProcess.do")
+	@RequestMapping(value = "/cmmn/registerProcess")
 	public @ResponseBody String registerProcess(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
@@ -110,7 +110,7 @@ public class AdminController {
 	 * name : logoutProcess
      * description : 로그아웃을한다.
 	 */
-    @RequestMapping(value="/logoutProcess.do")
+    @RequestMapping(value="/cmmn/logoutProcess")
     public String logoutProcess(HttpSession session) {
                             
         session.setAttribute("loginCheck",null);
@@ -123,7 +123,7 @@ public class AdminController {
 	 * name : overlapId (AJAX)
 	 * description : 아이디를 중복확인 한다.
 	 */
-	@RequestMapping(value = "/overlapId.do")
+	@RequestMapping(value = "/cmmn/overlapId")
 	public @ResponseBody String overlapId(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
@@ -135,7 +135,7 @@ public class AdminController {
 	 * name : selectPwFindQuiz (AJAX)
 	 * description : 비밀번호 찾기 질문을 조회한다.
 	 */
-	@RequestMapping(value = "/selectPwFindQuiz.do", produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/cmmn/selectPwFindQuiz", produces = "application/text; charset=utf8")
 	public @ResponseBody
 	String selectPwFindQuiz(@RequestParam Map<String, Object> param
 			, HttpSession session
@@ -148,7 +148,7 @@ public class AdminController {
 	 * name : selectPwFind (AJAX)
 	 * description : 비밀번호 찾기 를 조회한다.
 	 */
-	@RequestMapping(value = "/selectPwFind.do", produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/cmmn/selectPwFind", produces = "application/text; charset=utf8")
 	public @ResponseBody
 	String selectPwFind(@RequestParam Map<String, Object> param
 			, HttpSession session
@@ -161,7 +161,7 @@ public class AdminController {
 	 * name : selectLoginUserInfo (AJAX)
 	 * description : 로그인 유저 정보를 조회한다.
 	 */
-	@RequestMapping(value = "/selectLoginUserInfo.do")
+	@RequestMapping(value = "/cmmn/selectLoginUserInfo")
 	public @ResponseBody
 	ModelAndView selectLoginUserInfo(@RequestParam Map<String, Object> param
 			, HttpSession session
@@ -180,7 +180,7 @@ public class AdminController {
 	 * name : mypageView
 	 * description : 마이페이지 화면을 보여준다.
 	 */
-	@RequestMapping(value="/mypage.do")
+	@RequestMapping(value="/mypage")
 	public String mypageView(HttpSession session) {
 
 		return "admin/mypage";
@@ -191,40 +191,9 @@ public class AdminController {
 	 * name : adminMainPage
      * description : 관리자 메인화면을보여준다
 	 */
-	@RequestMapping(value = "/admin/main.do")
+	@RequestMapping(value = "/admin/main")
 	public String adminMainPage(Model model) throws Exception {
 
 		return "admin/index";
 	}
-
-	/**
-	 * name : projectPage
-     * description : 프로젝트관리화면을 보여준다.
-	 */
-	@RequestMapping(value = "/admin/project.do")
-	public String projectPage(Model model) throws Exception {
-
-		return "admin/project";
-	}
-	
-	/**
-	 * name : bbsPage
-     * description : 게시판관리화면을 보여준다.
-	 */
-	@RequestMapping(value = "/admin/bbs.do")
-	public String bbsPage(Model model) throws Exception {
-
-		return "admin/bbs";
-	}
-	
-	/**
-	 * name : settingPage
-     * description : 시스템 설정 화면을 보여준다.
-	 */
-	@RequestMapping(value = "/admin/setting.do")
-	public String settingPage(Model model) throws Exception {
-
-		return "admin/setting";
-	}
-	
 }

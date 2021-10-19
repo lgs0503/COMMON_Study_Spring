@@ -34,7 +34,7 @@
 						alert("아이디를 입력해주세요");
 						return;
 					} else {
-						let url = '/selectPwFindQuiz.do';
+						let url = '/cmmn/selectPwFindQuiz';
 						let data = {id : userId};
 
 						ajaxLoad(url, data, "text", function(result){
@@ -52,7 +52,7 @@
 					/* 아이디 로 비밀번호 찾기 퀴즈 답변으로 비밀번호 찾기 */
 					let answer = document.getElementById("answer").value;
 
-					let url = '/selectPwFind.do';
+					let url = '/cmmn/selectPwFind';
 					let data = { id : userId
 					           , answer : answer};
 
@@ -72,7 +72,7 @@
 
 			/* 취소 버튼 클릭 */
 			btnPrev.onclick = function () {
-				location.href = "/admin.do";
+				location.href = "/admin";
 			}
 		}
 	</script>
@@ -81,7 +81,7 @@
 		<div class="container">
 			<div class="header regi-header">
 				<div class="header-title">
-					<h1 class="header-title-main font70"><a href="/admin.do">CMS</a></h1>
+					<h1 class="header-title-main font70"><a href="/admin">CMS</a></h1>
 					<h2 class="header-title-sub">Contents Management System</h2>
 				</div>
 			</div>

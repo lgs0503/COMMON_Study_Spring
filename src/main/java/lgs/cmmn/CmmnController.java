@@ -56,7 +56,7 @@ public class CmmnController {
      * name : selectCode (AJAX)
      * description : 코드 데이터를 조회한다.
      */
-    @RequestMapping("/selectCode")
+    @RequestMapping("/cmmn/selectCode")
     public @ResponseBody
     ModelAndView selectCode(@RequestParam Map<String, Object> param
             , HttpSession session

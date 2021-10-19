@@ -58,7 +58,7 @@
 					return;
 				}
 
-				let url = '/loginProcess.do';
+				let url = '/cmmn/loginProcess';
 				let data = { userID : userID ,
 					         userPW : userPW };
 
@@ -66,7 +66,7 @@
 					console.log("success", data);
 					if(data == "1"){
 						alert("로그인하였습니다.");
-						location.href="/admin/main.do"
+						location.href="/admin/main"
 					} else {
 						alert("아이디 및 비밀번호를 확인해주세요");
 					}
@@ -88,7 +88,7 @@
 	<div class="container">
 		<div class="header">
 			<div class="header-title">
-				<h1 class="header-title-main font70"><a href="/admin.do">CMS</a></h1>
+				<h1 class="header-title-main font70"><a href="/admin">CMS</a></h1>
 				<h2 class="header-title-sub">Content ManageMent System</h2>
 			</div>
 		</div>

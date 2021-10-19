@@ -102,7 +102,7 @@ window.onload = function(){
 	
 	/*footer 어드민 버튼 클릭이벤트*/
 	$(".footer-admin-btn").click(function(){
-		location.href="/admin.do"
+		location.href="/admin"
 	});
 
 }

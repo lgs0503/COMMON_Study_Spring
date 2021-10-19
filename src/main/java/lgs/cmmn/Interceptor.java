@@ -24,11 +24,11 @@ public class Interceptor extends HandlerInterceptorAdapter{
 				if (userId != null && userId != "" && userId != "undefined") {
 					return true;
 				} else {
-					ModelAndView modelAndView = new ModelAndView("redirect:/admin.do");
+					ModelAndView modelAndView = new ModelAndView("redirect:/admin");
 					throw new ModelAndViewDefiningException(modelAndView);
 				}
 			} catch (Exception e) {
-				ModelAndView modelAndView = new ModelAndView("redirect:/admin.do");
+				ModelAndView modelAndView = new ModelAndView("redirect:/admin");
 				throw new ModelAndViewDefiningException(modelAndView);
 			}
 	}

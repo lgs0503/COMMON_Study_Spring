@@ -36,10 +36,11 @@
             <mvc:exclude-mapping path="/css/**"/>
             <mvc:exclude-mapping path="/images/**"/>
 
-            <mvc:exclude-mapping path="/admin.do"/>
-            <mvc:exclude-mapping path="/register.do"/>
-            <mvc:exclude-mapping path="/findpw.do"/>
-            <mvc:exclude-mapping path="/loginProcess.do"/>
+            <mvc:exclude-mapping path="/cmmn/**"/>
+
+            <mvc:exclude-mapping path="/admin"/>
+            <mvc:exclude-mapping path="/register"/>
+            <mvc:exclude-mapping path="/findpw"/>
 
             <bean class="lgs.cmmn.Interceptor" />
         </mvc:interceptor>

@@ -60,12 +60,12 @@
 					}).then(function(resolve){
 						document.getElementById("memberImageNo").value = resolve;
 
-						let url = '/registerProcess.do';
+						let url = '/cmmn/registerProcess';
 						let data = $("#regi-form").serialize();
 
 						ajaxLoad(url, data, "json", function(){
 							alert("회원가입완료");
-							location.href = "/admin.do";
+							location.href = "/admin";
 						});
 					});
 				}
@@ -73,7 +73,7 @@
 
 			/* 뒤로가기 버튼 클릭 */
 			btnPrev.onclick = function(){
-				location.href="/admin.do";
+				location.href="/admin";
 			}
 
 			/* 프로필 사진 데이터 체인지 될 경우 섬네일 화면 수정*/
@@ -102,7 +102,7 @@
 			/* 아이디 체인지 - 중복확인 */
 			iptId.onchange = function(){
 
-				let url = '/overlapId.do';
+				let url = '/cmmn/overlapId';
 				let data = {id : this.value};
 
 				ajaxLoad(url, data, "text", function(data){
@@ -196,7 +196,7 @@
 	<div class="container">
 		<div class="header regi-header">
 			<div class="header-title">
-				<h1 class="header-title-main font70"><a href="/admin.do">CMS</a></h1>
+				<h1 class="header-title-main font70"><a href="/admin">CMS</a></h1>
 				<h2 class="header-title-sub">Contents Management System</h2>
 			</div>
 		</div>

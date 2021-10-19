@@ -71,7 +71,7 @@ function inputOnlyNumber(inputId){
 /* 콤보박스 로드 */
 function comboLoad(selectId, upperCode, type){
 
-    let url = '/selectCode';
+    let url = '/cmmn/selectCode';
     let data = {upperCodeNo : upperCode};
 
     ajaxLoad(url, data, "json", function(result){

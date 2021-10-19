@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function(){
 		/* 로그인 계정정보 조회 (프로필사진, 아이디) */
-		let url = '/selectLoginUserInfo.do';
+		let url = '/cmmn/selectLoginUserInfo';
 		ajaxLoad(url, null, "json", function(result){
 			document.getElementById("mova-user-name").innerText = result.userList[0].MEMBER_NAME;
 			document.getElementById("user-name").innerText = result.userList[0].MEMBER_NAME;
@@ -83,12 +83,12 @@
 
 		/* 마이페이지 클릭 */
 		mypageBtn.onclick = function() {
-			location.href="/mypage.do";
+			location.href="/mypage";
 		}
 
 		/* 로그아웃 클릭 */
 		logoutBtn.onclick = function(){
-			location.href="/logoutProcess.do";
+			location.href="/cmmn/logoutProcess";
 		}
 	});
 </script>
