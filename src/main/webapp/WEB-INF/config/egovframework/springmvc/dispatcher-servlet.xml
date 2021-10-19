@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <context:component-scan
+            base-package="egovframework">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <context:component-scan base-package="lgs"> <!-- 베이스 클래스변경 -->
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <!-- 인터셉터 설정 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+
+            <mvc:exclude-mapping path="/js/**"/>
+            <mvc:exclude-mapping path="/css/**"/>
+            <mvc:exclude-mapping path="/images/**"/>
+
+            <mvc:exclude-mapping path="/admin.do"/>
+            <mvc:exclude-mapping path="/register.do"/>
+            <mvc:exclude-mapping path="/findpw.do"/>
+            <mvc:exclude-mapping path="/loginProcess.do"/>
+
+            <bean class="lgs.cmmn.Interceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- Tiles 순서 설정 -->
+    <bean id="tilesViewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+        <property name="order" value="1"/>
+    </bean>
+
+    <bean id="beanNameResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
+
+    <!-- Tiles 설정 -->
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/config/egovframework/tiles/tiles.xml</value>
+                <!-- <value>/WEB-INF/config/egovframework/tiles/tiles-def.xml</value> -->
+            </list>
+        </property>
+    </bean>
+
+    <!-- 기존 jsp order tiles 사용을위해 우선순위 2로 변경  -->
+    <bean
+            class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+            p:order="2"
+            p:viewClass="org.springframework.web.servlet.view.JstlView"
+            p:prefix="/WEB-INF/jsp/lgs/" p:suffix=".jsp"/> <!-- JSP PATH 변경 -->
+
+    <!-- 리소스 위치 선정 -->
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+
+	<!-- 파일업로드 -->
+    <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10000000"></property>
+    </bean>
+
+	<!-- jsonView 사용-->
+	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView">
+		<property name="contentType" value="application/json;charset=UTF-8"/>
+	</bean>
+
+    <bean
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="webBindingInitializer">
+            <bean
+                    class="egovframework.example.cmmn.web.EgovBindingInitializer"/>
+        </property>
+    </bean>
+    <bean
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+    <!-- 쿠키를 이용한 Locale 이용시 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/> -->
+    <bean id="localeChangeInterceptor"
+          class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="language"/>
+    </bean>
+
+    <bean
+            class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="cmmn/egovError"/>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.springframework.dao.DataAccessException">cmmn/dataAccessFailure</prop>
+                <prop
+                        key="org.springframework.transaction.TransactionException">cmmn/transactionFailure
+                </prop>
+                <prop
+                        key="egovframework.rte.fdl.cmmn.exception.EgovBizException">cmmn/egovError
+                </prop>
+                <prop key="org.springframework.security.AccessDeniedException">cmmn/egovError</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- For Pagination Tag -->
+    <bean id="imageRenderer"
+          class="egovframework.example.cmmn.web.EgovImgPaginationRenderer"/>
+
+    <bean id="paginationManager"
+          class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+        <property name="rendererType">
+            <map>
+                <entry key="image" value-ref="imageRenderer"/>
+            </map>
+        </property>
+    </bean>
+    <!-- /For Pagination Tag -->
+
+    <mvc:view-controller path="/cmmn/validator.do"
+                         view-name="cmmn/validator"/>
+    <mvc:default-servlet-handler/>
+
+</beans>

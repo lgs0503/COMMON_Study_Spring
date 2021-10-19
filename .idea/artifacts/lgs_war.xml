@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lgs:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>lgs</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="lgs-1.0.0.war">
+      <element id="artifact" artifact-name="lgs:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,48 @@
+/* 변수 */
+:root{
+    --title-color:#52616B;
+    --text-color: #52616B;
+    --text-color-white: #ffffff;
+
+    --form-color: #e2e7eb;
+    --card-color:#52616B;
+
+    --btn-color:#52616B;
+    --btn-color-border:#1E2022;
+    --btn-color-hover:#1E2022;
+
+    --nav-text-color: #52616B;
+    --user-info-color:#1E2022;
+}
+.btn-cmmn{
+    background-color: var(--btn-color);
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-cmmn:hover{
+    background-color: var(--btn-color-hover);
+}
+.header-title-main > a{
+    font-weight: bold;
+    color: var(--title-color);
+    font-family: 'Lato', sans-serif;
+    text-decoration: none;
+}
+.font70{
+    font-size: 70px;
+}
+.font60{
+    font-size: 60px;
+}
+.font50{
+    font-size: 50px;
+}
+.header-title-sub{
+    margin-top: 10px;
+    color: var(--text-color);
+    font-family: 'Lato', sans-serif;
+}

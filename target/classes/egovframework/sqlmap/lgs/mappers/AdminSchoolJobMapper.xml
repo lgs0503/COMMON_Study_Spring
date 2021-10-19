@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lgs.admin.mapper.AdminSchoolJobMapper">
+
+	<select id="searchList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	    SELECT IDX
+		     , SEQ
+		     , GUBUN
+             , NAME
+		     , MEMBER_ID
+		  FROM (SELECT ROWNUM AS NUM
+		             , A.IDX
+		             , A.SEQ
+				     , CASE WHEN A.GUBUN = 'school' THEN '학력'
+				            WHEN A.GUBUN = 'job' THEN '경력' END GUBUN
+                     , A.NAME
+				     , B.ID AS MEMBER_ID
+		          FROM SCHOOl_JOB A
+		          LEFT OUTER JOIN MEMBER B
+		            ON A.IDX = B.IDX)
+		 WHERE 1=1
+		 <!-- 경력 학력 구분값  -->
+		 <choose>
+			 <when test="chkbox == 'school'">
+		   AND GUBUN = 'school'
+			 </when>
+			 <when test="chkbox == 'job'">
+		   AND GUBUN = 'job'
+			 </when>
+		 </choose>
+		 <!-- 키워드 검색 구분값 -->
+		 <choose>
+			 <when test="chkbox2 == 'majordept' 
+			         and keyword != null 
+			         and keyword != ''">
+		   AND MAJOR_DEPT LIKE '%' || #{keyword} || '%'
+			 </when>
+			 <when test="chkbox2 == 'name'
+			         and keyword != null 
+			         and keyword != ''">
+		   AND NAME LIKE '%' || #{keyword} || '%'
+			 </when>
+		 </choose>
+		   AND NUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="countList" resultType="int">
+		SELECT COUNT(*)
+		  FROM SCHOOL_JOB
+	</select>
+	
+	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT A.IDX
+		     , A.SEQ
+		     , CASE WHEN A.GUBUN = 'school' THEN '학력'
+		            WHEN A.GUBUN = 'job' THEN '경력' END GUBUN
+		     , A.NAME
+		     , A.MAJOR_DEPT
+		     , A.BEGIN_DATE
+		     , A.END_DATE
+		     , A.REMARK
+		     , B.ID AS MEMBER_ID
+		  FROM SCHOOL_JOB A
+          LEFT OUTER JOIN MEMBER B
+            ON A.IDX = B.IDX
+		 WHERE A.SEQ = #{IDX}
+	</select>
+	
+	<insert id="add" parameterType="java.util.HashMap">
+		INSERT
+		  INTO SCHOOL_JOB
+		     ( IDX
+		     , SEQ
+		     , GUBUN
+		     , NAME
+		     , MAJOR_DEPT
+		     , BEGIN_DATE
+		     , END_DATE
+		     , REMARK
+		     ) VALUES
+		     ( #{idx}
+		     , (SELECT NVL(MAX(TO_NUMBER(IDX)),0)+1 
+		          FROM SCHOOL_JOB)
+		     , #{gubun}
+		     , #{name}
+		     , #{majordept}
+		     , #{begindate}
+		     , #{enddate}
+		     , #{remark}
+		     )
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+		UPDATE SCHOOL_JOB
+		   SET NAME = #{name}
+		     , MAJOR_DEPT = #{majordept}
+		     , BEGIN_DATE = #{begindate}
+		     , END_DATE = #{enddate}
+		     , REMARK = #{remark}
+		 WHERE SEQ = #{seq}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE 
+		  FROM SCHOOL_JOB
+		 WHERE SEQ = #{seq}
+	</delete>
+</mapper>

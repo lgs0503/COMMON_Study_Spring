@@ -1,0 +1,283 @@
+
+/* 헤더 */
+.header{
+	text-align: center;
+	margin: 150px 0px 50px 0px;
+}
+.regi-header{
+	margin-top: 50px;
+}
+
+
+
+/* 컨텐츠*/
+.contents{
+	text-align: center;
+}
+.regi-content{
+	margin : 50px 50px;
+	background-color: var(--form-color);
+	padding: 50px 50px;
+	border-radius: 10px;
+	box-shadow: 4px 4px 10px 0px silver;
+}
+.terms-content{
+	background-color:#ffffff;
+	overflow-y: scroll;
+	height: 250px;
+	line-height: 30px;
+	padding:0 20px;
+	color: var(--text-color);
+	border : 1px solid var(--title-color);
+}
+.terms-content::-webkit-scrollbar {
+	width: 10px;
+}
+.terms-content::-webkit-scrollbar-thumb {
+	background-color: var(--text-color);
+}
+.terms-content::-webkit-scrollbar-track {
+	background-color: #ffffff;
+}
+.terms-idchk{
+	margin: 20px 0px 80px 0px;
+	font-size: 18px;
+	text-align: right;
+}
+.terms-idchk > label{
+	margin-right: 30px;
+}
+.regi-input{
+	display: flex;
+	flex-wrap: wrap;
+}
+.regi-input > div{
+	width: 33.3%;
+}
+.regi-input > div > .regi-tr{
+	width: 100%;
+	margin: 20px;
+}
+.picture-form > label{
+	display: block;
+	margin-bottom: 20px;
+}
+.picture{
+	width: 90%;
+	height: 90%;
+	background: #ffffff url("/images/lgs/noimage.gif") no-repeat left center;
+	margin: 0px;
+}
+.regi-input > div > div > input{
+	height: 27px;
+	padding: 0px 5px 0px 5px;
+}
+.regi-input > div > div > select{
+	height: 27px;
+	width: 100px;
+}
+#comdo-quiz{
+	width: 200px;
+}
+.regi-input > div > div > label{
+	display:inline-block;
+	width: 120px;
+}
+
+.login-form{
+	background-color: var(--form-color);
+	padding: 30px ;
+	width: 500px;
+	margin: 0px auto;
+	border-radius: 10px;
+	box-shadow: 4px 4px 10px 0px silver;
+}
+.login-ipt > div{
+	margin: 0px auto;
+	width: 460px;
+	height: 40px;
+	padding: 0px 10px 0px 10px;
+	background-color: #ffffff;
+	border: var(--text-color) 1px solid;
+	box-sizing: border-box;
+}
+.login-ipt > div:focus-within {
+	border: 1px solid black;
+}
+
+.login-ipt > div:last-child{
+	border-radius: 0px 0px 10px 10px;
+}
+.login-ipt > div:first-child{
+	border-radius: 10px 10px 0px 0px;
+}
+.login-ipt > div > input{
+	border: none;
+	height: 30px;
+	margin: 4px 0px;
+	width: 390px;
+}
+.login-ipt > div > i{
+	padding: 0px 10px 0px 10px;
+	color:var(--title-color);
+}
+.login-idchk{
+	position: relative;
+	text-align: left;
+	margin: 20px;
+	height: 30px;
+}
+#chk-id{
+	margin: 0px;
+	width: 20px;
+	height: 20px;
+}
+.login-idchk > .chk-label{
+	position: absolute;
+	top:2px;
+	left:30px;
+	display: inline;
+	color: var(--text-color);
+}
+.btn-size{
+	height: 27px;
+	width: 80px;
+}
+.login-btn > input{
+	width: 460px;
+	padding: 15px 0px;
+	font-size: 30px;
+}
+.regi-btn{
+	margin-top: 50px;
+	text-align: right;
+}
+.other{
+	margin-top :20px;
+}
+.other > a{
+	text-decoration: none;
+	color: var(--text-color);
+}
+.other > a:first-child{
+	margin-left: 40px;
+}
+.other > a:last-child{
+	border-left:1px solid var(--text-color);
+	padding-left : 10px;
+}
+.h2-title{
+	font-size: 25px;
+	color: #575757;
+	margin: 20px 20px;
+	position: relative;
+}
+div > h2 > i{
+	font-size: 5px;
+	position: absolute;
+	top:10px;
+	left:-20px;
+}
+/* 비밀번호 찾기 */
+.pwfind-form{
+	background-color: var(--form-color);
+	margin: 0 200px;
+	border-radius: 10px;
+	padding: 30px;
+	box-shadow: 4px 4px 10px 0px silver;
+}
+.pwfind-form > h2{
+	text-align: center;
+	font-weight: bold;
+}
+#pwfind-input1 > input{
+	padding: 10px 10px;
+	width: 300px;
+	border-radius: 50px;
+	border: 1.5px solid var(--title-color);
+}
+.pwfind-input{
+	display: none;
+	text-align: center;
+	margin: 50px 0px;
+}
+.pwfind-btn{
+	text-align: center;
+}
+.pwfind-btn > input{
+	padding: 10px 0px;
+	width: 80px;
+	cursor: pointer;
+}
+.ipt-quiz{
+	margin-bottom: 20px;
+}
+.ipt-quiz > input{
+	border: none;
+	background-color: var(--form-color);
+	font-weight: bold;
+}
+.ipt-quiz > input:focus {
+	outline:none;
+}
+#pwfind-input2 > div > label{
+	font-size: 20px;
+	width: 50px;
+	font-family: 'Fredoka One', cursive;
+}
+#pwfind-input2 > div > input{
+	font-size: 16px;
+	width: 400px;
+}
+
+/* 모바일용 */
+@media screen and (max-width: 1450px) and (min-width:1100px){
+	.regi-input > div{
+		width:50%;
+	}
+	.picture{
+		width: 400px;
+		height: 280px;
+	}
+	.picture-form{
+		margin-top:40px;
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	.regi-input > div{
+		width: 100%;
+	}
+	.regi-input{
+		display: block;
+	}
+	.picture{
+		width: 100%;
+		height: 280px;
+	}
+	.picture-form{
+		margin-top:40px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.regi-content {
+		margin: 0px;
+		padding: 50px 20px;
+	}
+	.login-form{
+		width: 350px;
+	}
+	.login-ipt > div{
+		width: 340px;
+	}
+	.login-ipt > div > input{
+		width: 270px;
+	}
+	#btn-login{
+		width: 340px;
+	}
+	.pwfind-form{
+		margin:0 50px;
+	}
+}

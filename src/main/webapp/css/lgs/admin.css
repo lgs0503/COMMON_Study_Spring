@@ -1,0 +1,125 @@
+.content {
+    z-index: 1;
+    position: absolute;
+    top:60px;
+    width: 100%;
+    background-color: #f9f9f9;
+}
+.content-title {
+    margin : 30px;
+    font-size: 30px;
+    font-weight: bold;
+    color:var(--title-color);
+    padding : 0px 10px;
+}
+.content-title > h2{
+    display: inline-block;
+}
+.title-info{
+    display: inline-block;
+    font-size:13px;
+    font-weigh:none;
+    color: var(--color2);
+}
+
+.content-serach-form{
+    position: relative;
+    margin : 30px;
+    background-color: var(--form-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px 0px silver;
+}
+.content-serach-item{
+    display: inline-block;
+}
+.content-serach-item > label{
+    font-size: 13px;
+    font-weight: bold;
+    color:var(--text-color);
+    margin: 0px 0px 0px 10px;
+    display: inline-block;
+    width: 50px;
+}
+.content-serach-item > input{
+    width: 150px;
+    padding : 5px 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.content-serach-item > select{
+    width: 150px;
+    padding : 5px 10px;
+    border-radius: 5px;
+    border: none;
+}
+.btn-search{
+    padding : 5px 10px;
+    position: absolute;
+    right: 20px;
+    font-weight: bold;
+    width: 70px;
+}
+.content-btn{
+    text-align: right;
+    margin : 30px;
+}
+.btn-content{
+    font-weight: bold;
+    width: 70px;
+    padding : 5px 10px;
+}
+.content-work{
+    margin : 30px;
+}
+.content-work > table{
+    width: 100%;
+    text-align: center;
+    box-shadow: 4px 4px 10px 0px silver;
+}
+.content-work > table > thead{
+    background-color:var(--title-color);
+    color:var(--text-color-white);
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+}
+
+.content-work > table > tbody > tr{
+    background-color:var(--form-color);
+    color:#000000;
+    height: 30px;
+    line-height: 30px;
+}
+.content-work > table > tbody > tr{
+    background-color:var(--form-color);
+    border-bottom:solid 2px #ffffff;
+    color:#000000;
+    height: 40px;
+    line-height: 40px;
+}
+
+
+@media screen and (max-width: 950px){
+    .content-serach-item{
+        display: block;
+        height: 40px;
+        line-height: 40px;
+    }
+    .btn-search{
+        bottom: 25px
+    }
+    .content-title {
+        margin : 30px 10px;
+    }
+    .content-work{
+        margin : 30px 10px;
+    }
+    .content-btn{
+        margin : 30px 10px;
+    }
+    .content-serach-form{
+        margin : 30px 10px;
+    }
+}

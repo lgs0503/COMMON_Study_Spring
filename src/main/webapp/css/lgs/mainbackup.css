@@ -1,0 +1,530 @@
+:root {
+	--frame-size: 1200px;
+}
+
+body {
+	width: 100%;
+	background-color: #ffffff;
+}
+
+.container {
+	width: var(--frame-size);
+	margin: 0 auto;
+}
+
+.backimg {
+	background-color: #f6f5f5;
+	height: 300px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	width: 100%;
+	border-bottom: 60px double white;
+}
+/* 헤더 */
+.header {
+	background-color: #d3e0ea;
+	width: var(--frame-size);
+	height: 400px;
+	margin-top: 100px;
+}
+
+.header .title {
+	margin: 0 -20px;
+	border-radius: 10px;
+	background-color: #276678;
+	position: relative;
+	top: 30px;
+	padding: 15px 0;
+}
+
+.header .title img {
+	position: absolute;
+	width: 150px;
+	border: 4px solid #276678;
+	border-radius: 10px;
+	bottom: -70px;
+	left: 50px;
+}
+
+.header .title h1 {
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+	font-size: 2.5rem;
+	color: white;
+	font-weight: bold;
+}
+
+.header .header-text {
+	position: relative;
+	padding: 0 30px;
+	top: 115px;
+	color: #173e48;
+	line-height: 25px;
+}
+/*컨텐츠 */
+.contents {
+	background-color: white;
+	width: var(--frame-size);
+}
+
+.contents .content-stack, .contents .content-project, .contents .content-file,
+	.contents .content-maps, .contents .content-bbs, .contents .content-jobs
+	{
+	margin-top: 50px;
+	background-color: #d3e0ea;
+	width: 100%;
+}
+/*컨텐츠 - 기술스택 보유기술*/
+.contents div .content-title {
+	font-size: 1.3rem;
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #173e48;
+	padding: 20px 0;
+	padding-left: 20px;
+}
+
+.contents .content-stack {
+	overflow: hidden;
+	height: 300px;
+}
+
+.contents .content-stack .content-stack-work {
+	position: relative;
+	width: 5000px;
+	height: 0px;
+	transition: 0.5s;
+}
+
+.contents .content-stack a {
+	z-index: 1;
+	color: white;
+	background-color: #d3e0ea;
+	padding: 95px 20px;
+	font-size: 3rem;
+	position: relative;
+	top: 0px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.contents .content-stack #btn-next {
+	float: right;
+}
+
+.contents .content-stack #btn-perv {
+	float: left;
+}
+
+.contents .content-stack a:hover {
+	color: white;
+	background-color: #1687a7;
+	transition: 0.5s;
+}
+
+.contents .content-stack .content-stack-work 
+.content-stack-data {
+	display: inline-block;
+	width: 356px;
+	height: 237px;
+	background-color: white;
+	text-align: center;
+}
+
+.contents .content-stack .content-stack-work 
+.content-stack-data h1 {
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin: 20px 0;
+	color: #173e48;
+}
+
+.contents .content-stack .content-stack-work 
+.content-stack-data .content-stack-img {
+	position: absolute;
+	width: 356px;
+	height: 170px;
+}
+
+.contents .content-stack .content-stack-work 
+.content-stack-data .content-stack-img img {
+	margin: 50px 10px;
+	width: 50px;
+	height: 60px;
+}
+
+.contents .content-file, .contents .content-maps {
+	height: 500px;
+}
+
+.contents .content-project {
+	transition: 0.5s;
+}
+/*컨텐츠 - 학력 및 경력*/
+.contents .content-jobs {
+	height: 264px;
+}
+
+.contents .content-jobs .content-jobs-table
+table {
+	width: 100%;
+	background-color: #1687a7;
+	text-align: center;
+}
+
+.contents .content-jobs .content-jobs-table
+table thead tr {
+	font-weight: bold;
+	color: white;
+}
+
+.contents .content-jobs .content-jobs-table
+table thead th {
+	padding: 20px 0;
+}
+
+.contents .content-jobs .content-jobs-table
+table tbody tr {
+	background-color: #f6f5f5;
+}
+
+.contents .content-jobs .content-jobs-table
+table tbody tr td {
+	padding: 10px 0;
+	border: 1px solid #b4abab;
+}
+/*컨텐츠 - 참여프로젝트 경력 */
+.contents .content-project .content-project-work 
+.content-project-data {
+	width: var(--frame-size);
+	margin: 0 auto;
+}
+
+.contents .content-project .content-project-work 
+.content-project-data .content-project-title {
+	background-color: #1687a7;
+	color: white;
+	height: 50px;
+	cursor: pointer;
+	border-bottom: 1px solid #0f5e75;
+}
+
+.contents .content-project .content-project-work 
+.content-project-data .content-project-title span {
+	/*background-color:silver;*/
+	margin-left: 10px;
+	padding: 3px 10px;
+	border-radius: 10px;
+	position: relative;
+	top: 12px;
+	left: 20px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.lcon-leg {
+	background-color: #bb0000;
+}
+
+.lcon-frame {
+	background-color: #07009d;
+}
+
+.lcon-ui {
+	background-color: #005900;
+}
+
+.lcon-jq {
+	background-color: #d06800;
+}
+
+.lcon-db {
+	background-color: #640064;
+}
+
+.lcon-was {
+	background-color: #8080c0;
+}
+
+.lcon-os {
+	background-color: #b9005c;
+}
+
+.lcon-svn {
+	background-color: #009577;
+}
+
+.contents .content-project .content-project-work 
+.content-project-data .content-project-title a {
+	font-size: 1.3rem;
+	font-weight: bold;
+	position: relative;
+	top: 12px;
+	left: 20px;
+}
+
+.contents .content-project .content-project-work 
+.content-project-data .content-project-title a i {
+	font-size: 0.5rem;
+	margin-right: 10px;
+}
+
+.contents .content-project .content-project-work 
+.content-project-data .content-project-text {
+	overflow: hidden;
+	height: 0px;
+	transition: 0.5s;
+	background-color: white;
+	border: 0.5px solid #1687a7;
+}
+
+.contents .content-project .content-project-work 
+.content-project-data .content-project-text 
+.content-project-text-title {
+	padding: 10px 15px;
+	border-bottom: 1px solid #b4abab;
+	background-color: #f6f5f5;
+	font-weight: bold;
+}
+
+.contents .content-project .content-project-work 
+.content-project-data .content-project-text p {
+	padding: 10px 15px;
+	line-height: 20px;
+}
+/*자소서 이력서 파일 */
+.contents .content-file .content-file-work {
+	display: table;
+	width: 100%;
+	text-align: center;
+}
+
+.contents .content-file .content-file-work 
+.content-file-data {
+	background-color: #d3e0ea;
+	padding: 129px 0px;
+	border: 0.5px solid #0f5e75;
+	display: table-cell;
+	width: 33%;
+	font-size: 3rem;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	transition: 0.5s;
+	box-sizing: border-box;
+}
+
+.contents .content-file .content-file-work 
+.content-file-data i {
+	font-size: 5rem;
+}
+
+.contents .content-file .content-file-work 
+.content-file-data:hover {
+	background-color: #0f5e75;
+}
+
+/*구글 maps*/
+#map {
+	width: 100%;
+	height: 437px;
+}
+/*컨텐츠-참조 및 게시판*/
+.contents .content-bbs {
+	height: 440px;
+}
+
+.content-bbs-search-text {
+	width: 50%;
+	padding: 10px 5px;
+}
+
+.content-bbs-search-btn {
+	width: 200px;
+	position: absolute;
+	padding: 9.5px 0;
+	background-color: #f6f5f5;
+	border: 1px solid #b4abab;
+	cursor: pointer;
+}
+
+.content-bbs-search-btn:hover {
+	background-color: #d0caca;
+}
+
+.contents .content-bbs .content-bbs-table
+table {
+	width: 100%;
+	background-color: #1687a7;
+	text-align: center;
+}
+
+.contents .content-bbs .content-bbs-table
+table thead tr {
+	font-weight: bold;
+	color: white;
+}
+
+.contents .content-bbs .content-bbs-table
+table thead th {
+	padding: 20px 0;
+}
+
+.contents .content-bbs .content-bbs-table
+table tbody tr {
+	background-color: #f6f5f5;
+	cursor: pointer;
+}
+
+.contents .content-bbs .content-bbs-table
+table tbody tr:hover {
+	background-color: #d0caca;
+}
+
+.contents .content-bbs .content-bbs-table
+table tbody tr td {
+	padding: 10px 0;
+	border: 1px solid #b4abab;
+}
+
+.contents .content-bbs .content-bbs-page {
+	text-align: center;
+	margin: 30px 0;
+}
+
+.contents .content-bbs .content-bbs-page span {
+	text-align: center;
+	padding: 10px 10px;
+	background-color: #f6f5f5;
+	border: 1px solid #b4abab;
+	cursor: pointer;
+}
+
+.contents .content-bbs .content-bbs-page span:hover {
+	background-color: #d0caca;
+}
+/* 푸터 */
+.footer {
+	background-color: #276678;
+	width: var(--frame-size);
+	height: 150px;
+	display: table;
+}
+
+.footer .footer-left, .footer .footer-right {
+	display: table-cell;
+	color: white;
+	width: 50%;
+	padding: 20px 30px;
+	line-height: 20px;
+}
+
+.footer .footer-right .footer-admin-btn {
+	background-color: #f6f5f5;
+	border-radius: 10px;
+	width: 150px;
+	padding: 10px;
+	margin: 10px 0px;
+	text-align: center;
+	color: black;
+	cursor: pointer;
+}
+
+.footer .footer-right .footer-admin-btn:hover {
+	background-color: #d0caca;
+}
+/* 게시물 팝업*/
+.contents-bbs-popup {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .7);
+	z-index: 1;
+}
+
+.contents-bbs-popup.hide {
+	display: none;
+}
+.contents-bbs-popup .content{
+	padding: 20px;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+/*모바일용 반응형 웹*/
+@media ( min-width : 320px) and (max-width: 480px) {
+	:root { 
+		--frame-size: 100%;
+	}
+	.container {
+		position: relative;
+		left: 0px;
+	}
+	.backimg {
+		display: none;
+	}
+	.header {
+		height: 750px;
+	}
+	.header .title {
+		margin: 0;
+	}
+	.header .title h1 {
+		display: inline;
+		width: 400px;
+		position: relative;
+		left: 230px;
+		font-size: 1.5rem;
+	}
+	.header .title img {
+		left: 20px;
+	}
+	.contents .content-project .content-project-work 
+	.content-project-data .content-project-title span {
+		display: none;
+	}
+	.contents .content-project .content-project-work 
+	.content-project-data .content-project-title a {
+		font-size: 1rem;
+		top: 16px;
+	}
+	.contents .content-file .content-file-work {
+		display: block;
+		width: 100%;
+	}
+	.contents .content-file .content-file-work 
+	.content-file-data {
+		padding: 16px 0px;
+		display: block;
+		font-size: 1.5rem;
+		width: 100%;
+	}
+	.contents .content-file .content-file-work 
+	.content-file-data i {
+		font-size: 4rem;
+	}
+	.contents .content-stack a {
+		padding: 95px 8px;
+	}
+	.contents .content-jobs {
+		height: 330px;
+	}
+	.table-td-none {
+		display: none;
+	}
+	.content-bbs-search-btn {
+		width: 46.3%;
+	}
+	.footer .footer-left, .footer .footer-right {
+		display: block;
+		width: 100%;
+		padding: 20px 0;
+	}
+}

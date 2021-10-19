@@ -1,0 +1,24 @@
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- 화면 예외처리  -->
+	<definition name="admin/login" template="/WEB-INF/jsp/lgs/admin/login.jsp" />
+	<definition name="admin/register" template="/WEB-INF/jsp/lgs/admin/register.jsp" />
+	<definition name="admin/findpw" template="/WEB-INF/jsp/lgs/admin/findpw.jsp" />
+
+	<!-- 프레임 있는 화면  -->
+	<definition name="base" template="/WEB-INF/jsp/lgs/layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/lgs/layout/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/lgs/layout/footer.jsp" />
+	</definition>
+
+	<definition name="admin/**" extends="base">
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/lgs/admin/{1}.jsp" />
+	</definition>
+
+    
+</tiles-definitions>

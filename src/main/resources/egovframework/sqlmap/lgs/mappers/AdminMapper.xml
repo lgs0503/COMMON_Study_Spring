@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lgs.admin.mapper.AdminMapper">
+
+	<select id="loginChk" parameterType="java.util.HashMap" resultType="java.lang.String">
+		SELECT	COUNT(*) CNT
+		FROM	MEMBER
+		WHERE	MEMBER_ID = #{userID}
+		AND		MEMBER_PW = #{userPW}
+	</select>
+
+	<select id="overlapId" parameterType="java.util.HashMap" resultType="java.lang.String">
+		SELECT	COUNT(*) CNT
+		FROM	MEMBER
+		WHERE	MEMBER_ID = #{id}
+	</select>
+
+	<insert id="userRegister" parameterType="java.util.HashMap">
+		INSERT
+		INTO	MEMBER
+		(
+			MEMBER_NO
+		,	MEMBER_ID
+		,	MEMBER_PW
+		,	MEMBER_NAME
+		,	MEMBER_AUTOR
+		,   MEMBER_GENDER
+		,	MEMBER_BRITHDAY
+		,	MEMBER_PHONENUM
+		,	MEMBER_LOCATION
+		,	MEMBER_LOCATION_DTL
+		,	MEMBER_EMAIL
+		,	MEMBER_IMAGE_NO
+		,	MEMBER_PW_QUESTION
+		,	MEMBER_PW_ANSWER
+		,	INSERT_DATE
+		,	UPDATE_DATE
+		)
+		VALUES
+		(
+			( SELECT	NVL(MAX(MEMBER_NO), 0) + 1
+			  FROM		MEMBER)
+		,	#{id}
+		,	#{passwd}
+		,	#{name}
+		,	'3'
+		,	#{gender}
+		,	#{birthday}
+		,	#{phonenum}
+		,	#{location}
+		,	#{locationDtl}
+		,	#{email}
+		,	#{memberImageNo}
+		,	#{quiz}
+		,	#{pwfind}
+		,	SYSDATE
+		,	SYSDATE
+		)
+	</insert>
+
+	<select id="selectPwFindQuiz" parameterType="java.util.HashMap" resultType="String">
+		SELECT	B.CODE_NAME
+		FROM	MEMBER A
+		,
+		(
+			SELECT  CODE_NAME
+				,   CODE_VAL
+			FROM    CODE
+			WHERE   UPPER_CODE_NO = '4'
+		) B
+		WHERE   A.MEMBER_PW_QUESTION = B.CODE_VAL (+)
+		AND     A.MEMBER_ID = #{id}
+	</select>
+
+	<select id="selectPwFind" parameterType="java.util.HashMap" resultType="String">
+		SELECT	MEMBER_PW
+		FROM	MEMBER
+		WHERE	MEMBER_ID = #{id}
+		AND 	MEMBER_PW_ANSWER = #{answer}
+	</select>
+
+
+	<select id="selectLoginUserInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT	A.MEMBER_NAME
+			,	A.MEMBER_ID
+			,	B.FILE_PATH
+		FROM	MEMBER A
+		,
+		(
+			SELECT	FILE_NO
+				 ,	FILE_PATH || '/'|| SAVE_FILE_NAME || FILE_EXTEN AS FILE_PATH
+			FROM	FILE_REPOSITROY
+			WHERE	USE_YN = 'Y'
+		) B
+		WHERE	A.MEMBER_IMAGE_NO = B.FILE_NO (+)
+		AND		A.MEMBER_ID = #{id}
+	</select>
+</mapper>

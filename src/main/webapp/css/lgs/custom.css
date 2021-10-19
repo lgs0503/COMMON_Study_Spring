@@ -1,0 +1,28 @@
+:root {
+	--color1:#222831;
+	--color2:#393E46;
+	--color3:#00ADB5;
+	--color4:#EEEEEE;
+}
+.btn-color1{
+	background-color: var(--color3);
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+	transition:0.2s;
+}
+.btn-color1:hover{
+	background-color: var(--color2);
+    color: white;
+}
+.edit-custom{
+    border-radius: 5px;
+    border: 1px solid silver;
+    padding: 2px;
+}
+.combo-custom{
+    border-radius: 5px;
+    border: 1px solid silver;
+    padding: 2px;
+}
