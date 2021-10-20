@@ -61,32 +61,7 @@
 						<th>가입일</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-					</tr>
-					<tr>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-					</tr>
-					<tr>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-						<td>데이터1</td>
-					</tr>
-				</tbody>
+				<tbody id="memeberbody"></tbody>
 			</table>
 		</div>
 	</div>

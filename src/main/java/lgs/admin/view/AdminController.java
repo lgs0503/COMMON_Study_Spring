@@ -170,7 +170,10 @@ public class AdminController {
 
 		ModelAndView mv = new ModelAndView("jsonView");
 		List<Map<String, Object>> userLsit = adminService.selectLoginUserInfo(param);
-		userLsit.get(0).put("FILE_PATH", Utils.castBase64(userLsit.get(0).get("FILE_PATH").toString()));
+
+		if(userLsit.get(0).get("FILE_PATH") != null){
+			userLsit.get(0).put("FILE_PATH", Utils.castBase64(userLsit.get(0).get("FILE_PATH").toString()));
+		}
 
 		mv.addObject("userList", userLsit);
 		return mv;

@@ -12,7 +12,7 @@
 			document.getElementById("mova-user-name").innerText = result.userList[0].MEMBER_NAME;
 			document.getElementById("user-name").innerText = result.userList[0].MEMBER_NAME;
 
-			if(nullChk(result.userList[0].FILE_PATH)){
+			if(!nullChk(result.userList[0].FILE_PATH)){
 				let userImg = document.getElementsByClassName('info-btn');
 
 				for(let i = 0 ; i<userImg.length ; i++) {
@@ -55,11 +55,13 @@
 		/* 모바일 메뉴 버튼 클릭*/
 		movaNav.onclick = function() {
 			movaList.style.display = 'block';
+			document.getElementById("backgnd-block").style.display = 'block';
 		}
 
 		/* 모바일 메뉴 닫기 버튼*/
 		movaCloseBtn.onclick = function() {
 			movaList.style.display = 'none';
+			document.getElementById("backgnd-block").style.display = 'none';
 		}
 
 		/* 데스크탑 유저 프로필 클릭 */
@@ -94,7 +96,7 @@
 </script>
 <div class="header" id="header">
 	<div class="header-title">
-		<h1 class="header-title-main font50"><a href="/admin/main.do">CMS</a></h1>
+		<h1 class="header-title-main font50"><a href="/admin/main">CMS</a></h1>
 	</div>
 	<div class="nav">
 		<ul>
@@ -139,7 +141,7 @@
 		</div>
 		<div class="info-description">
 			<div class="info-desc-text">
-				(<strong id="mova-user-name">초롱이</strong>)님 어서오세요
+				(<strong id="mova-user-name">회원</strong>)님 어서오세요
 			</div>
 			<div class="info-desc-btn">
 				<input type="button" value="마이페이지"/>
@@ -177,7 +179,7 @@
 </div>
 <div class="user-info-layer" id="user-card">
 	<div class="info-layer-text">
-		(<strong id="user-name"></strong>)님 어서오세요
+		(<strong id="user-name">회원</strong>)님 어서오세요
 	</div>
 	<div class="info-layer-btn">
 		<input class="btn-cmmn" id="btn-mypage" type="button" value="마이페이지">
