@@ -68,7 +68,7 @@
     height: 1000px;
     width: 350px;
     position: absolute;
-    z-index: 110;
+    z-index: 250;
     top: 0px;
     right: 0px;
     display: none;
@@ -118,6 +118,7 @@
 .user-info-layer{
     position: absolute;
     z-index: 6;
+    border-radius: 10px 10px 10px 10px;
     box-shadow: 4px 4px 10px 0px silver;
     right: 10px;
     top: 65px;

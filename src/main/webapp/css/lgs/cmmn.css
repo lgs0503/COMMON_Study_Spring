@@ -15,16 +15,16 @@
     --user-info-color:#1E2022;
 }
 .btn-cmmn{
-    background-color: var(--btn-color);
+    background: rgb(63,69,73);
+    background: linear-gradient(56deg, rgba(63,69,73,1) 0%, rgba(82,97,107,1) 100%);
     border: none;
     color: #ffffff;
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
 }
-
 .btn-cmmn:hover{
-    background-color: var(--btn-color-hover);
+    background: var(--btn-color-hover);
 }
 .header-title-main > a{
     font-weight: bold;

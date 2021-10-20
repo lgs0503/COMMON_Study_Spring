@@ -10,6 +10,7 @@
 </script>
 <body>
     <div class="content">
+        <img src="/images/lgs/cms.jpg">
         <div class="jumbotron">
             <p>
                 어서오세요 컨텐츠 관리 시스템 입니다.

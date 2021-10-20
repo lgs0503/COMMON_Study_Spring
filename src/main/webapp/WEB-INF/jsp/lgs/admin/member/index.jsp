@@ -10,11 +10,20 @@
 		searchList();
 
 		const btnSearch = document.getElementById("btn-search");
+		const btnInsert = document.getElementById("btn-insert");
 
+		/* 조회 버튼 클릭 */
 		btnSearch.onclick = function(){
 			searchList();
 		}
+
+		/* 신규 버튼 클릭 */
+		btnInsert.onclick = function(){
+			loadLayer();
+		}
 	}
+
+	/* 회원 조회 */
 	function searchList(){
 
 		let data = { id : document.getElementById("user-id").value
@@ -55,14 +64,6 @@
 				rowData.className = "list-dtl";
 				colData.append(rowData);
 
-				let listDtl = document.getElementsByClassName("list-dtl");
-
-				for(let i = 0 ; i < listDtl.length ; i++){
-					listDtl[i].onclick = function () {
-						alert("test");
-					}
-				}
-
 				rowData = document.createElement("td");
 				rowData.innerText = value.MEMBER_NAME;
 				colData.append(rowData);
@@ -81,6 +82,14 @@
 
 				memberBody.append(colData);
 			});
+
+			let listDtl = document.getElementsByClassName("list-dtl");
+
+			for(let i = 0 ; i < listDtl.length ; i++){
+				listDtl[i].onclick = function () {
+					loadLayer("U", this.innerText);
+				}
+			}
 		});
 	}
 </script>
@@ -113,7 +122,7 @@
 				<strong id="list-cnt">0</strong>개 조회
 			</div>
 			<div class="content-btn">
-				<input class="btn-cmmn btn-content" type="button" value="신규">
+				<input id="btn-insert" class="btn-cmmn btn-content" type="button" value="신규">
 			</div>
 		</div>
 		<div class="content-work">
@@ -133,3 +142,5 @@
 		</div>
 	</div>
 </body>
+<!-- 회원 상세 신규 레이어 팝업-->
+<jsp:include page="/WEB-INF/jsp/lgs/admin/member/layer/memberLayer.jsp"></jsp:include>

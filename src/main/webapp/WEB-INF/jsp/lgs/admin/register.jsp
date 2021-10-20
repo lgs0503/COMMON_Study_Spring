@@ -24,6 +24,8 @@
 			const comboQuiz = document.getElementById("combo-quiz");
 			const iptId = document.getElementById("id");
 			const iptBirthday = document.getElementById("birthday");
+			
+			document.getElementById("location").disabled = true;
 
 			/* 콤보박스 코드 로드 */
 			comboLoad("combo-gender", "1", "SELECT");

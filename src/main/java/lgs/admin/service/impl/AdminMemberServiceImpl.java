@@ -44,7 +44,7 @@ public class AdminMemberServiceImpl extends EgovAbstractServiceImpl implements A
 	}
 	
 	@Override
-	public Map<String, Object> search(String map) {
+	public List<Map<String, Object>> search(Map<String, Object> map) {
 		return adminMemberMapper.search(map);
 	}
 
@@ -59,7 +59,7 @@ public class AdminMemberServiceImpl extends EgovAbstractServiceImpl implements A
 	}
 
 	@Override
-	public void delete(String map) {
+	public void delete(Map<String, Object> map) {
 		adminMemberMapper.delete(map);
 	}
 }

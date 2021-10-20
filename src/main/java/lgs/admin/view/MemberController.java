@@ -16,12 +16,10 @@
 package lgs.admin.view;
 
 import lgs.admin.service.AdminMemberService;
+import lgs.cmmn.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -63,10 +61,46 @@ public class MemberController {
 
 		ModelAndView mv = new ModelAndView("jsonView");
 
-		List<Map<String, Object>> memberList = adminMemberService.searchList(param);
-
-		mv.addObject("memberList", memberList);
+		mv.addObject("memberList", adminMemberService.searchList(param));
+		mv.addObject("memberCnt", adminMemberService.countList());
 
 		return mv;
+	}
+
+	/**
+	 * name : selectMember
+	 * description : 회원정보를 보여준다.
+	 */
+	@RequestMapping(value = "/read")
+	public @ResponseBody
+	ModelAndView selectMember(@RequestParam Map<String, Object> param
+			, HttpSession session
+			, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+
+		List<Map<String, Object>> memeber = adminMemberService.search(param);
+
+		if(memeber.get(0).get("FILE_PATH") != null){
+			memeber.get(0).put("FILE_PATH", Utils.castBase64(memeber.get(0).get("FILE_PATH").toString()));
+		}
+
+		mv.addObject("member", memeber);
+
+		return mv;
+	}
+
+	/**
+	 * name : deleteMember (ajax)
+	 * description : 회원을 삭제한다.
+	 */
+	@RequestMapping(value = "/delete")
+	public @ResponseBody
+	String deleteMember(@RequestParam Map<String, Object> param
+			, HttpSession session
+			, HttpServletRequest request) throws Exception {
+
+		adminMemberService.delete(param);
+
+		return "ok";
 	}
 }

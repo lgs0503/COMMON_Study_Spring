@@ -26,13 +26,13 @@ public interface AdminMemberMapper {
 	List<Map<String, Object>> searchList(Map<String, Object> map);
 	
 	int countList();
-	
-	Map<String, Object> search(String map);
+
+	List<Map<String, Object>> search(Map<String, Object> map);
 	
 	void add(Map<String, Object> map);
 	
 	void update(Map<String, Object> map);
 
-	void delete(String map);
+	void delete(Map<String, Object> map);
 
 }

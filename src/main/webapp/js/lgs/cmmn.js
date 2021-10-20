@@ -78,6 +78,7 @@ function comboLoad(selectId, upperCode, type){
 
         const sel = document.getElementById(selectId);
         let typeOption = document.createElement("option");
+        sel.innerHTML = "";
 
         if(type == "ALL"){
             typeOption.text = "전체";
@@ -101,8 +102,10 @@ function comboLoad(selectId, upperCode, type){
 
         /* 클릭이벤트 - 히든 데이터 넣어주기 */
         sel.onclick = function(){
-            const hidden = document.getElementById(selectId.replace("combo-",""));
-            hidden.value = this.value;
+            const hidden = document.getElementById(selectId.replace("combo-","").replace("-layer",""));
+            if(hidden != null){
+                hidden.value = this.value;
+            }
         }
     });
 }
@@ -180,7 +183,9 @@ function gfnAlert(msg, callback = null){
         backgnd.style.display = "none";
         alertCmmn.style.display = "none";
 
-        callback();
+        if(callback != null){
+            callback();
+        }
     }
 }
 /* 공통 선택창*/
@@ -214,4 +219,33 @@ function gfnConfirm(msg, callback){
 
         callback(false);
     }
+}
+/* 레이어 팝업 열기 */
+function openLayer(layerId){
+    let layer = document.getElementById(layerId);
+    let backgnd = document.getElementById("backgnd-block-layer");
+    let btnClose = document.getElementById("btn-layer-close");
+
+    layer.style.display = "block";
+    backgnd.style.display = "block";
+
+    btnClose.onclick = function(){
+        layer.style.display = "none";
+        backgnd.style.display = "none";
+    }
+}
+/* 현재날짜 yyyy-mm-dd*/
+function getToday(){
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = ("0" + (1 + date.getMonth())).slice(-2);
+    let day = ("0" + date.getDate()).slice(-2);
+
+    return year + "-" + month + "-" + day;
+}
+/* 파라미터 날짜 yyyy-mm-dd*/
+function castToYMD(date){
+    return String(date).substring(0,4)+'-'+
+    String(date).substring(4,6)+'-'+
+    String(date).substring(6,8);
 }

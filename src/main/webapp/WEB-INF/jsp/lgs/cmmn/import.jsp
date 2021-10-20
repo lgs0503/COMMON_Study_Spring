@@ -16,7 +16,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 100;
+        z-index: 250;
         width: 100%;
         height: 100%;
         background-color: rgba(0,0,0,0.5);
@@ -26,7 +26,7 @@
         position: fixed;
         top: 50%;
         left: 50%;
-        z-index: 200;
+        z-index: 300;
         transform: translate(-50%, -50%);
         background-color:var(--form-color);
         border-radius: 5px;

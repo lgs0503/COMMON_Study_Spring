@@ -115,8 +115,6 @@
 .list-dtl:hover{
     font-weight: bold;
 }
-
-
 @media screen and (max-width: 950px){
     .content-serach-item{
         display: block;
@@ -137,5 +135,100 @@
     }
     .content-serach-form{
         margin : 30px 10px;
+    }
+}
+
+/* layer css */
+.layer-member{
+    position: fixed;
+    z-index: 200;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--form-color);
+    display: none;
+    border-radius: 5px;
+}
+.layer-header{
+    background: rgb(63,69,73);
+    background: linear-gradient(56deg, rgba(63,69,73,1) 0%, rgba(82,97,107,1) 100%);
+    color : var(--text-color-white);
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px 5px 0 0;
+}
+.later-close-btn{
+    cursor: pointer;
+}
+.layer-work{
+    display: flex;
+    padding:20px;
+    color: var(--title-color);
+}
+.picture{
+    width: 90%;
+    background: #ffffff url("/images/lgs/noimage.gif") no-repeat left center;
+    border-radius: 10px;
+    border: 2px #ffffff solid;
+    margin-bottom: 20px;
+}
+.picture-form{
+    width: 250px;
+}
+.layer-col{
+    width: 333px;
+}
+.layer-tr{
+    margin-bottom: 15px;
+    height: 25px;
+    line-height: 25px;
+}
+.layer-tr > label{
+    display: inline-block;
+    width: 110px;
+}
+.layer-tr > input{
+    width: 190px;
+    height: 25px;
+}
+.layer-tr > select{
+    width: 100px;
+    height: 25px;
+}
+.item-right{
+    text-align: right;
+    margin-right: 25px;
+}
+.layer-btn{
+    text-align: right;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.layer-btn > input{
+    padding: 5px 20px;
+}
+
+.backgnd-block-layer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 190;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+}
+
+
+@media screen and (max-width: 950px){
+    .layer-work{
+        display: block;
+    }
+    .layer-member{
+        position: absolute;
+        top:55%;
     }
 }

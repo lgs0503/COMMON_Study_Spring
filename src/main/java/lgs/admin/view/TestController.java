@@ -71,9 +71,7 @@ public class TestController {
 	@GetMapping("read/{memberId}")
 	public String read(@PathVariable String memberId , Model model) throws Exception {
 		System.out.println("memberId"+memberId);
-		Map<String,Object> member = adminMemberService.search(memberId);
-		
-		model.addAttribute("MEMBER", member);
+
 		
 		return "admin/member/list";
 	}

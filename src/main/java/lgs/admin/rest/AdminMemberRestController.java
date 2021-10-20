@@ -47,7 +47,6 @@ public class AdminMemberRestController {
 	
 	@DeleteMapping("{memberId}")
 	public String delete(@PathVariable String memberId) {
-		adminMemberService.delete(memberId);
 		return HTTPRETURN_OK;
 	}
 }
