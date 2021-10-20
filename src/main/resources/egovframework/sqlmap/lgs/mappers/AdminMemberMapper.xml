@@ -40,8 +40,10 @@
 			,	A.MEMBER_LOCATION
 			,	A.MEMBER_LOCATION_DTL
 			,	A.MEMBER_EMAIL
+			,	A.MEMBER_PW
 			,	A.MEMBER_PW_QUESTION
 			,	A.MEMBER_PW_ANSWER
+			,   A.MEMBER_IMAGE_NO
 			,	B.FILE_PATH
 		FROM	MEMBER A
 		,
@@ -54,6 +56,25 @@
 		WHERE	A.MEMBER_IMAGE_NO = B.FILE_NO (+)
 		AND		A.MEMBER_ID = #{id}
 	</select>
+
+	<update id="update" parameterType="java.util.HashMap">
+		UPDATE	MEMBER
+		SET 	MEMBER_PW 			= #{passwd}
+			,	MEMBER_GENDER 		= #{gender}
+			, 	MEMBER_PHONENUM 	= #{phonenum}
+			,	MEMBER_LOCATION 	= #{location}
+			,	MEMBER_LOCATION_DTL = #{locationDtl}
+			,	MEMBER_NAME 		= #{name}
+			,	MEMBER_EMAIL 		= #{email}
+			,	MEMBER_BRITHDAY 	= #{birthday}
+		<if test="memberImageNo != null and memberImageNo != ''">
+			,	MEMBER_IMAGE_NO		= #{memberImageNo}
+		</if>
+			,	MEMBER_PW_QUESTION 	= #{quiz}
+			,	MEMBER_PW_ANSWER 	= #{pwfind}
+		    ,	UPDATE_DATE 		= SYSDATE
+		WHERE	MEMBER_ID = #{id}
+	</update>
 
 	<delete id="delete" parameterType="java.util.HashMap">
 		DELETE

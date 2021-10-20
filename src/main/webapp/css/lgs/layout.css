@@ -76,7 +76,7 @@
 .moba-nav-list > .user-info{
     display: flex;
     justify-content: space-between;
-    background-color: var(--user-info-color);
+    background-color: var(--form-color);
     padding: 10px;
 }
 .moba-nav-list > .user-info > .info-btn{
@@ -84,7 +84,7 @@
 }
 .info-description > .info-desc-text{
     margin-top: 3px;
-    color: var(--text-color-white);
+    color: var(--text-color);
 }
 .info-description > .info-desc-text > strong{
     font-weight: bold;
@@ -98,10 +98,6 @@
     padding: 2px 5px;
     font-size: 13px;
     font-weight: bold;
-    background-color: var(--title-color);
-    border: 2px solid var(--text-color);
-    color: #ffffff;
-    cursor: pointer;
 }
 .user-info > i{
     background-color: var(--title-color);

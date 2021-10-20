@@ -3,6 +3,7 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<link rel="stylesheet" href="/css/lgs/adminMain.css">
 <script type="text/javascript">
     window.onload = function(){
 
@@ -15,9 +16,7 @@
             <p>
                 어서오세요 컨텐츠 관리 시스템 입니다.
             </p>
-            <p>
-
-            </p>
+            <input class="btn-cmmn" type="button" value="사이트 바로가기">
         </div>
         <div class="work">
             <div class="left">

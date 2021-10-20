@@ -39,6 +39,8 @@ public class MemberController {
 	@Resource(name = "adminMemberService")
 	private AdminMemberService adminMemberService;
 
+	private final static String SUCCESS = "1";
+
 	/**
 	 * name : memberPage
      * description : 회원관리화면 을 보여준다.
@@ -90,6 +92,21 @@ public class MemberController {
 	}
 
 	/**
+	 * name : updateMember (ajax)
+	 * description : 회원을 수정한다.
+	 */
+	@RequestMapping(value = "/update")
+	public @ResponseBody
+	String updateMember(@RequestParam Map<String, Object> param
+			, HttpSession session
+			, HttpServletRequest request) throws Exception {
+
+		adminMemberService.update(param);
+
+		return SUCCESS;
+	}
+
+	/**
 	 * name : deleteMember (ajax)
 	 * description : 회원을 삭제한다.
 	 */
@@ -101,6 +118,6 @@ public class MemberController {
 
 		adminMemberService.delete(param);
 
-		return "ok";
+		return SUCCESS;
 	}
 }

@@ -17,12 +17,18 @@
         const iptBirthday = document.getElementById("birthday");
         const iptId = document.getElementById("id");
         const userImg = document.getElementById('preview-image');
+        const iptLocation = document.getElementById("location");
 
-        const eleId = [ "id", "name", "email"
-                      , "birthday", "phonenum"
-                      , "location", "locationDtl"];
+        const eleId = [ "id", "passwd", "passwdchk"
+                      , "name", "email"
+                      , "birthday", "hidden-birthday"
+                      , "phonenum"
+                      , "location", "locationDtl"
+                      , "memberImageNo","gender"
+                      , "quiz", "pwfind"];
 
-        document.getElementById("location").disabled = true;
+        iptImage.value = "";
+        iptLocation.disabled = true;
         userImg.src = "/images/lgs/noimg.png"
 
         /* 상세정보 일 경우 */
@@ -38,22 +44,42 @@
 
             ajaxLoad(url, data, "json", function(result){
 
+                const sessionId = document.getElementById("sessionId").value;
+
+                /* 자기자신 삭제 방지 */
+                if(sessionId == result.member[0].MEMBER_ID){
+                    btnDelete.style.display = "none";
+                }
+
                 if(!nullChk(result.member[0].FILE_PATH)){
                     userImg.src = base64Img(result.member[0].FILE_PATH);
                 }
 
                 const resultData = [ result.member[0].MEMBER_ID
+                                   , result.member[0].MEMBER_PW
+                                   , result.member[0].MEMBER_PW
                                    , result.member[0].MEMBER_NAME
                                    , result.member[0].MEMBER_EMAIL
                                    , castToYMD(result.member[0].MEMBER_BRITHDAY)
+                                   , result.member[0].MEMBER_BRITHDAY
                                    , result.member[0].MEMBER_PHONENUM
                                    , result.member[0].MEMBER_LOCATION
-                                   , result.member[0].MEMBER_LOCATION_DTL];
+                                   , result.member[0].MEMBER_LOCATION_DTL
+                                   , result.member[0].MEMBER_IMAGE_NO
+                                   , result.member[0].MEMBER_GENDER
+                                   , result.member[0].MEMBER_PW_QUESTION
+                                   , result.member[0].MEMBER_PW_ANSWER];
 
                 eleId.forEach(function (value, index) {
-                    document.getElementById(value).value = resultData[index];
+                    if(!nullChk(resultData[index])){
+                        document.getElementById(value).value = resultData[index];
+                    }
                 });
 
+                setTimeout(function(){
+                    selectOption("combo-gender-layer", result.member[0].MEMBER_GENDER, "value");
+                    selectOption("combo-quiz-layer", result.member[0].MEMBER_PW_QUESTION, "value");
+                }, 200);
             });
         } else { /* 신규 */
             iptId.disabled = false;
@@ -110,11 +136,13 @@
 
                     const iptImage = document.getElementById("image");
 
-                    if(layerType == "I"){ /* 신규 */
+                    iptLocation.disabled = false;
+                    iptId.disabled = false;
 
-                        /* promise를 이용한 비동기 통신 */
-                        new Promise(function(resolve, reject){
-                            /* 프로필 사진 업로드*/
+                    /* promise를 이용한 비동기 통신 */
+                    new Promise(function(resolve, reject){
+
+                        if(!nullChk(iptImage.value)){
                             /* 프로필 사진 업로드*/
                             let url = '/fileUpload';
                             let data = new FormData();
@@ -123,26 +151,37 @@
                             ajaxLoad(url, data, "text", function(result){
                                 resolve(result);
                             }, false, false);
+                        } else {
+                            resolve();
+                        }
 
-                        }).then(function(resolve){
+                    }).then(function(resolve){
+                        if(!nullChk(iptImage.value)){
                             document.getElementById("memberImageNo").value = resolve;
+                        }
 
-                            let url = '/cmmn/registerProcess';
-                            let data = $("#regi-form").serialize();
+                        let url = "";
 
-                            ajaxLoad(url, data, "json", function(){
-                                gfnAlert("회원등록완료", function () {
-                                    let btnClose = document.getElementById("btn-layer-close");
-                                    btnClose.click();
+                        if(layerType == "I") { /* 신규 */
+                            url = '/cmmn/registerProcess';
+                        } else if(layerType == "U") { /* 수정 */
+                            url = '/admin/member/update';
+                        }
 
-                                    searchList();
-                                });
+                        let data = $("#regi-form").serialize();
+
+                        ajaxLoad(url, data, "text", function(){
+                            gfnAlert("저장완료", function () {
+                                iptLocation.disabled = true;
+                                iptId.disabled = true;
+
+                                let btnClose = document.getElementById("btn-layer-close");
+                                btnClose.click();
+
+                                searchList();
                             });
                         });
-
-                    } else if(layerType == "U") { /* 수정 */
-
-                    }
+                    });
                 }
             });
         }
@@ -189,7 +228,7 @@
         const validationInputChkIdText = ["아이디", "비밀번호", "비밀번호 답변", "이름", "생년월일", "연락처", "주소", "상세주소", "이메일"];
 
         // select 태그
-        const validationComboChkId = ["combo-quiz", "combo-gender"];
+        const validationComboChkId = ["combo-quiz-layer", "combo-gender-layer"];
         const validationComboChkIdText = ["비밀번호 질문", "성별"];
 
         /* 필수값 체크 */
@@ -336,4 +375,4 @@
     </div>
 </form>
 
-<div class="backgnd-block-layer" id="backgnd-block-layer">
+<div class="backgnd-block-layer" id="backgnd-block-layer"></div>

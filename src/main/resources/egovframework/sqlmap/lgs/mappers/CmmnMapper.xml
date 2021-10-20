@@ -8,7 +8,7 @@
 		FROM		CODE
 		WHERE		UPPER_CODE_NO = #{upperCodeNo}
 		AND			USE_YN = 'Y'
-		ORDER BY	CODE_SORT DESC
+		ORDER BY	CODE_SORT ASC
 	</select>
 
 	<select id="getMaxfileNo"  resultType="String">

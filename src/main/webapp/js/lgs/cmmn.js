@@ -249,3 +249,24 @@ function castToYMD(date){
     String(date).substring(4,6)+'-'+
     String(date).substring(6,8);
 }
+/* select 원하는값 선택 */
+function selectOption(id, value, type){
+    let obj = document.getElementById(id);
+
+    for(let i = 0 ; i < obj.length ; i++){
+        switch (type) {
+            case "value":
+                if(obj[i].value == value){
+                    obj[i].selected = true;
+                }
+                break;
+            case "text":
+                if(obj[i].text == value){
+                    obj[i].selected = true;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}

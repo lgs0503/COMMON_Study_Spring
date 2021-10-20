@@ -11,6 +11,7 @@
 		ajaxLoad(url, null, "json", function(result){
 			document.getElementById("mova-user-name").innerText = result.userList[0].MEMBER_NAME;
 			document.getElementById("user-name").innerText = result.userList[0].MEMBER_NAME;
+			document.getElementById("sessionId").value = result.userList[0].MEMBER_ID;
 
 			if(!nullChk(result.userList[0].FILE_PATH)){
 				let userImg = document.getElementsByClassName('info-btn');
@@ -29,7 +30,7 @@
 				if(!$(".nav-sub").is(":visible")){
 					window.setTimeout(() => {
 						$('.nav-sub').off().slideDown(100);
-						$('.header' ).animate({height: '240px'}, 100, 'swing');
+						$('.header' ).animate({height: '300px'}, 100, 'swing');
 					}, 100);
 				}
 			}
@@ -49,8 +50,8 @@
 		const movaList = document.getElementById("moba-nav-list");
 		const userCard = document.getElementById("user-card");
 		const userInfoBtn = document.getElementById("user-info");
-		const mypageBtn = document.getElementById("btn-mypage");
-		const logoutBtn = document.getElementById("btn-logout");
+		const mypageBtn = document.getElementsByClassName("btn-mypage");
+		const logoutBtn = document.getElementsByClassName("btn-logout");
 		const backgnd = document.getElementById("backgnd-block");
 
 		/* 모바일 메뉴 버튼 클릭*/
@@ -86,16 +87,21 @@
 		}
 
 		/* 마이페이지 클릭 */
-		mypageBtn.onclick = function() {
-			location.href="/mypage";
+		for(let i = 0 ; i < mypageBtn.length ; i++){
+			mypageBtn[i].onclick = function() {
+				location.href="/mypage";
+			}
 		}
 
 		/* 로그아웃 클릭 */
-		logoutBtn.onclick = function(){
-			location.href="/cmmn/logoutProcess";
+		for(let i = 0 ; i < logoutBtn.length ; i++){
+			logoutBtn[i].onclick = function() {
+				location.href="/cmmn/logoutProcess";
+			}
 		}
 	});
 </script>
+<input type="hidden" id="sessionId">
 <div class="header" id="header">
 	<div class="header-title">
 		<h1 class="header-title-main font50"><a href="/admin/main">CMS</a></h1>
@@ -106,19 +112,15 @@
 				<ul class="nav-sub">
 					<li><a href="/admin/member">회원관리</a></li>
 					<li><a href="#">메뉴관리</a></li>
-				</ul>
-			</li>
-			<li class="nav-main"><a href="#">쇼핑몰관리</a>
-				<ul class="nav-sub">
-					<li><a href="#">물품관리</a></li>
-					<li><a href="#">통합구매관리</a></li>
-					<li><a href="#">통합물품관리</a></li>
+					<li><a href="#">코드관리</a></li>
 				</ul>
 			</li>
 			<li class="nav-main"><a href="#">컨텐츠관리</a>
 				<ul class="nav-sub">
+					<li><a href="#">게시판관리</a></li>
 					<li><a href="#">게시글관리</a></li>
-					<li><a href="#">베너관리</a></li>
+					<li><a href="#">배너관리</a></li>
+					<li><a href="#">팝업관리</a></li>
 				</ul>
 			</li>
 			<li class="nav-main"><a href="#">통계관리</a>
@@ -146,8 +148,8 @@
 				(<strong id="mova-user-name">회원</strong>)님 어서오세요
 			</div>
 			<div class="info-desc-btn">
-				<input type="button" value="마이페이지"/>
-				<input type="button" value="로그아웃"/>
+				<input class="btn-cmmn btn-mypage" type="button" value="마이페이지"/>
+				<input class="btn-cmmn btn-logout" type="button" value="로그아웃"/>
 			</div>
 		</div>
 		<i class="fas fa-times" id="mova-close-btn"></i>
@@ -157,19 +159,15 @@
 			<ul class="moba-nav-sub">
 				<li><a href="/admin/member">회원관리</a></li>
 				<li><a href="#">메뉴관리</a></li>
-			</ul>
-		</li>
-		<li class="moba-nav-main"><a href="#">쇼핑몰관리</a>
-			<ul class="moba-nav-sub">
-				<li><a href="#">물품관리</a></li>
-				<li><a href="#">통합구매관리</a></li>
-				<li><a href="#">통합물품관리</a></li>
+				<li><a href="#">코드관리</a></li>
 			</ul>
 		</li>
 		<li class="moba-nav-main"><a href="#">컨텐츠관리</a>
 			<ul class="moba-nav-sub">
+				<li><a href="#">게시판관리</a></li>
 				<li><a href="#">게시글관리</a></li>
-				<li><a href="#">베너관리</a></li>
+				<li><a href="#">배너관리</a></li>
+				<li><a href="#">팝업관리</a></li>
 			</ul>
 		</li>
 		<li class="moba-nav-main"><a href="#">통계관리</a>
@@ -184,7 +182,7 @@
 		(<strong id="user-name">회원</strong>)님 어서오세요
 	</div>
 	<div class="info-layer-btn">
-		<input class="btn-cmmn" id="btn-mypage" type="button" value="마이페이지">
-		<input class="btn-cmmn" id="btn-logout" type="button" value="로그아웃">
+		<input class="btn-cmmn btn-mypage" type="button" value="마이페이지">
+		<input class="btn-cmmn btn-logout" type="button" value="로그아웃">
 	</div>
 </div>

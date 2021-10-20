@@ -30,7 +30,9 @@
 		,	MEMBER_LOCATION
 		,	MEMBER_LOCATION_DTL
 		,	MEMBER_EMAIL
+		<if test="memberImageNo != null and memberImageNo != ''">
 		,	MEMBER_IMAGE_NO
+		</if>
 		,	MEMBER_PW_QUESTION
 		,	MEMBER_PW_ANSWER
 		,	INSERT_DATE
@@ -50,7 +52,9 @@
 		,	#{location}
 		,	#{locationDtl}
 		,	#{email}
+		<if test="memberImageNo != null and memberImageNo != ''">
 		,	#{memberImageNo}
+		</if>
 		,	#{quiz}
 		,	#{pwfind}
 		,	SYSDATE
@@ -78,7 +82,6 @@
 		WHERE	MEMBER_ID = #{id}
 		AND 	MEMBER_PW_ANSWER = #{answer}
 	</select>
-
 
 	<select id="selectLoginUserInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT	A.MEMBER_NAME

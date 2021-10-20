@@ -195,7 +195,7 @@
     height: 25px;
 }
 .layer-tr > select{
-    width: 100px;
+    width: 180px;
     height: 25px;
 }
 .item-right{
@@ -229,6 +229,14 @@
     }
     .layer-member{
         position: absolute;
-        top:55%;
+        top:70%;
     }
+}
+
+.mypage-member{
+    position: absolute;
+    top:80px;
+    text-align: center;
+    background-color: var(--form-color);
+    border-radius: 5px;
 }

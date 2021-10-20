@@ -127,6 +127,14 @@
 		</div>
 		<div class="content-work">
 			<table>
+				<colgroup>
+					<col width="40px">
+					<col width="200px">
+					<col width="100px">
+					<col width="100px">
+					<col width="200px">
+					<col width="200px">
+				</colgroup>
 				<thead>
 					<tr>
 						<th>No</th>

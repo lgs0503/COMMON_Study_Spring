@@ -266,18 +266,21 @@ div > h2 > i{
 		padding: 50px 20px;
 	}
 	.login-form{
-		width: 350px;
+		width: 300px;
 	}
 	.login-ipt > div{
-		width: 340px;
+		width: 280px;
 	}
 	.login-ipt > div > input{
-		width: 270px;
+		width: 210px;
 	}
 	#btn-login{
-		width: 340px;
+		width: 280px;
 	}
 	.pwfind-form{
 		margin:0 50px;
+	}
+	#pwfind-input1 > input{
+		width: 80%;
 	}
 }
