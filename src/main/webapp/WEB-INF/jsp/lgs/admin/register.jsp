@@ -38,37 +38,38 @@
 
 			/* 가입버튼 클릭 */
 			btnRegister.onclick = function(){
+				gfnConfirm("가입 하시겠습니까?", function(result){
+					if(result){
+						/*유효성 체크 결과값 이 실패면 종료*/
+						if (validate() == -1) {
+							return;
+						}
 
-				if(confirm("가입 하시겠습니까?")) {
+						/* promise를 이용한 비동기 통신 */
+						new Promise(function(resolve, reject){
+							/* 프로필 사진 업로드*/
+							/* 프로필 사진 업로드*/
+							let url = '/fileUpload';
+							let data = new FormData();
+							data.append("file", iptImage.files[0]);
 
-					/*유효성 체크 결과값 이 실패면 종료*/
-					if (validate() == -1) {
-						return;
-					}
+							ajaxLoad(url, data, "text", function(result){
+								resolve(result);
+							}, false, false);
+						}).then(function(resolve){
+							document.getElementById("memberImageNo").value = resolve;
 
-					/* promise를 이용한 비동기 통신 */
-					new Promise(function(resolve, reject){
-						/* 프로필 사진 업로드*/
-						/* 프로필 사진 업로드*/
-						let url = '/fileUpload';
-						let data = new FormData();
-						data.append("file", iptImage.files[0]);
+							let url = '/cmmn/registerProcess';
+							let data = $("#regi-form").serialize();
 
-						ajaxLoad(url, data, "text", function(result){
-							resolve(result);
-						}, false, false);
-					}).then(function(resolve){
-						document.getElementById("memberImageNo").value = resolve;
-
-						let url = '/cmmn/registerProcess';
-						let data = $("#regi-form").serialize();
-
-						ajaxLoad(url, data, "json", function(){
-							alert("회원가입완료");
-							location.href = "/admin";
+							ajaxLoad(url, data, "json", function(){
+								gfnAlert("회원가입완료", function () {
+									location.href = "/admin";
+								});
+							});
 						});
-					});
-				}
+					}
+				})
 			}
 
 			/* 뒤로가기 버튼 클릭 */
@@ -107,9 +108,10 @@
 
 				ajaxLoad(url, data, "text", function(data){
 					if(data == 1){
-						alert("중복 된 계정이 있습니다.");
-						iptId.value = "";
-						iptId.focus();
+						gfnAlert("중복 된 계정이 있습니다.", function(){
+							iptId.value = "";
+							iptId.focus();
+						});
 					}
 				});
 			}
@@ -127,7 +129,7 @@
 			const termsChk = document.getElementsByName("terms");
 
 			if(termsChk[1].checked == true){
-				alert("개인정보 동의를 해야 가입을 할 수 있습니다.");
+				gfnAlert("개인정보 동의를 해야 가입을 할 수 있습니다.");
 				return -1;
 			}
 
@@ -145,9 +147,10 @@
 				let inputVal =  ele.value;
 
 				if(nullChk(inputVal)){
-					alert("("+validationInputChkIdText[i]+ ")는 필수 입력 값 입니다.");
-					ele.focus();
-					return -1;
+					gfnAlert("("+validationInputChkIdText[i]+ ")는 필수 입력 값 입니다.",function () {
+						ele.focus();
+						return -1;
+					});
 				}
 			}
 
@@ -156,8 +159,9 @@
 				let inputVal =  ele.value;
 
 				if(nullChk(inputVal)){
-					alert("("+validationComboChkIdText[i]+ ")는 필수 선택 값 입니다.");
-					ele.focus();
+					gfnAlert("("+validationComboChkIdText[i]+ ")는 필수 선택 값 입니다.",function () {
+						ele.focus();
+					});
 					return -1;
 				}
 			}
@@ -167,7 +171,7 @@
 			const passwdChk = document.getElementById("passwdchk").value;
 
 			if(passwd != passwdChk){
-				alert("비밀번호 가 일치 하지 않습니다.");
+				gfnAlert("비밀번호 가 일치 하지 않습니다.");
 				return -1;
 			}
 		}
@@ -180,12 +184,14 @@
 
 				const len = ipt.value.length;
 				if(len > max){
-					alert("("+name+")은 "+max+": 길이를 초과 할 수 없습니다.");
-					ipt.value = "";
+					gfnAlert("("+name+")은 "+max+": 길이를 초과 할 수 없습니다.", function(){
+						ipt.value = "";
+					});
 				}
 				if(len < min){
-					alert("("+name+")은 "+min+"글자 이상 입력 하세요.");
-					ipt.value = "";
+					gfnAlert("("+name+")은 "+min+"글자 이상 입력 하세요.", function(){
+						ipt.value = "";
+					});
 				}
 				ipt.focus();
 			}

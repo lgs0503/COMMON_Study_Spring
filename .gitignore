@@ -28,4 +28,6 @@ build
 /target/
 **/target
 
-# /example/
+# /example/lgscms\
+.idea\
+/.idea/

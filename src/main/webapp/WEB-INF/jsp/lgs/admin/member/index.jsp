@@ -16,7 +16,7 @@
 		/* 로그인 계정정보 조회 (프로필사진, 아이디) */
 		let url = '/admin/member/list';
 		ajaxLoad(url, null, "json", function(result){
-			alert(result);
+			gfnAlert(result);
 
 		});
 	}

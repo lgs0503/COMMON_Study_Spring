@@ -159,4 +159,59 @@ function nullChk (data){
 function base64Img(base64str){
     return "data:image/png;base64,"+base64str;
 }
+/* 공통 알림창*/
+function gfnAlert(msg, callback = null){
+    let backgnd = document.getElementById("backgnd-block");
+    let alertCmmn = document.getElementById("alert-cmmn");
 
+    let alertText = document.getElementById("alert-text");
+
+    let btnOk = document.getElementById("btn-ok");
+    let btnClose = document.getElementById("btn-close");
+
+    backgnd.style.display = "block";
+    alertCmmn.style.display = "block";
+    btnClose.style.display ="none";
+
+    alertText.innerHTML = msg;
+
+    btnOk.onclick = function(){
+
+        backgnd.style.display = "none";
+        alertCmmn.style.display = "none";
+
+        callback();
+    }
+}
+/* 공통 선택창*/
+function gfnConfirm(msg, callback){
+    let backgnd = document.getElementById("backgnd-block");
+    let alertCmmn = document.getElementById("alert-cmmn");
+
+    let alertText = document.getElementById("alert-text");
+
+    let btnOk = document.getElementById("btn-ok");
+    let btnClose = document.getElementById("btn-close");
+
+    backgnd.style.display = "block";
+    alertCmmn.style.display = "block";
+    btnClose.style.display ="inline-block";
+
+    alertText.innerHTML = msg;
+
+    btnOk.onclick = function(){
+
+        backgnd.style.display = "none";
+        alertCmmn.style.display = "none";
+
+        callback(true);
+    }
+
+    btnClose.onclick = function(){
+
+        backgnd.style.display = "none";
+        alertCmmn.style.display = "none";
+
+        callback(false);
+    }
+}

@@ -31,7 +31,7 @@
 				if(ipt1.style.display == "block"){
 					/* 아이디 로 비밀번호 찾기 퀴즈 조회 */
 					if(nullChk(userId)){
-						alert("아이디를 입력해주세요");
+						gfnAlert("아이디를 입력해주세요");
 						return;
 					} else {
 						let url = '/cmmn/selectPwFindQuiz';
@@ -39,7 +39,7 @@
 
 						ajaxLoad(url, data, "text", function(result){
 							if(nullChk(result)){
-								alert("일치하는 계정이 없습니다.");
+								gfnAlert("일치하는 계정이 없습니다.");
 								return;
 							}
 							document.getElementById("quiz").value = result;
@@ -58,7 +58,7 @@
 
 					ajaxLoad(url, data, "text", function(result){
 						if(nullChk(result)){
-							alert("답변이 일치하지 않습니다.");
+							gfnAlert("답변이 일치하지 않습니다.");
 							return;
 						}
 						document.getElementById("password").value = result;

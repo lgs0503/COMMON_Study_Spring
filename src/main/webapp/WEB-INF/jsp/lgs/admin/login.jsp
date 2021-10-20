@@ -51,10 +51,10 @@
 				let userPW = document.getElementById('user-pw').value;
 
 				if(nullChk(userID)){
-					alert("아이디를 입력해주세요.");
+					gfnAlert("아이디를 입력해주세요.");
 					return;
 				} else if(nullChk(userPW)) {
-					alert("패스워드를 입력해주세요.");
+					gfnAlert("패스워드를 입력해주세요.");
 					return;
 				}
 
@@ -65,10 +65,9 @@
 				ajaxLoad(url, data, "text", function(data){
 					console.log("success", data);
 					if(data == "1"){
-						alert("로그인하였습니다.");
 						location.href="/admin/main"
 					} else {
-						alert("아이디 및 비밀번호를 확인해주세요");
+						gfnAlert("아이디 및 비밀번호를 확인해주세요");
 					}
 				});
 			}
@@ -115,8 +114,8 @@
 				</div>
 			</div>
 			<div class="other">
-				<a href="/register.do">회원가입</a>
-				<a href="/findpw.do">비밀번호 찾기</a>
+				<a href="/register">회원가입</a>
+				<a href="/findpw">비밀번호 찾기</a>
 			</div>
 		</div>
 	</div>
