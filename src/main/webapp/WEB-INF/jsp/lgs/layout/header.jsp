@@ -51,17 +51,18 @@
 		const userInfoBtn = document.getElementById("user-info");
 		const mypageBtn = document.getElementById("btn-mypage");
 		const logoutBtn = document.getElementById("btn-logout");
+		const backgnd = document.getElementById("backgnd-block");
 
 		/* 모바일 메뉴 버튼 클릭*/
 		movaNav.onclick = function() {
 			movaList.style.display = 'block';
-			document.getElementById("backgnd-block").style.display = 'block';
+			backgnd.style.display = 'block';
 		}
 
 		/* 모바일 메뉴 닫기 버튼*/
 		movaCloseBtn.onclick = function() {
 			movaList.style.display = 'none';
-			document.getElementById("backgnd-block").style.display = 'none';
+			backgnd.style.display = 'none';
 		}
 
 		/* 데스크탑 유저 프로필 클릭 */
@@ -78,6 +79,7 @@
 			let winWidth = window.innerWidth;
 			if(winWidth >= 950){
 				movaList.style.display = 'none';
+				backgnd.style.display = 'none';
 			} else {
 				userCard.style.display = 'none';
 			}

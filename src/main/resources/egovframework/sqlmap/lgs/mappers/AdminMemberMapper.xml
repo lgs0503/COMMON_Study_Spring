@@ -6,16 +6,26 @@
 		SELECT	MEMBER_NO
 			 ,	MEMBER_ID
 			 ,	MEMBER_NAME
-			 ,	MEMBER_GENDER
-			 ,	MEMBER_PHONENUM
-			 ,	INSERT_DATE
+			 ,	FN_GET_CODE_NAME('1', MEMBER_GENDER) MEMBER_GENDER
+			 ,	REGEXP_REPLACE(MEMBER_PHONENUM, '(.{3})(.+)(.{4})', '\1-\2-\3') MEMBER_PHONENUM
+			 ,	TO_CHAR(INSERT_DATE ,'YYYY-MM-DD') INSERT_DATE
 		FROM 	MEMBER
+		<where>
+			<if test="id != null and id != ''">
+				AND MEMBER_ID LIKE '%' || #{id} || '%'
+			</if>
+			<if test="name != null and name != ''">
+				AND MEMBER_NAME LIKE '%' || #{name} || '%'
+			</if>
+			<if test="gender != null and gender != ''">
+				AND MEMBER_GENDER = #{gender}
+			</if>
+		</where>
+		ORDER BY MEMBER_NO ASC
 	</select>
 	
 	<select id="countList" resultType="int">
-		SELECT COUNT(*)
+		SELECT COUNT(*) AS CNT
 		  FROM MEMBER
 	</select>
-
-
 </mapper>

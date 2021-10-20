@@ -61,9 +61,18 @@
     font-weight: bold;
     width: 70px;
 }
-.content-btn{
-    text-align: right;
-    margin : 30px;
+.content-top{
+    display: flex;
+    justify-content: space-between;
+    margin : 15px 30px;
+}
+.content-top > div{
+    display: inline-block;
+}
+.list-cnt{
+    padding : 5px 10px;
+    font-weight: bold;
+    color: var(--title-color);
 }
 .btn-content{
     font-weight: bold;
@@ -71,7 +80,7 @@
     padding : 5px 10px;
 }
 .content-work{
-    margin : 30px;
+    margin : 15px 30px;
 }
 .content-work > table{
     width: 100%;
@@ -99,6 +108,13 @@
     height: 40px;
     line-height: 40px;
 }
+.list-dtl{
+    cursor: pointer;
+    color : var(--title-color);
+}
+.list-dtl:hover{
+    font-weight: bold;
+}
 
 
 @media screen and (max-width: 950px){
@@ -114,10 +130,10 @@
         margin : 30px 10px;
     }
     .content-work{
-        margin : 30px 10px;
+        margin : 15px 10px;
     }
-    .content-btn{
-        margin : 30px 10px;
+    .content-top{
+        margin : 15px 10px;
     }
     .content-serach-form{
         margin : 30px 10px;
