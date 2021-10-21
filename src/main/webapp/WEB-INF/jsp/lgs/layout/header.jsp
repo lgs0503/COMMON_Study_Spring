@@ -112,7 +112,7 @@
 				<ul class="nav-sub">
 					<li><a href="/admin/member">회원관리</a></li>
 					<li><a href="#">메뉴관리</a></li>
-					<li><a href="#">코드관리</a></li>
+					<li><a href="/admin/code">코드관리</a></li>
 				</ul>
 			</li>
 			<li class="nav-main"><a href="#">컨텐츠관리</a>
@@ -159,7 +159,7 @@
 			<ul class="moba-nav-sub">
 				<li><a href="/admin/member">회원관리</a></li>
 				<li><a href="#">메뉴관리</a></li>
-				<li><a href="#">코드관리</a></li>
+				<li><a href="/admin/code">코드관리</a></li>
 			</ul>
 		</li>
 		<li class="moba-nav-main"><a href="#">컨텐츠관리</a>

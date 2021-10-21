@@ -39,7 +39,7 @@
     color:var(--text-color);
     margin: 0px 0px 0px 10px;
     display: inline-block;
-    width: 50px;
+    width: 60px;
 }
 .content-serach-item > input{
     width: 150px;
@@ -235,7 +235,8 @@
 
 .mypage-member{
     position: absolute;
-    top:80px;
+    top: 151px;
+    width: 100%;
     text-align: center;
     background-color: var(--form-color);
     border-radius: 5px;

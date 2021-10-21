@@ -100,22 +100,6 @@
             }).open();
         }
 
-        /* 아이디 체인지 - 중복확인 */
-        iptId.onchange = function(){
-
-            let url = '/cmmn/overlapId';
-            let data = {id : this.value};
-
-            ajaxLoad(url, data, "text", function(data){
-                if(data == 1){
-                    gfnAlert("중복 된 계정이 있습니다.", function(){
-                        iptId.value = "";
-                        iptId.focus();
-                    });
-                }
-            });
-        }
-
         /* 저장 버튼 클릭 */
         btnSave.onclick = function () {
 
@@ -269,12 +253,18 @@
         }
     }
 </script>
+<div class="content">
+    <div class="content-title">
+        <i class="fas fa-caret-right"></i>
+        <h2>마이페이지</h2>
+        <div class="title-info">
+            <h2>마이페이지</h2>
+        </div>
+    </div>
+</div>
 <form id="regi-form">
     <input type="hidden" id="memberImageNo" name="memberImageNo">
     <div class="mypage-member">
-        <div class="layer-header">
-            <div class="layer-title">내 정보</div>
-        </div>
         <div class="layer-work">
             <div class="picture-form">
                 <img class="picture" id="preview-image" src="/images/lgs/noimg.jpg">
