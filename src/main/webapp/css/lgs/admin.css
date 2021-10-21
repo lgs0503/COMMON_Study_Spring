@@ -222,6 +222,63 @@
     display: none;
 }
 
+.mypage-member{
+    position: absolute;
+    top: 151px;
+    width: 100%;
+    text-align: center;
+    background-color: var(--form-color);
+    border-radius: 5px;
+}
+.work-master{
+    width: calc(100% - 400px);
+    padding: 20px;
+    height: 400px;
+    overflow: scroll;
+    background-color: var(--color4);
+    margin-right: 20px;
+}
+.work-master::-webkit-scrollbar {
+    width: 10px;
+}
+.work-master::-webkit-scrollbar-thumb {
+    background-color: var(--text-color);
+}
+.work-master::-webkit-scrollbar-track {
+    background-color: #ffffff;
+}
+.work-detail{
+    width: 400px;
+    background-color: var(--form-color);
+    box-shadow: 4px 4px 10px 0px silver;
+    border-radius: 10px;
+}
+.row{
+    padding: 10px 20px;
+    color:var(--text-color);
+    font-weight: bold;
+}
+.row > label{
+    display: inline-block;
+    width: 100px;
+}
+.row > input{
+    width: 200px;
+    padding: 7px 5px;
+}
+.row > select {
+    width: 150px;
+    padding: 7px 5px;
+}
+.detail-label{
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: var(--title-color);
+    font-weight: bold;
+    color: var(--text-color-white);
+    border-left: 6px double var(--title-color);
+}
+
 
 @media screen and (max-width: 950px){
     .layer-work{
@@ -231,13 +288,15 @@
         position: absolute;
         top:70%;
     }
-}
-
-.mypage-member{
-    position: absolute;
-    top: 151px;
-    width: 100%;
-    text-align: center;
-    background-color: var(--form-color);
-    border-radius: 5px;
+    .flex{
+        display: block;
+    }
+    .work-detail{
+        width: 100%;
+    }
+    .work-master{
+        height: 150px;
+        margin-bottom: 20px;
+        width: 93%;
+    }
 }

@@ -46,3 +46,6 @@
     color: var(--text-color);
     font-family: 'Lato', sans-serif;
 }
+.flex{
+    display: flex;
+}

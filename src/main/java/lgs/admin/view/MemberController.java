@@ -57,7 +57,7 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/list")
 	public @ResponseBody
-	ModelAndView selectLoginUserInfo(@RequestParam Map<String, Object> param
+	ModelAndView selectList(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 

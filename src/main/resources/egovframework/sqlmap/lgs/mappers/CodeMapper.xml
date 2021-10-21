@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lgs.admin.mapper.CodeMapper">
+
+	<select id="searchList" parameterType="java.util.HashMap" resultType="lgs.cmmn.LowerKeyMap">
+		SELECT LEVEL
+			 , CD.CODE_NO AS ID
+			 , CD.CODE_VAL AS CODE
+			 , CD.CODE_NAME AS TEXT
+			 , CASE WHEN CD.CODE_NO = 0 THEN '#' ELSE TO_CHAR(CD.UPPER_CODE_NO) END PARENT
+			 , CD.CODE_SORT AS SORT_ORDR
+			 , CD.USE_YN AS USE_AT
+             , CASE WHEN (SELECT COUNT(*)
+                            FROM CODE
+                           WHERE UPPER_CODE_NO = CD.CODE_NO) = 0 THEN '/images/lgs/code.png'
+                    ELSE '/images/lgs/file.png' END AS ICON
+		FROM CODE CD
+		START WITH CD.CODE_NO = 0
+		CONNECT BY PRIOR CD.CODE_NO = CD.UPPER_CODE_NO
+		ORDER SIBLINGS BY CD.CODE_SORT
+	</select>
+	
+	<select id="countList" resultType="int">
+		SELECT COUNT(*) AS CNT
+		  FROM CODE
+	</select>
+</mapper>

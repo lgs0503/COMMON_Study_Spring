@@ -16,6 +16,7 @@
 package lgs.admin.view;
 
 import lgs.admin.service.AdminMemberService;
+import lgs.admin.service.CodeService;
 import lgs.cmmn.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,8 +40,8 @@ import java.util.Map;
 public class CodeController {
 
 	/** AdminMemberService */
-	@Resource(name = "adminMemberService")
-	private AdminMemberService adminMemberService;
+	@Resource(name = "codeService")
+	private CodeService codeService;
 
 	private final static String SUCCESS = "1";
 
@@ -55,19 +56,19 @@ public class CodeController {
 	}
 
 	/**
-	 * name : selectList (ajax)
+	 * name : codeList (ajax)
 	 * description : 회원리스트을 보여준다.
 	 */
 	@RequestMapping(value = "/list")
 	public @ResponseBody
-	ModelAndView selectLoginCodeInfo(@RequestParam Map<String, Object> param
+	ModelAndView codeList(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
 		ModelAndView mv = new ModelAndView("jsonView");
 
-		mv.addObject("codeList", adminMemberService.searchList(param));
-		mv.addObject("codeCnt", adminMemberService.countList());
+		mv.addObject("codeList", codeService.searchList(param));
+		mv.addObject("codeCnt", codeService.countList());
 
 		return mv;
 	}
@@ -83,7 +84,7 @@ public class CodeController {
 			, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("jsonView");
 
-		List<Map<String, Object>> memeber = adminMemberService.search(param);
+		List<Map<String, Object>> memeber = codeService.search(param);
 
 		if(memeber.get(0).get("FILE_PATH") != null){
 			memeber.get(0).put("FILE_PATH", Utils.castBase64(memeber.get(0).get("FILE_PATH").toString()));
@@ -104,7 +105,7 @@ public class CodeController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		adminMemberService.update(param);
+		codeService.update(param);
 
 		return SUCCESS;
 	}
@@ -119,7 +120,7 @@ public class CodeController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		adminMemberService.delete(param);
+		codeService.delete(param);
 
 		return SUCCESS;
 	}
