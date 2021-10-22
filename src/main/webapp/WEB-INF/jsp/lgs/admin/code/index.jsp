@@ -12,16 +12,26 @@
 </style>
 <script type="text/javascript">
 	window.onload = function(){
-		document.getElementById("btn-save").disabled = true;
+
+		comboLoad("combo-useyn", "U001", "SELECT");
+
 		serachCodeList();
 
-		const btnSearch = document.getElementById("btn-search");
 		const iptCode = document.getElementById("code");
 		const bntSave = document.getElementById("btn-save");
+		const btnSearch = document.getElementById("btn-search");
+
+		/* 엔터 조회 */
+		addEnter("search-code-name", function(){
+			btnSearch.click();
+		});
+
+		bntSave.disabled = true;
 
 		/* 조회 버튼 클릭 */
 		btnSearch.onclick = function(){
-			serachCodeList();
+			let val = document.getElementById("search-code-name").value;
+			$('#jstree_div').jstree(true).search(val);
 		}
 
 		/* 코드 에디터 박스 수정 (중복확인) */
@@ -70,15 +80,11 @@
 				}
 			});
 		}
-
 	}
 
+	/* 코드 트리 리스트 조회 */
 	function serachCodeList(){
-		/* 코드 트리 리스트 조회 */
 		let url = "/admin/code/list";
-
-		comboLoad("combo-useyn-search", "U001", "SELECT");
-		comboLoad("combo-useyn", "U001", "SELECT");
 
 		ajaxLoad(url, null, "json", function (data) {
 
@@ -156,6 +162,9 @@
 							}
 						};
 					}
+				},
+				"search" : { "show_only_matches" : true
+					       , "show_only_matches_children" : true,
 				}
 			});
 
@@ -236,15 +245,7 @@
 		<div class="content-serach-form">
 			<div class="content-serach-item">
 				<label>코드명</label>
-				<input id="user-id" type="text">
-			</div>
-			<div class="content-serach-item">
-				<label>코드번호</label>
-				<input id="user-name" type="text">
-			</div>
-			<div class="content-serach-item">
-				<label>사용여부</label>
-				<select id="combo-useyn-search"></select>
+				<input id="search-code-name" type="text">
 			</div>
 			<input id="btn-search" class="btn-cmmn btn-search" type="button" value="조회">
 		</div>
@@ -257,11 +258,16 @@
 			</div>
 		</div>
 		<div class="content-work flex">
-			<div class="work-master" id="jstree_div"></div>
-			<div class="work-detail">
-
+			<div class="work-master" >
 				<div class="detail-label">
-					상세정보
+					<div>코드</div>
+					<div class="label-info">코드 우측 클릭시 추가 삭제 가능</div>
+				</div>
+				<div id="jstree_div"></div>
+			</div>
+			<div class="work-detail">
+				<div class="detail-label">
+					<div>상세정보</div>
 				</div>
 				<div class="row">
 					<label>코드</label>

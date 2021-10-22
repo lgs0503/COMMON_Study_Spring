@@ -73,13 +73,13 @@
 			}
 
 			/* 엔터 조회 */
-			for(let i = 0 ; i < iptLogin.length ; i++){
-				iptLogin[i].onkeyup = function(event){
-					if (event.keyCode == 13) {
-						btnLogin.click();
-					}
-				}
-			}
+			let enterId = ["user-id", "user-pw"];
+
+			enterId.forEach(function(value){
+				addEnter(value, function(){
+					btnLogin.click();
+				});
+			});
 		}
 	</script>
 </head>

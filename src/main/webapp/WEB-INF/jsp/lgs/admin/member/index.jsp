@@ -21,13 +21,22 @@
 		btnInsert.onclick = function(){
 			loadLayer();
 		}
+
+		/* 엔터 조회 */
+		let enterId = ["member-id", "member-name", "combo-gender"];
+
+		enterId.forEach(function(value){
+			addEnter(value, function(){
+				btnSearch.click();
+			});
+		});
 	}
 
 	/* 회원 조회 */
 	function searchList(){
 
-		let data = { id : document.getElementById("user-id").value
-			       , name : document.getElementById("user-name").value
+		let data = { id : document.getElementById("member-id").value
+			       , name : document.getElementById("member-name").value
 		           , gender : document.getElementById("combo-gender").value};
 
 		/* 로그인 계정정보 조회 (프로필사진, 아이디) */
@@ -105,11 +114,11 @@
 		<div class="content-serach-form">
 			<div class="content-serach-item">
 				<label>아이디</label>
-				<input id="user-id" type="text">
+				<input id="member-id" type="text">
 			</div>
 			<div class="content-serach-item">
 				<label>성명</label>
-				<input id="user-name" type="text">
+				<input id="member-name" type="text">
 			</div>
 			<div class="content-serach-item">
 				<label>성별</label>

@@ -232,11 +232,16 @@
 }
 .work-master{
     width: calc(100% - 400px);
-    padding: 20px;
     height: 400px;
     overflow: scroll;
     background-color: var(--color4);
     margin-right: 20px;
+}
+.work-master > .detail-label{
+    display: flex;
+    justify-content: space-between;
+    position:sticky;
+    top:0;
 }
 .work-master::-webkit-scrollbar {
     width: 10px;
@@ -271,12 +276,17 @@
     padding: 7px 5px;
 }
 .detail-label{
+    justify-content: space-between;
     margin-bottom: 15px;
     padding: 10px;
     background-color: var(--title-color);
     font-weight: bold;
     color: var(--text-color-white);
     border-left: 6px double var(--title-color);
+}
+.label-info{
+    font-size:11px;
+    line-height: 16px;
 }
 
 
@@ -295,7 +305,7 @@
         width: 100%;
     }
     .work-master{
-        height: 150px;
+        height: 200px;
         margin-bottom: 20px;
         width: 100%;
         padding : 0px;

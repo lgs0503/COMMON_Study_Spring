@@ -270,3 +270,11 @@ function selectOption(id, value, type){
         }
     }
 }
+/* input 태그 엔터조회 추가 */
+function addEnter(iptId, callback){
+    document.getElementById(iptId).onkeyup = function(event){
+        if (event.keyCode == 13) {
+            callback();
+        }
+    }
+}
