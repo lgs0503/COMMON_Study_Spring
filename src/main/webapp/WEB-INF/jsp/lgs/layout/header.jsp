@@ -28,7 +28,7 @@
 		for(let i = 0 ; i<mainNav.length ; i++) {
 			mainNav[i].onclick = function(){
 				if(!$(".nav-sub").is(":visible")){
-					window.setTimeout(() => {
+					window.setTimeout(function(){
 						$('.nav-sub').off().slideDown(100);
 						$('.header' ).animate({height: '300px'}, 100, 'swing');
 					}, 100);
@@ -38,7 +38,7 @@
 
 		$(".header").mouseleave(function(){
 			if($(".nav-sub").is(":visible")){
-				window.setTimeout(() => {
+				window.setTimeout(function(){
 					$('.nav-sub').off().slideUp(100);
 					$('.header' ).animate({height: '60px'}, 100, 'swing');
 				}, 100);
@@ -111,7 +111,7 @@
 			<li class="nav-main"><a href="#">시스템관리</a>
 				<ul class="nav-sub">
 					<li><a href="/admin/member">회원관리</a></li>
-					<li><a href="#">메뉴관리</a></li>
+					<li><a href="/admin/menu">메뉴관리</a></li>
 					<li><a href="/admin/code">코드관리</a></li>
 				</ul>
 			</li>
@@ -158,7 +158,7 @@
 		<li class="moba-nav-main"><a href="#">시스템관리</a>
 			<ul class="moba-nav-sub">
 				<li><a href="/admin/member">회원관리</a></li>
-				<li><a href="#">메뉴관리</a></li>
+				<li><a href="/admin/menu">메뉴관리</a></li>
 				<li><a href="/admin/code">코드관리</a></li>
 			</ul>
 		</li>

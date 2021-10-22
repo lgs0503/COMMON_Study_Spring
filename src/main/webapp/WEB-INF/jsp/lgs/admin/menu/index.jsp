@@ -15,8 +15,6 @@
 
 		comboLoad("combo-useyn", "U001", "SELECT");
 
-		inputOnlyNumber("code-sort");
-
 		serachCodeList();
 
 		const iptCode = document.getElementById("code");
@@ -36,14 +34,14 @@
 			$('#jstree_div').jstree(true).search(val);
 		}
 
-		/* 코드 에디터 박스 수정 (중복확인) */
+		/* 메뉴 에디터 박스 수정 (중복확인) */
 		iptCode.onchange = function(){
-			let url = '/admin/code/overlapCode';
+			let url = '/admin/code/overlapMenu';
 			let data = {code : iptCode.value};
 
 			ajaxLoad(url, data, "text", function(data){
 				if(data == 1){
-					gfnAlert("중복 된 코드이 있습니다.", function(){
+					gfnAlert("중복 된 메뉴가 있습니다.", function(){
 						iptCode.value = "";
 						iptCode.focus();
 					});
@@ -84,13 +82,13 @@
 		}
 	}
 
-	/* 코드 트리 리스트 조회 */
+	/* 메뉴 트리 리스트 조회 */
 	function serachCodeList(){
-		let url = "/admin/code/list";
+		let url = "/admin/menu/list";
 
 		ajaxLoad(url, null, "json", function (data) {
 
-			document.getElementById("list-cnt").innerText = data.codeCnt;
+			document.getElementById("list-cnt").innerText = data.menuCnt;
 
 			let $jstree = $('#jstree_div');
 
@@ -98,7 +96,7 @@
 			$jstree.jstree({
 				"core": {
 					"check_callback": true,
-					data: data.codeList
+					data: data.menuList
 				},
 				"themes": {
 					"theme": "classic",
@@ -112,14 +110,14 @@
 							"Create": {
 								"separator_before": false,
 								"separator_after": false,
-								"label": "신규코드",
+								"label": "신규메뉴",
 								"action": function (obj) {
 									let sNode = $jstree.jstree(true).get_selected(true)[0];
 									if (sNode.original.id == undefined) {
-										gfnAlert("코드를 등록할 수 없습니다.");
+										gfnAlert("메뉴를 등록할 수 없습니다.");
 									} else {
 										let newNode = { parent: sNode.original.id
-											, text : "신규 코드"};
+											, text : "신규 메뉴"};
 
 										$node = $jstree.jstree(true).create_node($node, newNode);
 										$jstree.jstree(true).edit($node);
@@ -129,7 +127,7 @@
 							"Delete": {
 								"separator_before": false,
 								"separator_after": false,
-								"label": "코드삭제",
+								"label": "메뉴삭제",
 								"action": function (obj) {
 									let sNode = $jstree.jstree(true).get_selected(true)[0];
 									if (sNode.original.id == undefined) {
@@ -143,9 +141,9 @@
 									} else if (sNode.original.id == 0) {
 										gfnAlert("최상위 노드는 삭제 할 수 없습니다.");
 									} else if (sNode.children.length > 0) {
-										gfnAlert("하위 코드가 존재합니다.\n\n하위 코드부터 삭제 후 다시 시도하세요.");
+										gfnAlert("하위 메뉴가 존재합니다.\n\n하위 메뉴부터 삭제 후 다시 시도하세요.");
 									} else {
-										gfnConfirm("선택하신 코드를 삭제 하시겠습니까?", function(result){
+										gfnConfirm("선택하신 메뉴를 삭제 하시겠습니까?", function(result){
 											if(result){
 
 												let url = "/admin/code/delete";
@@ -198,7 +196,7 @@
 		});
 	}
 
-	/* 코드 상세 데이터 변경 */
+	/* 메뉴 상세 데이터 변경 */
 	function fn_setForm(data){
 
 		if(data.node.original.id == null){
@@ -239,14 +237,14 @@
 	<div class="content">
 		<div class="content-title">
 			<i class="fas fa-caret-right"></i>
-			<h2>코드관리</h2>
+			<h2>메뉴관리</h2>
 			<div class="title-info">
-				<h2>시스템관리 <i class="fas fa-caret-right"></i> 코드관리</h2>
+				<h2>시스템관리 <i class="fas fa-caret-right"></i> 메뉴관리</h2>
 			</div>
 		</div>
 		<div class="content-serach-form">
 			<div class="content-serach-item">
-				<label>코드명</label>
+				<label>메뉴명</label>
 				<input id="search-code-name" type="text">
 			</div>
 			<input id="btn-search" class="btn-cmmn btn-search" type="button" value="조회">
@@ -262,8 +260,8 @@
 		<div class="content-work flex">
 			<div class="work-master" >
 				<div class="detail-label">
-					<div>코드</div>
-					<div class="label-info">코드 우측 클릭시 추가 삭제 가능</div>
+					<div>메뉴</div>
+					<div class="label-info">메뉴 우측 클릭시 추가 삭제 가능</div>
 				</div>
 				<div id="jstree_div"></div>
 			</div>
@@ -272,20 +270,20 @@
 					<div>상세정보</div>
 				</div>
 				<div class="row">
-					<label>코드</label>
-					<input type="text" id="code" placeholder="코드" maxlength="7">
+					<label>메뉴</label>
+					<input type="text" id="code" placeholder="코드">
 				</div>
 				<div class="row">
 					<label>코드이름</label>
-					<input type="text" id="code-name" placeholder="코드이름" maxlength="15">
+					<input type="text" id="code-name" placeholder="코드이름">
 				</div>
 				<div class="row">
 					<label>코드값</label>
-					<input type="text" id="code-val" placeholder="코드값" maxlength="7">
+					<input type="text" id="code-val" placeholder="코드값">
 				</div>
 				<div class="row">
 					<label>정렬</label>
-					<input type="text" id="code-sort" placeholder="정렬" maxlength="5">
+					<input type="text" id="code-sort" placeholder="정렬">
 				</div>
 				<div class="row">
 					<label>사용여부</label>

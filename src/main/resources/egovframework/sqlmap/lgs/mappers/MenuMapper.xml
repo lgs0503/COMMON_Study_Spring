@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lgs.admin.mapper.MenuMapper">
+
+	<select id="searchList" parameterType="java.util.HashMap" resultType="lgs.cmmn.LowerKeyMap">
+		SELECT LEVEL
+			 , MU.MENU_NO AS ID
+			 , MU.MENU_URL
+			 , MU.MENU_GUBUN
+			 , MU.MENU_NAME AS TEXT
+			 , CASE WHEN MU.MENU_NO = '0' THEN '#'
+					ELSE MU.UPPER_MENU_NO END PARENT
+			 , MU.USE_YN
+			 , MU.REMARK
+			 , CASE WHEN (SELECT COUNT(*)
+						  FROM MENU
+						  WHERE UPPER_MENU_NO = MU.MENU_NO) = '0' THEN '/images/lgs/code.png'
+					ELSE '/images/lgs/file.png' END AS ICON
+		FROM MENU MU
+		START WITH MU.MENU_NO = '0'
+		CONNECT BY PRIOR MU.MENU_NO = MU.UPPER_MENU_NO
+	</select>
+	
+	<select id="countList" resultType="int">
+		SELECT COUNT(*) AS CNT
+		  FROM MENU
+	</select>
+
+	<select id="overlapMenu" parameterType="java.util.HashMap" resultType="java.lang.String">
+		SELECT	COUNT(*) CNT
+		FROM	MENU
+		WHERE	MENU_NO = #{code}
+	</select>
+
+	<insert id="add" parameterType="java.util.HashMap">
+		INSERT
+		INTO	CODE
+		(
+			CODE_NO
+		,	CODE_NAME
+        ,   UPPER_CODE_NO
+        ,	USE_YN
+        ,	CODE_VAL
+        ,	CODE_SORT
+        ,	INSERT_DATE
+        ,	UPDATE_DATE
+		)
+		VALUES
+		(
+			#{code}
+		,	#{codeName}
+		,	#{upperCode}
+		,	#{useyn}
+		,	#{codeVal}
+		,	#{codeSort}
+		,	SYSDATE
+		,	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+		UPDATE	CODE
+		SET		CODE_NAME	= #{codeName}
+			,   USE_YN		= #{useyn}
+			,	CODE_VAL	= #{codeVal}
+			,	CODE_SORT	= #{codeSort}
+			,	UPDATE_DATE	= SYSDATE
+		WHERE	CODE_NO 	= #{code}
+	</update>
+
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE
+		FROM	CODE
+		WHERE	CODE_NO	= #{code}
+	</delete>
+</mapper>

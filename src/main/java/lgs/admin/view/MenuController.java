@@ -15,9 +15,7 @@
  */
 package lgs.admin.view;
 
-import lgs.admin.service.AdminMemberService;
-import lgs.admin.service.CodeService;
-import lgs.cmmn.Utils;
+import lgs.admin.service.MenuService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,45 +27,44 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Map;
 
 /**
  */
 
 @Controller
-@RequestMapping("/admin/code")
-public class CodeController {
+@RequestMapping("/admin/menu")
+public class MenuController {
 
-	@Resource(name = "codeService")
-	private CodeService codeService;
+	@Resource(name = "menuService")
+	private MenuService menuService;
 
 	private final static String SUCCESS = "1";
 
 	/**
-	 * name : codePage
-     * description : 코드관리화면 을 보여준다.
+	 * name : menuPage
+     * description : 메뉴관리화면 을 보여준다.
 	 */
 	@GetMapping
-	public String codePage(Model model, HttpServletRequest request) throws Exception {
+	public String menuPage(Model model, HttpServletRequest request) throws Exception {
 
-		return "admin/code/index";
+		return "admin/menu/index";
 	}
 
 	/**
-	 * name : codeList (ajax)
-	 * description : 회원리스트을 보여준다.
+	 * name : menuList (ajax)
+	 * description : 메뉴리스트을 보여준다.
 	 */
 	@RequestMapping(value = "/list")
 	public @ResponseBody
-	ModelAndView codeList(@RequestParam Map<String, Object> param
+	ModelAndView menuList(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
 		ModelAndView mv = new ModelAndView("jsonView");
 
-		mv.addObject("codeList", codeService.searchList(param));
-		mv.addObject("codeCnt", codeService.countList());
+		mv.addObject("menuList", menuService.searchList(param));
+		mv.addObject("menuCnt", menuService.countList());
 
 		return mv;
 	}
@@ -76,12 +73,12 @@ public class CodeController {
 	 * name : overlapCode (AJAX)
 	 * description : 코드를 중복확인 한다.
 	 */
-	@RequestMapping(value = "/overlapCode")
-	public @ResponseBody String overlapCode(@RequestParam Map<String, Object> param
+	@RequestMapping(value = "/overlapMenu")
+	public @ResponseBody String overlapMenu(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		return codeService.overlapCode(param);
+		return menuService.overlapMenu(param);
 	}
 
 	/**
@@ -94,7 +91,7 @@ public class CodeController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		codeService.add(param);
+		menuService.add(param);
 
 		return SUCCESS;
 	}
@@ -109,7 +106,7 @@ public class CodeController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		codeService.update(param);
+		menuService.update(param);
 
 		return SUCCESS;
 	}
@@ -124,7 +121,7 @@ public class CodeController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		codeService.delete(param);
+		menuService.delete(param);
 
 		return SUCCESS;
 	}
