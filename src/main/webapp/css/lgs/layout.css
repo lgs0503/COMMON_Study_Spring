@@ -94,8 +94,8 @@
 }
 .info-description > .info-desc-btn > input{
     width: 80px;
-    margin: 10px 0px 0px 0px;
-    padding: 2px 5px;
+    margin: 10px 5px 0px 0px;
+    padding: 7px 5px;
     font-size: 13px;
     font-weight: bold;
 }
@@ -109,6 +109,10 @@
     text-align: center;
     line-height: 40px;
     margin-top: 6px;
+    border-radius: 5px;
+}
+.user-info > i:hover{
+    background-color: #000000;
 }
 /* 유저 카드 */
 .user-info-layer{

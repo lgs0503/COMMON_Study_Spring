@@ -73,8 +73,6 @@ public class CodeController {
 		return mv;
 	}
 
-
-
 	/**
 	 * name : overlapCode (AJAX)
 	 * description : 코드를 중복확인 한다.
@@ -88,12 +86,27 @@ public class CodeController {
 	}
 
 	/**
-	 * name : updateMember (ajax)
-	 * description : 회원을 수정한다.
+	 * name : insertCode (ajax)
+	 * description : 코드를 생성한다.
+	 */
+	@RequestMapping(value = "/insert")
+	public @ResponseBody
+	String insertCode(@RequestParam Map<String, Object> param
+			, HttpSession session
+			, HttpServletRequest request) throws Exception {
+
+		codeService.add(param);
+
+		return SUCCESS;
+	}
+
+	/**
+	 * name : updateCode (ajax)
+	 * description : 코드를 수정한다.
 	 */
 	@RequestMapping(value = "/update")
 	public @ResponseBody
-	String updateMember(@RequestParam Map<String, Object> param
+	String updateCode(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 

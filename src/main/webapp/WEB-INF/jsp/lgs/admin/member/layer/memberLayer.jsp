@@ -90,8 +90,8 @@
             });
         }
 
-        comboLoad("combo-gender-layer", "1", "SELECT");
-        comboLoad("combo-quiz-layer", "4", "SELECT");
+        comboLoad("combo-gender-layer", "G001", "SELECT");
+        comboLoad("combo-quiz-layer", "PW001", "SELECT");
 
         /* 주소 찾기 버튼 클릭 */
         btnLoaction.onclick = function(){

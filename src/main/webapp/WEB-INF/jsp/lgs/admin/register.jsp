@@ -28,8 +28,8 @@
 			document.getElementById("location").disabled = true;
 
 			/* 콤보박스 코드 로드 */
-			comboLoad("combo-gender", "1", "SELECT");
-			comboLoad("combo-quiz", "4", "SELECT");
+			comboLoad("combo-gender", "G001", "SELECT");
+			comboLoad("combo-quiz", "PW001", "SELECT");
 
 			/* input 태그 숫자만 입력되게 */
 			inputOnlyNumber("phonenum");

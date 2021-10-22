@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	window.onload = function(){
 
-		comboLoad("combo-gender", "1", "SELECT");
+		comboLoad("combo-gender", "G001", "SELECT");
 		searchList();
 
 		const btnSearch = document.getElementById("btn-search");

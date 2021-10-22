@@ -19,5 +19,4 @@ public interface CodeService {
 	void update(Map<String, Object> map);
 
 	void delete(Map<String, Object> map);
-
 }

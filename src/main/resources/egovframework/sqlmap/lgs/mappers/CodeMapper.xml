@@ -4,21 +4,21 @@
 
 	<select id="searchList" parameterType="java.util.HashMap" resultType="lgs.cmmn.LowerKeyMap">
 		SELECT LEVEL
-			 , CD.CODE_NO AS ID
-			 , CD.CODE_VAL AS CODE
-			 , CD.CODE_NAME AS TEXT
-			 , CASE WHEN CD.CODE_NO = 0 THEN '#' ELSE TO_CHAR(CD.UPPER_CODE_NO) END PARENT
-			 , CD.CODE_SORT AS SORT_ORDR
-			 , CASE WHEN CD.USE_YN = 'Y' THEN '1'
-			             ELSE '2' END AS USE_AT
+             , CD.CODE_NO AS ID
+             , CD.CODE_VAL AS CODE
+             , CD.CODE_NAME AS TEXT
+             , CASE WHEN CD.CODE_NO = '0' THEN '#'
+                    ELSE CD.UPPER_CODE_NO END PARENT
+             , CD.CODE_SORT AS SORT_ORDR
+             , CD.USE_YN
              , CASE WHEN (SELECT COUNT(*)
                             FROM CODE
-                           WHERE UPPER_CODE_NO = CD.CODE_NO) = 0 THEN '/images/lgs/code.png'
+                           WHERE UPPER_CODE_NO = CD.CODE_NO) = '0' THEN '/images/lgs/code.png'
                     ELSE '/images/lgs/file.png' END AS ICON
-		FROM CODE CD
-		START WITH CD.CODE_NO = 0
-		CONNECT BY PRIOR CD.CODE_NO = CD.UPPER_CODE_NO
-		ORDER SIBLINGS BY CD.CODE_SORT
+        FROM CODE CD
+        START WITH CD.CODE_NO = '0'
+        CONNECT BY PRIOR CD.CODE_NO = CD.UPPER_CODE_NO
+        ORDER SIBLINGS BY CD.CODE_SORT
 	</select>
 	
 	<select id="countList" resultType="int">
@@ -26,9 +26,51 @@
 		  FROM CODE
 	</select>
 
-	<select id="overlapId" parameterType="java.util.HashMap" resultType="java.lang.String">
+	<select id="overlapCode" parameterType="java.util.HashMap" resultType="java.lang.String">
 		SELECT	COUNT(*) CNT
 		FROM	CODE
 		WHERE	CODE_NO = #{code}
 	</select>
+
+	<insert id="add" parameterType="java.util.HashMap">
+		INSERT
+		INTO	CODE
+		(
+			CODE_NO
+		,	CODE_NAME
+        ,   UPPER_CODE_NO
+        ,	USE_YN
+        ,	CODE_VAL
+        ,	CODE_SORT
+        ,	INSERT_DATE
+        ,	UPDATE_DATE
+		)
+		VALUES
+		(
+			#{code}
+		,	#{codeName}
+		,	#{upperCode}
+		,	#{useyn}
+		,	#{codeVal}
+		,	#{codeSort}
+		,	SYSDATE
+		,	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+		UPDATE	CODE
+		SET		CODE_NAME	= #{codeName}
+			,   USE_YN		= #{useyn}
+			,	CODE_VAL	= #{codeVal}
+			,	CODE_SORT	= #{codeSort}
+			,	UPDATE_DATE	= SYSDATE
+		WHERE	CODE_NO 	= #{code}
+	</update>
+
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE
+		FROM	CODE
+		WHERE	CODE_NO	= #{code}
+	</delete>
 </mapper>

@@ -65,4 +65,5 @@ public class CodeServiceImpl extends EgovAbstractServiceImpl implements CodeServ
 	public void delete(Map<String, Object> map) {
 		codeMapper.delete(map);
 	}
+
 }
