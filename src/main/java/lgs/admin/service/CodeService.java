@@ -11,6 +11,8 @@ public interface CodeService {
 	int countList();
 
 	List<Map<String, Object>> search(Map<String, Object> map);
+
+	String overlapCode(Map<String, Object> map);
 	
 	void add(Map<String, Object> map);
 	

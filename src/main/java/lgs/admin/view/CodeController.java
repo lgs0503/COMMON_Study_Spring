@@ -73,26 +73,18 @@ public class CodeController {
 		return mv;
 	}
 
+
+
 	/**
-	 * name : selectMember
-	 * description : 회원정보를 보여준다.
+	 * name : overlapCode (AJAX)
+	 * description : 코드를 중복확인 한다.
 	 */
-	@RequestMapping(value = "/read")
-	public @ResponseBody
-	ModelAndView selectMember(@RequestParam Map<String, Object> param
+	@RequestMapping(value = "/overlapCode")
+	public @ResponseBody String overlapCode(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("jsonView");
 
-		List<Map<String, Object>> memeber = codeService.search(param);
-
-		if(memeber.get(0).get("FILE_PATH") != null){
-			memeber.get(0).put("FILE_PATH", Utils.castBase64(memeber.get(0).get("FILE_PATH").toString()));
-		}
-
-		mv.addObject("member", memeber);
-
-		return mv;
+		return codeService.overlapCode(param);
 	}
 
 	/**

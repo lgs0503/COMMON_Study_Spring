@@ -108,6 +108,22 @@
 				fn_setForm(data);
 			});
 		});
+
+		const iptCode = document.getElementById("code");
+
+		iptCode.onchange = function(){
+			let url = '/code/overlapCode';
+			let data = {code : iptCode.value};
+
+			ajaxLoad(url, data, "text", function(data){
+				if(data == 1){
+					gfnAlert("중복 된 코드이 있습니다.", function(){
+						iptCode.value = "";
+						iptCode.focus();
+					});
+				}
+			});
+		}
 	}
 	/* 코드 상세 데이터 변경 */
 	function fn_setForm(data){
@@ -120,7 +136,11 @@
 		} else {
 			document.getElementById("code").value = data.node.original.code;
 			document.getElementById("code-name").value = data.node.original.text;
-			document.getElementById("code-sort").value = data.node.original.sort_ordr;
+			if(!nullChk(data.node.original.sort_ordr)){
+				document.getElementById("code-sort").value = data.node.original.sort_ordr;
+			} else {
+				document.getElementById("code-sort").value = 0;
+			}
 
 			selectOption("combo-useyn-list", data.node.original.use_at, "value");
 		}

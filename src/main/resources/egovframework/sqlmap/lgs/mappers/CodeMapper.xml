@@ -9,7 +9,8 @@
 			 , CD.CODE_NAME AS TEXT
 			 , CASE WHEN CD.CODE_NO = 0 THEN '#' ELSE TO_CHAR(CD.UPPER_CODE_NO) END PARENT
 			 , CD.CODE_SORT AS SORT_ORDR
-			 , CD.USE_YN AS USE_AT
+			 , CASE WHEN CD.USE_YN = 'Y' THEN '1'
+			             ELSE '2' END AS USE_AT
              , CASE WHEN (SELECT COUNT(*)
                             FROM CODE
                            WHERE UPPER_CODE_NO = CD.CODE_NO) = 0 THEN '/images/lgs/code.png'
@@ -23,5 +24,11 @@
 	<select id="countList" resultType="int">
 		SELECT COUNT(*) AS CNT
 		  FROM CODE
+	</select>
+
+	<select id="overlapId" parameterType="java.util.HashMap" resultType="java.lang.String">
+		SELECT	COUNT(*) CNT
+		FROM	CODE
+		WHERE	CODE_NO = #{code}
 	</select>
 </mapper>

@@ -47,6 +47,11 @@ public class CodeServiceImpl extends EgovAbstractServiceImpl implements CodeServ
 	}
 
 	@Override
+	public String overlapCode(Map<String, Object> map) {
+		return codeMapper.overlapCode(map);
+	}
+
+	@Override
 	public void add(Map<String, Object> map) {
 		codeMapper.add(map);
 	}
