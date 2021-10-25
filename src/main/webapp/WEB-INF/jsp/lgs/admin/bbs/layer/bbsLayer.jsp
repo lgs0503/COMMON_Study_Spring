@@ -12,46 +12,32 @@
 
         const btnSave = document.getElementById("btn-save");
         const btnDelete = document.getElementById("btn-delete");
-        const iptId = document.getElementById("id");
-        const iptLocation = document.getElementById("location");
+        const iptBbs = document.getElementById("bbs");
 
-        const eleId = [ "id", "passwd", "passwdchk"
-                      , "name", "email"
-                      , "birthday", "hidden-birthday"
-                      , "phonenum"
-                      , "location", "locationDtl"
-                      , "memberImageNo","gender"
-                      , "quiz", "pwfind"];
-
-        iptLocation.disabled = true;
+        const eleId = [ "bbs", "bbs-name-layer", "bbstype"
+                      , "useyn", "commentUseyn", "fileUseyn"
+                      , "remark"];
 
         /* 상세정보 일 경우 */
         if(type == "U"){
-            iptId.disabled = true;
+            iptBbs.disabled = true;
 
             btnDelete.style.display = "inline-block";
 
             layerType = type;
 
-            let data = {id: param};
+            let data = {bbs: param};
             let url = '/admin/bbs/read';
 
             ajaxLoad(url, data, "json", function(result){
 
-                const resultData = [ result.member[0].MEMBER_ID
-                                   , result.member[0].MEMBER_PW
-                                   , result.member[0].MEMBER_PW
-                                   , result.member[0].MEMBER_NAME
-                                   , result.member[0].MEMBER_EMAIL
-                                   , castToYMD(result.member[0].MEMBER_BRITHDAY)
-                                   , result.member[0].MEMBER_BRITHDAY
-                                   , result.member[0].MEMBER_PHONENUM
-                                   , result.member[0].MEMBER_LOCATION
-                                   , result.member[0].MEMBER_LOCATION_DTL
-                                   , result.member[0].MEMBER_IMAGE_NO
-                                   , result.member[0].MEMBER_GENDER
-                                   , result.member[0].MEMBER_PW_QUESTION
-                                   , result.member[0].MEMBER_PW_ANSWER];
+                const resultData = [ result.bbs[0].BBS_NO
+                                   , result.bbs[0].BBS_NAME
+                                   , result.bbs[0].BBS_TYPE
+                                   , result.bbs[0].USE_YN
+                                   , result.bbs[0].COMMENT_USE_YN
+                                   , result.bbs[0].FILE_USE_YN
+                                   , result.bbs[0].REMARK ];
 
                 eleId.forEach(function (value, index) {
                     if(!nullChk(resultData[index])){
@@ -60,12 +46,14 @@
                 });
 
                 setTimeout(function(){
-                    selectOption("combo-gender-layer", result.member[0].MEMBER_GENDER, "value");
-                    selectOption("combo-quiz-layer", result.member[0].MEMBER_PW_QUESTION, "value");
+                    selectOption("combo-useyn", result.bbs[0].USE_YN, "value");
+                    selectOption("combo-commentUseyn", result.bbs[0].COMMENT_USE_YN, "value");
+                    selectOption("combo-fileUseyn", result.bbs[0].FILE_USE_YN, "value");
+                    selectOption("combo-bbstype-layer", result.bbs[0].BBS_TYPE, "value");
                 }, 200);
             });
         } else { /* 신규 */
-            iptId.disabled = false;
+            iptBbs.disabled = false;
             btnDelete.style.display = "none";
 
             eleId.forEach(function (value) {
@@ -73,20 +61,22 @@
             });
         }
 
-        comboLoad("combo-gender-layer", "G001", "SELECT");
-        comboLoad("combo-quiz-layer", "PW001", "SELECT");
+        comboLoad("combo-useyn", "U001", "SELECT");
+        comboLoad("combo-commentUseyn", "U001", "SELECT");
+        comboLoad("combo-fileUseyn", "U001", "SELECT");
+        comboLoad("combo-bbstype-layer", "B001", "SELECT");
 
-        /* 아이디 체인지 - 중복확인 */
-        iptId.onchange = function(){
+        /* 게시판번호 체인지 - 중복확인 */
+        iptBbs.onchange = function(){
 
-            let url = '/cmmn/overlapId';
-            let data = {id : this.value};
+            let url = '/admin/bbs/overlapBbs';
+            let data = {bbs : this.value};
 
             ajaxLoad(url, data, "text", function(data){
                 if(data == 1){
-                    gfnAlert("중복 된 계정이 있습니다.", function(){
-                        iptId.value = "";
-                        iptId.focus();
+                    gfnAlert("중복 된 게시판번호가 있습니다.", function(){
+                        iptBbs.value = "";
+                        iptBbs.focus();
                     });
                 }
             });
@@ -95,10 +85,6 @@
         /* 저장 버튼 클릭 */
         btnSave.onclick = function () {
 
-            /* input 글자 길이 유효성 체크 */
-            lengthMaxMinValidate("id", 15, 5, "아이디");
-            lengthMaxMinValidate("passwd", 15, 6, "비밀번호");
-
             gfnConfirm("저장하시겠습니까?", function (result) {
                 if(result){
                     /*유효성 체크 결과값 이 실패면 종료*/
@@ -106,52 +92,26 @@
                         return;
                     }
 
-                    const iptImage = document.getElementById("image");
+                    iptBbs.disabled = false;
 
-                    iptLocation.disabled = false;
-                    iptId.disabled = false;
+                    let url = "";
 
-                    /* promise를 이용한 비동기 통신 */
-                    new Promise(function(resolve, reject){
+                    if(layerType == "I") { /* 신규 */
+                        url = '/admin/bbs/insert';
+                    } else if(layerType == "U") { /* 수정 */
+                        url = '/admin/bbs/update';
+                    }
 
-                        if(!nullChk(iptImage.value)){
-                            /* 프로필 사진 업로드*/
-                            let url = '/fileUpload';
-                            let data = new FormData();
-                            data.append("file", iptImage.files[0]);
+                    let data = $("#bbs-form").serialize();
 
-                            ajaxLoad(url, data, "text", function(result){
-                                resolve(result);
-                            }, false, false);
-                        } else {
-                            resolve();
-                        }
+                    ajaxLoad(url, data, "text", function(){
+                        gfnAlert("저장완료", function () {
+                            iptBbs.disabled = true;
 
-                    }).then(function(resolve){
-                        if(!nullChk(iptImage.value)){
-                            document.getElementById("memberImageNo").value = resolve;
-                        }
+                            let btnClose = document.getElementById("btn-layer-close");
+                            btnClose.click();
 
-                        let url = "";
-
-                        if(layerType == "I") { /* 신규 */
-                            url = '/cmmn/registerProcess';
-                        } else if(layerType == "U") { /* 수정 */
-                            url = '/admin/member/update';
-                        }
-
-                        let data = $("#regi-form").serialize();
-
-                        ajaxLoad(url, data, "text", function(){
-                            gfnAlert("저장완료", function () {
-                                iptLocation.disabled = true;
-                                iptId.disabled = true;
-
-                                let btnClose = document.getElementById("btn-layer-close");
-                                btnClose.click();
-
-                                searchList();
-                            });
+                            searchList();
                         });
                     });
                 }
@@ -160,10 +120,10 @@
 
         /* 삭제 버튼 클릭 */
         btnDelete.onclick = function () {
-            gfnConfirm("정말 회원 정보를 삭제 하시겠습니까?", function(result){
+            gfnConfirm("정말 게시판 정보를 삭제 하시겠습니까?", function(result){
                 if(result){
-                    let data = {id: param};
-                    let url = '/admin/member/delete';
+                    let data = {bbs: param};
+                    let url = '/admin/bbs/delete';
 
                     ajaxLoad(url, data, "text", function(result){
                         gfnAlert("삭제되었습니다.", function(){
@@ -177,7 +137,6 @@
             })
         }
 
-
         //$('#layer-member').draggable({handle: ".layer-header"});
         openLayer("layer-member");
     };
@@ -187,73 +146,40 @@
     function validate(){
 
         // input 태그
-        const validationInputChkId = ["id", "passwd", "pwfind", "name", "birthday", "phonenum", "location", "locationDtl", "email"];
-        const validationInputChkIdText = ["아이디", "비밀번호", "비밀번호 답변", "이름", "생년월일", "연락처", "주소", "상세주소", "이메일"];
+        const validationInputChkId = ["bbs", "bbs-name-layer"];
+        const validationInputChkIdText = ["게시판번호", "게시판이름"];
 
         // select 태그
-        const validationComboChkId = ["combo-quiz-layer", "combo-gender-layer"];
-        const validationComboChkIdText = ["비밀번호 질문", "성별"];
+        const validationComboChkId = ["combo-bbstype-layer", "combo-useyn", "combo-commentUseyn", "combo-fileUseyn"];
+        const validationComboChkIdText = ["게시판타입", "사용여부", "댓글사용여부", "파일사용여부"];
 
         /* 필수값 체크 */
         for(let i = 0 ; i < validationInputChkId.length ; i++){
             let ele = document.getElementById(validationInputChkId[i]);
-            let inputVal =  ele.value;
 
-            if(nullChk(inputVal)){
-                gfnAlert("("+validationInputChkIdText[i]+ ")는 필수 입력 값 입니다.",function () {
+            if(nullChk(ele.value)){
+                gfnAlert("("+validationInputChkIdText[i]+ ")는 필수 입력 값 입니다.", function () {
                     ele.focus();
-                    return -1;
                 });
+                return -1;
+                break;
             }
         }
 
         for(let i = 0 ; i < validationComboChkId.length ; i++){
             let ele = document.getElementById(validationComboChkId[i]);
-            let inputVal =  ele.value;
 
-            if(nullChk(inputVal)){
-                gfnAlert("("+validationComboChkIdText[i]+ ")는 필수 선택 값 입니다.",function () {
+            if(nullChk(ele.value)){
+                gfnAlert("("+validationComboChkIdText[i]+ ")는 필수 선택 값 입니다.", function () {
                     ele.focus();
                 });
                 return -1;
+                break;
             }
-        }
-
-        /* 비밀번호 같은지 체크 */
-        const passwd = document.getElementById("passwd").value;
-        const passwdChk = document.getElementById("passwdchk").value;
-
-        if(passwd != null){
-            if(passwd != passwdChk){
-                gfnAlert("비밀번호 가 일치 하지 않습니다.");
-                return -1;
-            }
-        }
-    }
-
-    /* input 태그 최대 최소 length 유효성 체크 */
-    function lengthMaxMinValidate(inputId, max, min, name){
-        const ipt = document.getElementById(inputId);
-
-        ipt.onchange = function(){
-
-            const len = ipt.value.length;
-            if(len > max){
-                gfnAlert("("+name+")은 "+max+": 길이를 초과 할 수 없습니다.", function(){
-                    ipt.value = "";
-                });
-            }
-            if(len < min){
-                gfnAlert("("+name+")은 "+min+"글자 이상 입력 하세요.", function(){
-                    ipt.value = "";
-                });
-            }
-            ipt.focus();
         }
     }
 </script>
-<form id="regi-form">
-    <input type="hidden" id="memberImageNo" name="memberImageNo">
+<form id="bbs-form">
     <div class="layer-member" id="layer-member">
         <div class="layer-header">
             <div class="layer-title">게시판정보</div>
@@ -264,62 +190,42 @@
         <div class="layer-work">
             <div class="layer-col">
                 <div class="layer-tr">
-                    <label>아이디</label>
-                    <input type="text" name="id" id="id" placeholder="아이디" maxlength="15">
+                    <label>게시판번호</label>
+                    <input type="text" name="bbs" id="bbs" placeholder="게시판번호" maxlength="15">
                 </div>
                 <div class="layer-tr">
-                    <label>비밀번호</label>
-                    <input type="password" name="passwd" id="passwd" placeholder="비밀번호" maxlength="15">
+                    <label>게시판이름</label>
+                    <input type="text" name="bbsName" id="bbs-name-layer" placeholder="게시판이름" maxlength="15">
                 </div>
                 <div class="layer-tr">
-                    <label>비밀번호 확인</label>
-                    <input type="password" name="passwdchk" id="passwdchk" placeholder="비밀번호 확인" maxlength="15">
-                </div>
-                <div class="layer-tr">
-                    <input type="hidden" name="quiz" id="quiz">
-                    <label>비밀번호 질문</label>
-                    <select id="combo-quiz-layer">
+                    <input type="hidden" name="bbstype" id="bbstype">
+                    <label>게시판타입</label>
+                    <select id="combo-bbstype-layer">
                     </select>
-                </div>
-                <div class="layer-tr">
-                    <label>답변</label>
-                    <input type="pwfind" name="pwfind" id="pwfind" placeholder="비밀번호 찾기 답변" maxlength="50">
-                </div>
-                <div class="layer-tr">
-                    <label>성명</label>
-                    <input type="text" name="name" id="name" placeholder="성명">
                 </div>
             </div>
             <div class="layer-col">
                 <div class="layer-tr">
-                    <input type="hidden" name="gender" id="gender">
-                    <label>성별</label>
-                    <select id="combo-gender-layer">
+                    <input type="hidden" name="useyn" id="useyn">
+                    <label>사용여부</label>
+                    <select id="combo-useyn">
                     </select>
                 </div>
                 <div class="layer-tr">
-                    <label>생년월일</label>
-                    <input type="hidden" name="birthday" id="hidden-birthday">
-                    <input type="date" id="birthday" placeholder="생년월일">
+                    <label>댓글 사용여부</label>
+                    <input type="hidden" name="commentUseyn" id="commentUseyn">
+                    <select id="combo-commentUseyn">
+                    </select>
+                </div>
+                <div class="layer-tr layer-rowspan">
+                    <label>파일업로드 사용여부</label>
+                    <input type="hidden" name="fileUseyn" id="fileUseyn">
+                    <select id="combo-fileUseyn">
+                    </select>
                 </div>
                 <div class="layer-tr">
-                    <label>연락처</label>
-                    <input type="text" name="phonenum" id="phonenum" placeholder="연락처 (-) 제외 입력">
-                </div>
-                <div class="layer-tr">
-                    <label>주소</label>
-                    <input type="text" name="location" id="location" placeholder="주소">
-                </div>
-                <div class="layer-tr item-right">
-                    <input class="btn-cmmn btn-size" id="btn-loaction" type="button" value="주소찾기">
-                </div>
-                <div class="layer-tr">
-                    <label>상세 주소</label>
-                    <input type="text" name="locationDtl" id="locationDtl" placeholder="상세 주소">
-                </div>
-                <div class="layer-tr">
-                    <label>이메일</label>
-                    <input type="text" name="email" id="email" placeholder="이메일">
+                    <label>비고</label>
+                    <input type="text" name="remark" id="remark" placeholder="비고">
                 </div>
             </div>
         </div>

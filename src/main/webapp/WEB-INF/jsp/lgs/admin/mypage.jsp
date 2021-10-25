@@ -6,12 +6,12 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
-    window.onload = function() {
-        /* 세션값 읽어들이는 시간을 주기위해 1초뒤 조회*/
+    document.addEventListener("DOMContentLoaded", function(){
+        /* 세션값 읽어들이는 시간을 주기위해 0.5초뒤 조회*/
         setTimeout(function(){
             loadMypage(document.getElementById("sessionId").value);
-        },100);
-    }
+        },500);
+    });
 
     /* 레이어 로드 이벤트 대용 */
     function loadMypage(param = null){
@@ -41,7 +41,6 @@
         iptId.disabled = true;
 
         btnDelete.style.display = "inline-block";
-
 
         let data = {id: param};
         let url = '/admin/member/read';

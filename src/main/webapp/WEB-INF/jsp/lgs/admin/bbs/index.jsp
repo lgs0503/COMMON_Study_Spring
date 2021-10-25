@@ -108,7 +108,7 @@
 				<input id="bbs-name" type="text">
 			</div>
 			<div class="content-serach-item">
-				<label>구분</label>
+				<label>타입</label>
 				<select id="combo-bbstype"></select>
 			</div>
 			<input id="btn-search" class="btn-cmmn btn-search" type="button" value="조회">
@@ -133,7 +133,7 @@
 					<tr>
 						<th>게시판번호</th>
 						<th>게시판명</th>
-						<th>구분</th>
+						<th>타입</th>
 						<th>등록일</th>
 					</tr>
 				</thead>

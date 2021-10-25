@@ -16,7 +16,6 @@
 package lgs.admin.view;
 
 import lgs.admin.service.BbsService;
-import lgs.cmmn.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,12 +71,12 @@ public class BbsController {
 	}
 
 	/**
-	 * name : selectMember
-	 * description : 회원정보를 보여준다.
+	 * name : selectBbs
+	 * description : 게시판정보를 보여준다.
 	 */
 	@RequestMapping(value = "/read")
 	public @ResponseBody
-	ModelAndView selectMember(@RequestParam Map<String, Object> param
+	ModelAndView selectBbs(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("jsonView");
@@ -90,12 +89,39 @@ public class BbsController {
 	}
 
 	/**
-	 * name : updateMember (ajax)
-	 * description : 회원을 수정한다.
+	 * name : overlapBbs (AJAX)
+	 * description : 게시판번호를 중복확인 한다.
+	 */
+	@RequestMapping(value = "/overlapBbs")
+	public @ResponseBody String overlapBbs(@RequestParam Map<String, Object> param
+			, HttpSession session
+			, HttpServletRequest request) throws Exception {
+
+		return bbsService.overlapBbs(param);
+	}
+
+	/**
+	 * name : insertBbs (ajax)
+	 * description : 게시판을 추가한다..
+	 */
+	@RequestMapping(value = "/insert")
+	public @ResponseBody
+	String insertBbs(@RequestParam Map<String, Object> param
+			, HttpSession session
+			, HttpServletRequest request) throws Exception {
+
+		bbsService.add(param);
+
+		return SUCCESS;
+	}
+
+	/**
+	 * name : updateBbs (ajax)
+	 * description : 게시판을 수정한다.
 	 */
 	@RequestMapping(value = "/update")
 	public @ResponseBody
-	String updateMember(@RequestParam Map<String, Object> param
+	String updateBbs(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
@@ -105,12 +131,12 @@ public class BbsController {
 	}
 
 	/**
-	 * name : deleteMember (ajax)
-	 * description : 회원을 삭제한다.
+	 * name : deleteBbs (ajax)
+	 * description : 게시판을 삭제한다.
 	 */
 	@RequestMapping(value = "/delete")
 	public @ResponseBody
-	String deleteMember(@RequestParam Map<String, Object> param
+	String deleteBbs(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 

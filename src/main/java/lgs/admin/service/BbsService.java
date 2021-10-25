@@ -18,4 +18,5 @@ public interface BbsService {
 
 	void delete(Map<String, Object> map);
 
+    String overlapBbs(Map<String, Object> param);
 }

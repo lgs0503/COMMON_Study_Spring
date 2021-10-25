@@ -20,60 +20,73 @@
 	</select>
 	
 	<select id="countList" resultType="int">
-		SELECT COUNT(*) AS CNT
-		  FROM BBS
+		SELECT	COUNT(*) AS CNT
+		FROM	BBS
+	</select>
+
+	<select id="overlapBbs" parameterType="java.util.HashMap" resultType="java.lang.String">
+		SELECT	COUNT(*) AS CNT
+		FROM 	BBS
+		WHERE	BBS_NO = #{bbs}
 	</select>
 
 	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT	A.MEMBER_NO
-			,	A.MEMBER_ID
-			,	A.MEMBER_NAME
-			,	A.MEMBER_GENDER
-			,	A.MEMBER_PHONENUM
-			,	A.MEMBER_AUTOR
-			,	A.MEMBER_BRITHDAY
-			,	A.MEMBER_LOCATION
-			,	A.MEMBER_LOCATION_DTL
-			,	A.MEMBER_EMAIL
-			,	A.MEMBER_PW
-			,	A.MEMBER_PW_QUESTION
-			,	A.MEMBER_PW_ANSWER
-			,   A.MEMBER_IMAGE_NO
-			,	B.FILE_PATH
-		FROM	MEMBER A
-		,
-		(
-			SELECT	FILE_NO
-				 ,	FILE_PATH || '/'|| SAVE_FILE_NAME || FILE_EXTEN AS FILE_PATH
-			FROM	FILE_REPOSITROY
-			WHERE	USE_YN = 'Y'
-		) B
-		WHERE	A.MEMBER_IMAGE_NO = B.FILE_NO (+)
-		AND		A.MEMBER_ID = #{id}
+		SELECT	A.BBS_NO
+			,	A.BBS_NAME
+			,	A.BBS_TYPE
+			,	A.USE_YN
+			,	A.COMMENT_USE_YN
+			,	A.FILE_USE_YN
+			,	A.REMARK
+		FROM	BBS A
+		WHERE	A.BBS_NO = #{bbs}
 	</select>
 
-	<update id="update" parameterType="java.util.HashMap">
-		UPDATE	MEMBER
-		SET 	MEMBER_PW 			= #{passwd}
-			,	MEMBER_GENDER 		= #{gender}
-			, 	MEMBER_PHONENUM 	= #{phonenum}
-			,	MEMBER_LOCATION 	= #{location}
-			,	MEMBER_LOCATION_DTL = #{locationDtl}
-			,	MEMBER_NAME 		= #{name}
-			,	MEMBER_EMAIL 		= #{email}
-			,	MEMBER_BRITHDAY 	= #{birthday}
-		<if test="memberImageNo != null and memberImageNo != ''">
-			,	MEMBER_IMAGE_NO		= #{memberImageNo}
+	<insert id="add" parameterType="java.util.HashMap">
+		INSERT
+		INTO 	BBS
+		(	BBS_NO
+		,	BBS_NAME
+		, 	BBS_TYPE
+		,	USE_YN
+		,	COMMENT_USE_YN
+		,	FILE_USE_YN
+		<if test="remark != null and remark != ''">
+		,	REMARK
 		</if>
-			,	MEMBER_PW_QUESTION 	= #{quiz}
-			,	MEMBER_PW_ANSWER 	= #{pwfind}
-		    ,	UPDATE_DATE 		= SYSDATE
-		WHERE	MEMBER_ID = #{id}
+		,	INSERT_DATE
+		,	UPDATE_DATE
+		)
+		VALUES
+		(	#{bbs}
+		,	#{bbsName}
+		,	#{bbstype}
+		,	#{useyn}
+		,	#{commentUseyn}
+		,	#{fileUseyn}
+		<if test="remark != null and remark != ''">
+		, 	#{remark}
+		</if>
+		,	SYSDATE
+		,	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+		UPDATE	BBS
+		SET 	BBS_NAME 		= #{bbsName}
+			, 	BBS_TYPE 		= #{bbstype}
+			,	USE_YN 			= #{useyn}
+			,	COMMENT_USE_YN 	= #{commentUseyn}
+			,	FILE_USE_YN		= #{fileUseyn}
+			,	REMARK 			= #{remark}
+			,	UPDATE_DATE		= SYSDATE
+		WHERE	BBS_NO			= #{bbs}
 	</update>
 
 	<delete id="delete" parameterType="java.util.HashMap">
 		DELETE
-		FROM	MEMBER
-		WHERE	MEMBER_ID = #{id}
+		FROM	BBS
+		WHERE	BBS_NO = #{bbs}
 	</delete>
 </mapper>

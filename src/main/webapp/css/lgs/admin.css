@@ -186,6 +186,15 @@
     height: 25px;
     line-height: 25px;
 }
+.layer-rowspan{
+    height: 52px;
+    position: relative;
+}
+.layer-rowspan > select{
+    position: absolute;
+    top: 15px;
+    right: 37px;
+}
 .layer-tr > label{
     display: inline-block;
     width: 110px;

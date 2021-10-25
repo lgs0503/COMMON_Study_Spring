@@ -59,4 +59,9 @@ public class BbsServiceImpl extends EgovAbstractServiceImpl implements BbsServic
 	public void delete(Map<String, Object> map) {
 		bbsMapper.delete(map);
 	}
+
+	@Override
+	public String overlapBbs(Map<String, Object> param) {
+		return bbsMapper.overlapBbs(param);
+	}
 }
