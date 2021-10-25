@@ -250,7 +250,12 @@
 			} else {
 				document.getElementById("code-sort").value = 0;
 			}
-			document.getElementById("code-val").value = data.node.original.code;
+
+			if(!nullChk(data.node.original.code)){
+				document.getElementById("code-val").value = data.node.original.code;
+			} else {
+				document.getElementById("code-val").value = "";
+			}
 
 			selectOption("combo-useyn", data.node.original.use_yn, "value");
 			document.getElementById("useyn").value = data.node.original.use_yn;

@@ -19,5 +19,11 @@
     right: 10px;
     padding: 10px;
     cursor: pointer;
+}
 
+
+@media screen and (max-width: 950px){
+    .content > img{
+        height: 250px;
+    }
 }
