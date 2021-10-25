@@ -14,15 +14,16 @@
 	window.onload = function(){
 
 		comboLoad("combo-useyn", "U001", "SELECT");
+		comboLoad("combo-gubun", "MG001", "SELECT");
 
-		serachCodeList();
+		serachMenuList();
 
-		const iptCode = document.getElementById("code");
+		const iptMenu = document.getElementById("menu");
 		const bntSave = document.getElementById("btn-save");
 		const btnSearch = document.getElementById("btn-search");
 
 		/* 엔터 조회 */
-		addEnter("search-code-name", function(){
+		addEnter("search-menu-name", function(){
 			btnSearch.click();
 		});
 
@@ -30,20 +31,20 @@
 
 		/* 조회 버튼 클릭 */
 		btnSearch.onclick = function(){
-			let val = document.getElementById("search-code-name").value;
+			let val = document.getElementById("search-menu-name").value;
 			$('#jstree_div').jstree(true).search(val);
 		}
 
 		/* 메뉴 에디터 박스 수정 (중복확인) */
-		iptCode.onchange = function(){
-			let url = '/admin/code/overlapMenu';
-			let data = {code : iptCode.value};
+		iptMenu.onchange = function(){
+			let url = '/admin/menu/overlapMenu';
+			let data = {code : iptMenu.value};
 
 			ajaxLoad(url, data, "text", function(data){
 				if(data == 1){
 					gfnAlert("중복 된 메뉴가 있습니다.", function(){
-						iptCode.value = "";
-						iptCode.focus();
+						iptMenu.value = "";
+						iptMenu.focus();
 					});
 				}
 			});
@@ -55,24 +56,25 @@
 				if(result){
 					let status = document.getElementById("status").value;
 
-					document.getElementById("code").disabled = false;
+					document.getElementById("menu").disabled = false;
 
 					let url = "";
 					if(status == 'I'){ /* 신규 */
-						url = "/admin/code/insert";
+						url = "/admin/menu/insert";
 					} else if(status == "U"){ /* 수정 */
-						url = "/admin/code/update";
+						url = "/admin/menu/update";
 					}
 
-					let data = { code : document.getElementById("code").value
-						, codeName : document.getElementById("code-name").value
-						, codeSort : document.getElementById("code-sort").value
-						, upperCode : document.getElementById("upper-code").value
-						, codeVal : document.getElementById("code-val").value
+					let data = { menu : document.getElementById("menu").value
+						, menuName : document.getElementById("menu-name").value
+						, url : document.getElementById("menu-url").value
+						, upperMenu : document.getElementById("upper-menu").value
+						, remark : document.getElementById("menu-remark").value
+						, gubun : document.getElementById("gubun").value
 						, useyn : document.getElementById("useyn").value};
 
 					ajaxLoad(url, data, "text", function () {
-						document.getElementById("code").disabled = true;
+						document.getElementById("menu").disabled = true;
 						gfnAlert("저장 되었습니다.", function(){
 							location.reload();
 						});
@@ -83,7 +85,7 @@
 	}
 
 	/* 메뉴 트리 리스트 조회 */
-	function serachCodeList(){
+	function serachMenuList(){
 		let url = "/admin/menu/list";
 
 		ajaxLoad(url, null, "json", function (data) {
@@ -146,8 +148,8 @@
 										gfnConfirm("선택하신 메뉴를 삭제 하시겠습니까?", function(result){
 											if(result){
 
-												let url = "/admin/code/delete";
-												let data = {code : sNode.original.id};
+												let url = "/admin/menu/delete";
+												let data = {menu : sNode.original.id};
 
 												/* 삭제 ajax */
 												ajaxLoad(url, data, "text", function () {
@@ -193,6 +195,15 @@
 			$jstree.bind("loaded.jstree", function (event, data) {
 				$(this).jstree("open_all");
 			});
+			/* 트리 펼치기 */
+			document.getElementById("btn-treeOpen").onclick = function(){
+			$jstree.jstree("open_all");
+			}
+
+			/* 트리 접기 */
+			document.getElementById("btn-treeClose").onclick = function(){
+			$jstree.jstree("close_all");
+			}
 		});
 	}
 
@@ -200,32 +211,41 @@
 	function fn_setForm(data){
 
 		if(data.node.original.id == null){
-			document.getElementById("code").disabled = false;
-			document.getElementById("code").value = "";
-			document.getElementById("code-name").value = "";
-			document.getElementById("code-sort").value = "";
-			document.getElementById("code-val").value = "";
-			document.getElementById("upper-code").value = data.node.original.parent;
+			document.getElementById("menu").disabled = false;
+			document.getElementById("menu").value = "";
+			document.getElementById("menu-name").value = "";
+			document.getElementById("menu-url").value = "";
+			document.getElementById("menu-remark").value = "";
+			document.getElementById("upper-menu").value = data.node.original.parent;
 
-			selectOption("combo-useyn", "y", "value");
+			selectOption("combo-gubun", "bbs", "value");
+			selectOption("combo-useyn", "Y", "value");
 			document.getElementById("useyn").value = 'Y';
-
+			document.getElementById("gubun").value = 'bbs';
 			document.getElementById("status").value = "I";
 		} else {
-			document.getElementById("code").disabled = true;
-			document.getElementById("code").value = data.node.original.id;
-			document.getElementById("code-name").value = data.node.original.text;
-			document.getElementById("upper-code").value = data.node.original.parent;
+			document.getElementById("menu").disabled = true;
+			document.getElementById("menu").value = data.node.original.id;
+			document.getElementById("menu-name").value = data.node.original.text;
+			document.getElementById("upper-menu").value = data.node.original.parent;
 
-			if(!nullChk(data.node.original.sort_ordr)){
-				document.getElementById("code-sort").value = data.node.original.sort_ordr;
+			if(!nullChk(data.node.original.menu_url)){
+				document.getElementById("menu-url").value = data.node.original.menu_url;
 			} else {
-				document.getElementById("code-sort").value = 0;
+				document.getElementById("menu-url").value = "";
 			}
-			document.getElementById("code-val").value = data.node.original.code;
 
+			if(!nullChk(data.node.original.remark)){
+				document.getElementById("menu-remark").value = data.node.original.remark;
+			} else {
+				document.getElementById("menu-remark").value = "";
+			}
+
+			selectOption("combo-gubun", data.node.original.menu_gubun, "value");
 			selectOption("combo-useyn", data.node.original.use_yn, "value");
+
 			document.getElementById("useyn").value = data.node.original.use_yn;
+	        document.getElementById("gubun").value = data.node.original.menu_gubun;
 
 			document.getElementById("status").value = "U";
 		}
@@ -233,7 +253,7 @@
 </script>
 <body>
 	<input type="hidden" id="status">
-	<input type="hidden" id="upper-code">
+	<input type="hidden" id="upper-menu">
 	<div class="content">
 		<div class="content-title">
 			<i class="fas fa-caret-right"></i>
@@ -245,7 +265,7 @@
 		<div class="content-serach-form">
 			<div class="content-serach-item">
 				<label>메뉴명</label>
-				<input id="search-code-name" type="text">
+				<input id="search-menu-name" type="text">
 			</div>
 			<input id="btn-search" class="btn-cmmn btn-search" type="button" value="조회">
 		</div>
@@ -254,6 +274,8 @@
 				<strong id="list-cnt">0</strong>개 조회
 			</div>
 			<div class="content-btn">
+				<input id="btn-treeOpen" class="btn-cmmn btn-content" type="button" value="펼치기">
+				<input id="btn-treeClose" class="btn-cmmn btn-content" type="button" value="접기">
 				<input id="btn-save" class="btn-cmmn btn-content" type="button" value="저장">
 			</div>
 		</div>
@@ -270,20 +292,25 @@
 					<div>상세정보</div>
 				</div>
 				<div class="row">
-					<label>메뉴</label>
-					<input type="text" id="code" placeholder="코드">
+					<label>메뉴코드</label>
+					<input type="text" id="menu" placeholder="메뉴코드">
 				</div>
 				<div class="row">
-					<label>코드이름</label>
-					<input type="text" id="code-name" placeholder="코드이름">
+					<label>메뉴명</label>
+					<input type="text" id="menu-name" placeholder="메뉴명">
 				</div>
 				<div class="row">
-					<label>코드값</label>
-					<input type="text" id="code-val" placeholder="코드값">
+					<label>메뉴URL</label>
+					<input type="text" id="menu-url" placeholder="메뉴URL">
 				</div>
 				<div class="row">
-					<label>정렬</label>
-					<input type="text" id="code-sort" placeholder="정렬">
+					<label>메뉴구분</label>
+					<input type="hidden" name="gubun" id="gubun">
+					<select id="combo-gubun"></select>
+				</div>
+				<div class="row">
+					<label>비고</label>
+					<input type="text" id="menu-remark" placeholder="비고">
 				</div>
 				<div class="row">
 					<label>사용여부</label>

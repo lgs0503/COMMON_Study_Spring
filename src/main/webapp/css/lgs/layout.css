@@ -179,8 +179,6 @@
     text-decoration: none;
     color:var(--text-color);
     border-bottom: var(--title-color) solid 1px;
-    border-left: var(--title-color) solid 1px;
-    border-right: var(--title-color) solid 1px;
     padding: 10px 30px;
     font-weight: bold;
 }

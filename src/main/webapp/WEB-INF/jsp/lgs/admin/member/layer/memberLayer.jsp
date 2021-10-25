@@ -216,6 +216,7 @@
             readImage(e.target, "preview-image");
         }
 
+        //$('#layer-member').draggable({handle: ".layer-header"});
         openLayer("layer-member");
     };
 

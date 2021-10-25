@@ -7,6 +7,7 @@
 <link type="text/css" rel="stylesheet" href="/css/lgs/reset.css"/>
 <link type="text/css" rel="stylesheet" href="/css/lgs/custom.css"/>
 <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/js/lgs/cmmn.js?v=<%=System.currentTimeMillis() %>" defer></script>
 

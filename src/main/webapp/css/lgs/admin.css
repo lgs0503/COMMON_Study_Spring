@@ -229,6 +229,7 @@
     text-align: center;
     background-color: var(--form-color);
     border-radius: 5px;
+    text-align: left;
 }
 .work-master{
     width: calc(100% - 400px);

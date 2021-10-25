@@ -34,43 +34,47 @@
 
 	<insert id="add" parameterType="java.util.HashMap">
 		INSERT
-		INTO	CODE
+		INTO	MENU
 		(
-			CODE_NO
-		,	CODE_NAME
-        ,   UPPER_CODE_NO
+			MENU_NO
+		,	MENU_NAME
+        ,   UPPER_MENU_NO
         ,	USE_YN
-        ,	CODE_VAL
-        ,	CODE_SORT
+        ,	MENU_URL
+        ,	MENU_GUBUN
+        ,	REMARK
         ,	INSERT_DATE
         ,	UPDATE_DATE
 		)
 		VALUES
 		(
-			#{code}
-		,	#{codeName}
-		,	#{upperCode}
+			#{menu}
+		,	#{menuName}
+		,	#{upperMenu}
 		,	#{useyn}
-		,	#{codeVal}
-		,	#{codeSort}
+		,	#{url}
+		,	#{gubun}
+		,	#{remark}
 		,	SYSDATE
 		,	SYSDATE
 		)
 	</insert>
 
 	<update id="update" parameterType="java.util.HashMap">
-		UPDATE	CODE
-		SET		CODE_NAME	= #{codeName}
-			,   USE_YN		= #{useyn}
-			,	CODE_VAL	= #{codeVal}
-			,	CODE_SORT	= #{codeSort}
-			,	UPDATE_DATE	= SYSDATE
-		WHERE	CODE_NO 	= #{code}
+		UPDATE	MENU
+		SET		MENU_NAME		= #{menuName}
+			,   UPPER_MENU_NO	= #{upperMenu}
+			,	USE_YN			= #{useyn}
+			,	MENU_URL		= #{url}
+			,	MENU_GUBUN		= #{gubun}
+			,	REMARK			= #{remark}
+			,	UPDATE_DATE		= SYSDATE
+		WHERE	MENU_NO 		= #{menu}
 	</update>
 
 	<delete id="delete" parameterType="java.util.HashMap">
 		DELETE
-		FROM	CODE
-		WHERE	CODE_NO	= #{code}
+		FROM	MENU
+		WHERE	MENU_NO	= #{menu}
 	</delete>
 </mapper>

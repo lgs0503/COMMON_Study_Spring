@@ -55,6 +55,22 @@
 		bntSave.onclick = function(){
 			gfnConfirm("저장 하시겠습니까?", function (result) {
 				if(result){
+
+				    let code = document.getElementById("code").value;
+				    let codeName = document.getElementById("code-name").value;
+                    let useyn = document.getElementById("useyn").value;
+
+                    if(nullChk(code)){
+                        gfnAlert("코드를 입력해주세요");
+                        return;
+                    } else if(nullChk(codeName)) {
+                        gfnAlert("코드명를 입력해주세요");
+                        return;
+                    } else if(nullChk(useyn)) {
+                        gfnAlert("사용여부를 선택해주세요");
+                        return;
+                    }
+
 					let status = document.getElementById("status").value;
 
 					document.getElementById("code").disabled = false;
@@ -66,12 +82,12 @@
 						url = "/admin/code/update";
 					}
 
-					let data = { code : document.getElementById("code").value
-						, codeName : document.getElementById("code-name").value
+					let data = { code :code
+						, codeName : codeName
 						, codeSort : document.getElementById("code-sort").value
 						, upperCode : document.getElementById("upper-code").value
 						, codeVal : document.getElementById("code-val").value
-						, useyn : document.getElementById("useyn").value};
+						, useyn : useyn};
 
 					ajaxLoad(url, data, "text", function () {
 						document.getElementById("code").disabled = true;
@@ -195,6 +211,16 @@
 			$jstree.bind("loaded.jstree", function (event, data) {
 				$(this).jstree("open_all");
 			});
+
+			/* 트리 펼치기 */
+			document.getElementById("btn-treeOpen").onclick = function(){
+				$jstree.jstree("open_all");
+			}
+
+			/* 트리 접기 */
+			document.getElementById("btn-treeClose").onclick = function(){
+				$jstree.jstree("close_all");
+			}
 		});
 	}
 
@@ -256,6 +282,8 @@
 				<strong id="list-cnt">0</strong>개 조회
 			</div>
 			<div class="content-btn">
+				<input id="btn-treeOpen" class="btn-cmmn btn-content" type="button" value="펼치기">
+				<input id="btn-treeClose" class="btn-cmmn btn-content" type="button" value="접기">
 				<input id="btn-save" class="btn-cmmn btn-content" type="button" value="저장">
 			</div>
 		</div>
@@ -276,8 +304,8 @@
 					<input type="text" id="code" placeholder="코드" maxlength="7">
 				</div>
 				<div class="row">
-					<label>코드이름</label>
-					<input type="text" id="code-name" placeholder="코드이름" maxlength="15">
+					<label>코드명</label>
+					<input type="text" id="code-name" placeholder="코드명" maxlength="15">
 				</div>
 				<div class="row">
 					<label>코드값</label>

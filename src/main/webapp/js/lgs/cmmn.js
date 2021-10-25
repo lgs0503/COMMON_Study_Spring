@@ -187,6 +187,8 @@ function gfnAlert(msg, callback = null){
             callback();
         }
     }
+
+    btnOk.focus();
 }
 /* 공통 선택창*/
 function gfnConfirm(msg, callback){
@@ -211,6 +213,8 @@ function gfnConfirm(msg, callback){
 
         callback(true);
     }
+
+    btnOk.focus();
 
     btnClose.onclick = function(){
 
@@ -276,5 +280,19 @@ function addEnter(iptId, callback){
         if (event.keyCode == 13) {
             callback();
         }
+    }
+}
+/* 필수값 체크*/
+function requiredChk(iptId, text){
+    let ele = document.getElementById(iptId);
+
+    if(nullChk(ele.value)){
+
+        gfnAlert("("+text+ ")를 입력 해주세요.",function () {
+            ele.focus();
+        });
+        return true;
+    } else {
+        return false;
     }
 }

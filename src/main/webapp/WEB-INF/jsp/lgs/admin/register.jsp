@@ -151,8 +151,8 @@
 				if(nullChk(inputVal)){
 					gfnAlert("("+validationInputChkIdText[i]+ ")는 필수 입력 값 입니다.",function () {
 						ele.focus();
-						return -1;
 					});
+					return -1;
 				}
 			}
 
