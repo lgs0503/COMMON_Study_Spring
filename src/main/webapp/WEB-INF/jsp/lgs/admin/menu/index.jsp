@@ -23,7 +23,7 @@
 		const btnSearch = document.getElementById("btn-search");
 
 		/* 엔터 조회 */
-		addEnter("search-menu-name", function(){
+		addEnterSearch("search-menu-name", function(){
 			btnSearch.click();
 		});
 

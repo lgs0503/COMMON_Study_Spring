@@ -3,7 +3,6 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
     /* 레이어 로드 이벤트 대용 */
@@ -189,7 +188,7 @@
 <form id="bbs-form">
     <div class="layer-member" id="layer-member">
         <div class="layer-header">
-            <div class="layer-title">게시판정보</div>
+            <div class="layer-title">게시글정보</div>
             <div class="later-close-btn" id="btn-layer-close">
                 <i class="fas fa-times"></i>
             </div>
@@ -197,42 +196,17 @@
         <div class="layer-work">
             <div class="layer-col">
                 <div class="layer-tr">
-                    <label>게시판번호</label>
+                    <label>제목</label>
                     <input type="text" name="bbs" id="bbs" placeholder="게시판번호" maxlength="15">
                 </div>
                 <div class="layer-tr">
-                    <label>게시판이름</label>
+                    <label>내용</label>
                     <input type="text" name="bbsName" id="bbs-name-layer" placeholder="게시판이름" maxlength="15">
                 </div>
                 <div class="layer-tr">
-                    <input type="hidden" name="bbstype" id="bbstype">
-                    <label>게시판타입</label>
-                    <select id="combo-bbstype-layer">
-                    </select>
-                </div>
-            </div>
-            <div class="layer-col">
-                <div class="layer-tr">
-                    <input type="hidden" name="useyn" id="useyn">
-                    <label>사용여부</label>
-                    <select id="combo-useyn">
-                    </select>
-                </div>
-                <div class="layer-tr">
-                    <label>댓글 사용여부</label>
-                    <input type="hidden" name="commentUseyn" id="commentUseyn">
-                    <select id="combo-commentUseyn">
-                    </select>
-                </div>
-                <div class="layer-tr layer-rowspan">
-                    <label>파일업로드 사용여부</label>
-                    <input type="hidden" name="fileUseyn" id="fileUseyn">
-                    <select id="combo-fileUseyn">
-                    </select>
-                </div>
-                <div class="layer-tr">
-                    <label>비고</label>
-                    <input type="text" name="remark" id="remark" placeholder="비고">
+                    <label>파일</label>
+                    <input type="text" name="bbsName" id="file1" placeholder="게시판이름" maxlength="15">
+                    <input type="text" name="bbsName" id="file2" placeholder="게시판이름" maxlength="15">
                 </div>
             </div>
         </div>

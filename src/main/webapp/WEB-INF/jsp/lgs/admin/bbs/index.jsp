@@ -26,7 +26,7 @@
 		let enterId = ["bbs-name", "combo-bbstype"];
 
 		enterId.forEach(function(value){
-			addEnter(value, function(){
+			addEnterSearch(value, function(){
 				btnSearch.click();
 			});
 		});

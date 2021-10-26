@@ -3,7 +3,6 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
     /* 레이어 로드 이벤트 대용 */

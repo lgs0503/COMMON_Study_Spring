@@ -35,6 +35,7 @@
             <mvc:exclude-mapping path="/js/**"/>
             <mvc:exclude-mapping path="/css/**"/>
             <mvc:exclude-mapping path="/images/**"/>
+            <mvc:exclude-mapping path="/plugin/**"/>
 
             <mvc:exclude-mapping path="/cmmn/**"/>
 
@@ -78,6 +79,7 @@
     <mvc:resources mapping="/js/**" location="/js/"/>
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/images/**" location="/plugin/"/>
 
 	<!-- 파일업로드 -->
     <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

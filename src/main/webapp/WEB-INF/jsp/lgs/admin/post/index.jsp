@@ -40,7 +40,7 @@
 		let enterId = ["post-name", "combo-bbs", "combo-poststatus"];
 
 		enterId.forEach(function(value){
-			addEnter(value, function(){
+			addEnterSearch(value, function(){
 				btnSearch.click();
 			});
 		});

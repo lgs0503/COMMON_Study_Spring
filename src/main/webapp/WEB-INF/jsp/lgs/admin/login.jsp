@@ -76,7 +76,7 @@
 			let enterId = ["user-id", "user-pw"];
 
 			enterId.forEach(function(value){
-				addEnter(value, function(){
+				addEnterSearch(value, function(){
 					btnLogin.click();
 				});
 			});

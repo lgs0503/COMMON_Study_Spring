@@ -26,7 +26,7 @@
 		let enterId = ["member-id", "member-name", "combo-gender"];
 
 		enterId.forEach(function(value){
-			addEnter(value, function(){
+			addEnterSearch(value, function(){
 				btnSearch.click();
 			});
 		});

@@ -24,7 +24,7 @@
 		const btnSearch = document.getElementById("btn-search");
 
 		/* 엔터 조회 */
-		addEnter("search-code-name", function(){
+		addEnterSearch("search-code-name", function(){
 			btnSearch.click();
 		});
 
