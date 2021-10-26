@@ -13,21 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lgs.cmmn.mapper;
+package lgs.admin.mapper;
 
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
 
 import java.util.List;
 import java.util.Map;
 
-@Mapper("cmmnMapper")
-public interface CmmnMapper {
+@Mapper("postMapper")
+public interface PostMapper {
 
-	List<Map<String, Object>> selectCode(Map<String, Object> map) throws Exception;
+	List<Map<String, Object>> searchList(Map<String, Object> map);
+	
+	int countList();
 
-	String getMaxfileNo() throws Exception;
+	List<Map<String, Object>> search(Map<String, Object> map);
+	
+	void add(Map<String, Object> map);
+	
+	void update(Map<String, Object> map);
 
-	void insertFile(Map<String, Object> map) throws Exception;
+	void delete(Map<String, Object> map);
 
-	List<Map<String, Object>> selectBbsCode();
+    String overlapBbs(Map<String, Object> param);
 }

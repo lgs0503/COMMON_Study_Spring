@@ -15,7 +15,7 @@
  */
 package lgs.admin.view;
 
-import lgs.admin.service.BbsService;
+import lgs.admin.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +37,8 @@ import java.util.Map;
 @RequestMapping("/admin/post")
 public class PostController {
 
-	@Resource(name = "bbsService")
-	private BbsService bbsService;
+	@Resource(name = "postService")
+	private PostService postService;
 
 	private final static String SUCCESS = "1";
 
@@ -48,7 +48,7 @@ public class PostController {
 	 */
 	@GetMapping
 	public String postPage(Model model, HttpServletRequest request) throws Exception {
-
+		model.addAttribute("bbsNo", request.getParameter("bbs"));
 		return "admin/post/index";
 	}
 
@@ -64,8 +64,8 @@ public class PostController {
 
 		ModelAndView mv = new ModelAndView("jsonView");
 
-		mv.addObject("postList", bbsService.searchList(param));
-		mv.addObject("postCnt", bbsService.countList());
+		mv.addObject("postList", postService.searchList(param));
+		mv.addObject("postCnt", postService.countList());
 
 		return mv;
 	}
@@ -81,7 +81,7 @@ public class PostController {
 			, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("jsonView");
 
-		List<Map<String, Object>> bbs = bbsService.search(param);
+		List<Map<String, Object>> bbs = postService.search(param);
 
 		mv.addObject("bbs", bbs);
 
@@ -97,7 +97,7 @@ public class PostController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		return bbsService.overlapBbs(param);
+		return postService.overlapBbs(param);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class PostController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		bbsService.add(param);
+		postService.add(param);
 
 		return SUCCESS;
 	}
@@ -125,7 +125,7 @@ public class PostController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		bbsService.update(param);
+		postService.update(param);
 
 		return SUCCESS;
 	}
@@ -140,7 +140,7 @@ public class PostController {
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
-		bbsService.delete(param);
+		postService.delete(param);
 
 		return SUCCESS;
 	}

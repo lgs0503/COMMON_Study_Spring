@@ -54,7 +54,7 @@ public class CmmnController {
 
     /**
      * name : selectCode (AJAX)
-     * description : 코드 데이터를 조회한다.
+     * description : 코드 데이터를 조회한다. (콤보로드)
      */
     @RequestMapping("/cmmn/selectCode")
     public @ResponseBody
@@ -63,6 +63,20 @@ public class CmmnController {
             , HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView("jsonView");
         mv.addObject("codeList", cmmnService.selectCode(param));
+        return mv;
+    }
+
+    /**
+     * name : selectBbsCode (AJAX)
+     * description : 게시판 코드 데이터를 조회한다. (콤보로드 커스텀)
+     */
+    @RequestMapping("/cmmn/selectBbsCode")
+    public @ResponseBody
+    ModelAndView selectBbsCode(@RequestParam Map<String, Object> param
+            , HttpSession session
+            , HttpServletRequest request) throws Exception {
+        ModelAndView mv = new ModelAndView("jsonView");
+        mv.addObject("codeList", cmmnService.selectBbsCode());
         return mv;
     }
 

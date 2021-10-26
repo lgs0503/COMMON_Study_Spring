@@ -4,10 +4,11 @@ function ajaxLoad( url
                  , dataType
                  , callbackFn
                  , processData = true
-                 , contentType = 'application/x-www-form-urlencoded; charset=UTF-8') {
+                 , contentType = 'application/x-www-form-urlencoded; charset=UTF-8'
+                 , type = 'POST') {
 
     let ajaxData = { url: url
-        , type: 'POST'
+        , type: type
         , processData : processData
         , contentType : contentType
         , dataType: dataType
@@ -71,8 +72,16 @@ function inputOnlyNumber(inputId){
 /* 콤보박스 로드 */
 function comboLoad(selectId, upperCode, type){
 
-    let url = '/cmmn/selectCode';
-    let data = {upperCodeNo : upperCode};
+    let url = '';
+    let data = null;
+
+    if(upperCode == 'BBS'){ /* 게시판 조회 */
+        url = '/cmmn/selectBbsCode';
+        data = null
+    } else { /* 일반 공통코드 조회 */
+        url = '/cmmn/selectCode';
+        data = {upperCodeNo : upperCode};
+    }
 
     ajaxLoad(url, data, "json", function(result){
 

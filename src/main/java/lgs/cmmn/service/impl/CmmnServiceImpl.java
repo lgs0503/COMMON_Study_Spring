@@ -36,6 +36,11 @@ public class CmmnServiceImpl extends EgovAbstractServiceImpl implements CmmnServ
 	}
 
 	@Override
+	public List<Map<String, Object>> selectBbsCode() {
+		return cmmnMapper.selectBbsCode();
+	}
+
+	@Override
 	public String getMaxfileNo() throws Exception {
 		return cmmnMapper.getMaxfileNo();
 	}

@@ -108,6 +108,14 @@
     height: 40px;
     line-height: 40px;
 }
+.list-notice{
+    background-color: var(--title-color);
+    color:var(--text-color-white);
+    border-radius: 5px;
+    box-shadow: 4px 4px 10px 0px silver;
+    padding :2px 5px;
+    margin-right:10px;
+}
 .list-dtl{
     cursor: pointer;
     color : var(--title-color);

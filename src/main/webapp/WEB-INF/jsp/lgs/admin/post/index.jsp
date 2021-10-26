@@ -6,8 +6,22 @@
 <script type="text/javascript">
 	window.onload = function(){
 
-		comboLoad("combo-poststatus", "B001", "SELECT");
-		searchList();
+		new Promise(function(resolve, reject){
+			comboLoad("combo-poststatus", "P001", "SELECT");
+			comboLoad("combo-bbs", "BBS", "SELECT");
+
+			setTimeout(function(){
+				resolve();
+			}, 200);
+		}).then(function(resolve){
+
+			let urlbbsNo = "${bbsNo}";
+
+			if(!nullChk(urlbbsNo)){
+				selectOption("combo-bbs", urlbbsNo, "value")
+			}
+			searchList();
+		});
 
 		const btnSearch = document.getElementById("btn-search");
 		const btnInsert = document.getElementById("btn-insert");
@@ -36,8 +50,8 @@
 	function searchList(){
 
 		let data = { name : document.getElementById("post-name").value
-			       , type : document.getElementById("combo-bbs").value
-			       , type : document.getElementById("combo-poststatus").value };
+			       , bbs : document.getElementById("combo-bbs").value
+			       , status : document.getElementById("combo-poststatus").value };
 
 		/* 로그인 계정정보 조회 (프로필사진, 아이디) */
 		let url = '/admin/post/list';
@@ -47,26 +61,33 @@
 
 			postBody.innerHTML = "";
 
-			if(result.bbsCnt != null){
-				document.getElementById("list-cnt").innerHTML = result.bbsCnt;
+			if(result.postCnt != null){
+				document.getElementById("list-cnt").innerHTML = result.postCnt;
 			}
 
-			if(result.bbsList.length == 0){
+			if(result.postList.length == 0){
 				let colData = document.createElement("tr");
 				let rowData = document.createElement("td");
 				rowData.colSpan = 6;
 				rowData.innerText = "조회된 데이터가 없습니다.";
 				colData.append(rowData);
-				bbsBody.append(colData);
+				postBody.append(colData);
 			}
 
-			result.bbsList.forEach(function(value){
+			result.postList.forEach(function(value){
 
 				let colData = document.createElement("tr");
 
 				let rowData = document.createElement("td");
-				rowData.innerText = value.BBS_NO;
+				if(value.POST_STATUS == 'notice'){
+					let noticeData = document.createElement("span");
+					noticeData.innerText = "공지";
+					noticeData.className = "list-notice";
+					rowData.append(noticeData);
+				}
+				rowData.append(value.POST_NO);
 				rowData.className = "list-dtl";
+
 				colData.append(rowData);
 
 				rowData = document.createElement("td");
@@ -74,11 +95,15 @@
 				colData.append(rowData);
 
 				rowData = document.createElement("td");
-				rowData.innerText = value.BBS_TYPE;
+				rowData.innerText = value.POST_TITLE;
 				colData.append(rowData);
 
 				rowData = document.createElement("td");
 				rowData.innerText = value.INSERT_DATE;
+				colData.append(rowData);
+
+				rowData = document.createElement("td");
+				rowData.innerText = value.INSERT_USER_ID;
 				colData.append(rowData);
 
 				postBody.append(colData);
@@ -109,7 +134,7 @@
 				<select id="combo-bbs"></select>
 			</div>
 			<div class="content-serach-item">
-				<label>게시글명</label>
+				<label>게시글</label>
 				<input id="post-name" type="text">
 			</div>
 			<div class="content-serach-item">
@@ -129,17 +154,19 @@
 		<div class="content-work">
 			<table>
 				<colgroup>
-					<col width="150px">
+					<col width="100px">
 					<col width="200px">
 					<col width="100px">
 					<col width="200px">
+					<col width="100px">
 				</colgroup>
 				<thead>
 					<tr>
-						<th>게시글번호</th>
+						<th>No</th>
 						<th>게시판명</th>
 						<th>제목</th>
 						<th>작성일</th>
+						<th>작성자</th>
 					</tr>
 				</thead>
 				<tbody id="postBody"></tbody>

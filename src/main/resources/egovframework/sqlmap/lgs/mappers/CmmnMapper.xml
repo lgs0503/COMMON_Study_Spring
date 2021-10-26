@@ -11,6 +11,14 @@
 		ORDER BY	CODE_SORT ASC
 	</select>
 
+	<select id="selectBbsCode" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT		BBS_NAME AS CODE_NAME
+			 ,		BBS_NO AS CODE_VAL
+		FROM		BBS
+		WHERE		USE_YN = 'Y'
+		ORDER BY	BBS_NAME ASC
+	</select>
+
 	<select id="getMaxfileNo"  resultType="String">
 		SELECT		NVL(MAX(FILE_NO), 0) + 1
 		FROM		FILE_REPOSITROY

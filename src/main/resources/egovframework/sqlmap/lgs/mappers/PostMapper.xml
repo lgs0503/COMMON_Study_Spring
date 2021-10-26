@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lgs.admin.mapper.PostMapper">
+
+	<select id="searchList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT  B.BBS_NAME
+			,   A.POST_NO
+			,   A.POST_TITLE
+			,   A.POST_CONTENT
+			,   A.POST_STATUS
+			,   A.FILE_NO
+			,   A.FILE_NO2
+			,   TO_CHAR(A.INSERT_DATE, 'YYYY-MM-DD') AS INSERT_DATE
+			,   A.INSERT_USER_ID
+		FROM    POST A
+			,   BBS B
+		WHERE	A.BBS_NO  = B.BBS_NO
+		<if test="name != null and name != ''">
+		AND		A.POST_TITLE LIKE '%' || #{name} || '%'
+		</if>
+		<if test="bbs != null and bbs != ''">
+		AND		A.BBS_NO = #{bbs}
+		</if>
+		<if test="status != null and status != ''">
+		AND		A.POST_STATUS = #{status}
+		</if>
+		ORDER BY A.POST_STATUS DESC, A.POST_NO ASC
+	</select>
+	
+	<select id="countList" resultType="int">
+		SELECT	COUNT(*) AS CNT
+		FROM	POST
+	</select>
+
+	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT	A.POST_NO
+			,	A.BBS_NO
+			,	A.POST_TITLE
+			,	A.POST_CONTENT
+			,	A.INSERT_USER_ID
+			,	A.INSERT_DATE
+			,	A.UPDATE_DATE
+			,	FILE_NO
+			,	FILE_NO2
+		FROM	POST A
+		WHERE	A.POST_NO = #{post}
+	</select>
+
+	<insert id="add" parameterType="java.util.HashMap">
+		INSERT
+		INTO 	BBS
+		(	BBS_NO
+		,	BBS_NAME
+		, 	BBS_TYPE
+		,	USE_YN
+		,	COMMENT_USE_YN
+		,	FILE_USE_YN
+		<if test="remark != null and remark != ''">
+		,	REMARK
+		</if>
+		,	INSERT_DATE
+		,	UPDATE_DATE
+		)
+		VALUES
+		(	#{bbs}
+		,	#{bbsName}
+		,	#{bbstype}
+		,	#{useyn}
+		,	#{commentUseyn}
+		,	#{fileUseyn}
+		<if test="remark != null and remark != ''">
+		, 	#{remark}
+		</if>
+		,	SYSDATE
+		,	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+		UPDATE	BBS
+		SET 	BBS_NAME 		= #{bbsName}
+			, 	BBS_TYPE 		= #{bbstype}
+			,	USE_YN 			= #{useyn}
+			,	COMMENT_USE_YN 	= #{commentUseyn}
+			,	FILE_USE_YN		= #{fileUseyn}
+			,	REMARK 			= #{remark}
+			,	UPDATE_DATE		= SYSDATE
+		WHERE	BBS_NO			= #{bbs}
+	</update>
+
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE
+		FROM	BBS
+		WHERE	BBS_NO = #{bbs}
+	</delete>
+</mapper>
