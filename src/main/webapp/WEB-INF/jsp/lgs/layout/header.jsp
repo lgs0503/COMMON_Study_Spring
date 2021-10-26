@@ -118,7 +118,7 @@
 			<li class="nav-main"><a href="#">컨텐츠관리</a>
 				<ul class="nav-sub">
 					<li><a href="/admin/bbs">게시판관리</a></li>
-					<li><a href="/admin/bbswrite">게시글관리</a></li>
+					<li><a href="/admin/post">게시글관리</a></li>
 					<li><a href="/admin/content">컨텐츠관리</a></li>
 				</ul>
 			</li>
@@ -170,7 +170,7 @@
 		<li class="moba-nav-main"><a href="#">컨텐츠관리</a>
 			<ul class="moba-nav-sub">
 				<li><a href="/admin/bbs">게시판관리</a></li>
-				<li><a href="/admin/bbswrite">게시글관리</a></li>
+				<li><a href="/admin/post">게시글관리</a></li>
 				<li><a href="/admin/content">컨텐츠관리</a></li>
 			</ul>
 		</li>

@@ -46,6 +46,9 @@
     font-size: 13px;
     text-align: left;
 }
+.nav-sub > li > a:hover{
+    font-weight: bold;
+}
 .info-btn{
     background: url("/images/lgs/noimg.png") no-repeat left center;
     background-size: 50px 50px;

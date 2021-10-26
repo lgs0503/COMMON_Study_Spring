@@ -34,8 +34,8 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/admin/bbs")
-public class BbsController {
+@RequestMapping("/admin/post")
+public class PostController {
 
 	@Resource(name = "bbsService")
 	private BbsService bbsService;
@@ -43,18 +43,18 @@ public class BbsController {
 	private final static String SUCCESS = "1";
 
 	/**
-	 * name : bbsPage
-     * description : 게시판관리화면 을 보여준다.
+	 * name : postPage
+     * description : 게시글관리화면 을 보여준다.
 	 */
 	@GetMapping
-	public String bbsPage(Model model, HttpServletRequest request) throws Exception {
+	public String postPage(Model model, HttpServletRequest request) throws Exception {
 
-		return "admin/bbs/index";
+		return "admin/post/index";
 	}
 
 	/**
 	 * name : selectList (ajax)
-	 * description : 게시판 리스트를 보여준다.
+	 * description : 게시글 리스트를 보여준다.
 	 */
 	@RequestMapping(value = "/list")
 	public @ResponseBody
@@ -64,19 +64,19 @@ public class BbsController {
 
 		ModelAndView mv = new ModelAndView("jsonView");
 
-		mv.addObject("bbsList", bbsService.searchList(param));
-		mv.addObject("bbsCnt", bbsService.countList());
+		mv.addObject("postList", bbsService.searchList(param));
+		mv.addObject("postCnt", bbsService.countList());
 
 		return mv;
 	}
 
 	/**
-	 * name : selectBbs
-	 * description : 게시판정보를 보여준다.
+	 * name : selectPost
+	 * description : 게시글정보를 보여준다.
 	 */
 	@RequestMapping(value = "/read")
 	public @ResponseBody
-	ModelAndView selectBbs(@RequestParam Map<String, Object> param
+	ModelAndView selectPost(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("jsonView");
@@ -89,7 +89,7 @@ public class BbsController {
 	}
 
 	/**
-	 * name : overlapBbs (AJAX)
+	 * name : overlapPost (AJAX)
 	 * description : 게시판번호를 중복확인 한다.
 	 */
 	@RequestMapping(value = "/overlapBbs")
