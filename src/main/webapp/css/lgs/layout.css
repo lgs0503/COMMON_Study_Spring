@@ -177,6 +177,9 @@
 .moba-nav-sub > li{
     background-color: var(--form-color);
 }
+.moba-nav-sub > li:hover{
+    background-color: #bfc3c7;
+}
 .moba-nav-sub > li > a{
     display: block;
     text-decoration: none;

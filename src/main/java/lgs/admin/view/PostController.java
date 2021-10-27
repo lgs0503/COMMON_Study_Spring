@@ -81,32 +81,20 @@ public class PostController {
 			, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("jsonView");
 
-		List<Map<String, Object>> bbs = postService.search(param);
+		List<Map<String, Object>> post = postService.search(param);
 
-		mv.addObject("bbs", bbs);
+		mv.addObject("post", post);
 
 		return mv;
 	}
 
 	/**
-	 * name : overlapPost (AJAX)
-	 * description : 게시판번호를 중복확인 한다.
-	 */
-	@RequestMapping(value = "/overlapBbs")
-	public @ResponseBody String overlapBbs(@RequestParam Map<String, Object> param
-			, HttpSession session
-			, HttpServletRequest request) throws Exception {
-
-		return postService.overlapBbs(param);
-	}
-
-	/**
-	 * name : insertBbs (ajax)
+	 * name : insertPost (ajax)
 	 * description : 게시판을 추가한다..
 	 */
 	@RequestMapping(value = "/insert")
 	public @ResponseBody
-	String insertBbs(@RequestParam Map<String, Object> param
+	String insertPost(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
@@ -116,12 +104,12 @@ public class PostController {
 	}
 
 	/**
-	 * name : updateBbs (ajax)
+	 * name : updatePost (ajax)
 	 * description : 게시판을 수정한다.
 	 */
 	@RequestMapping(value = "/update")
 	public @ResponseBody
-	String updateBbs(@RequestParam Map<String, Object> param
+	String updatePost(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 
@@ -131,12 +119,12 @@ public class PostController {
 	}
 
 	/**
-	 * name : deleteBbs (ajax)
+	 * name : deletePost (ajax)
 	 * description : 게시판을 삭제한다.
 	 */
 	@RequestMapping(value = "/delete")
 	public @ResponseBody
-	String deleteBbs(@RequestParam Map<String, Object> param
+	String deletePost(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
 

@@ -59,9 +59,4 @@ public class PostServiceImpl extends EgovAbstractServiceImpl implements PostServ
 	public void delete(Map<String, Object> map) {
 		postMapper.delete(map);
 	}
-
-	@Override
-	public String overlapBbs(Map<String, Object> param) {
-		return postMapper.overlapBbs(param);
-	}
 }

@@ -40,51 +40,40 @@
 			,	A.INSERT_USER_ID
 			,	A.INSERT_DATE
 			,	A.UPDATE_DATE
-			,	FILE_NO
-			,	FILE_NO2
+			,	A.FILE_NO
+			,	A.FILE_NO2
 		FROM	POST A
 		WHERE	A.POST_NO = #{post}
 	</select>
 
 	<insert id="add" parameterType="java.util.HashMap">
 		INSERT
-		INTO 	BBS
-		(	BBS_NO
-		,	BBS_NAME
-		, 	BBS_TYPE
-		,	USE_YN
-		,	COMMENT_USE_YN
-		,	FILE_USE_YN
-		<if test="remark != null and remark != ''">
-		,	REMARK
-		</if>
+		INTO 	POST
+		(	POST_NO
+		,	BBS_NO
+		,	POST_TITLE
+		,	POST_CONTENT
+		,	INSERT_USER_ID
 		,	INSERT_DATE
 		,	UPDATE_DATE
+		,	FILE_NO
+		,	FILE_NO2
+		,	POST_STATUS
 		)
 		VALUES
-		(	#{bbs}
-		,	#{bbsName}
-		,	#{bbstype}
-		,	#{useyn}
-		,	#{commentUseyn}
-		,	#{fileUseyn}
-		<if test="remark != null and remark != ''">
-		, 	#{remark}
-		</if>
-		,	SYSDATE
-		,	SYSDATE
+		(
 		)
 	</insert>
 
 	<update id="update" parameterType="java.util.HashMap">
-		UPDATE	BBS
-		SET 	BBS_NAME 		= #{bbsName}
-			, 	BBS_TYPE 		= #{bbstype}
-			,	USE_YN 			= #{useyn}
-			,	COMMENT_USE_YN 	= #{commentUseyn}
-			,	FILE_USE_YN		= #{fileUseyn}
-			,	REMARK 			= #{remark}
-			,	UPDATE_DATE		= SYSDATE
+		UPDATE	POST
+		SET 	POST_TITLE
+			,	POST_CONTENT
+			,	INSERT_USER_ID
+			,	UPDATE_DATE
+			,	FILE_NO
+			,	FILE_NO2
+			,	POST_STATUS
 		WHERE	BBS_NO			= #{bbs}
 	</update>
 

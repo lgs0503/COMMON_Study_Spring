@@ -10,11 +10,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/js/lgs/cmmn.js?v=<%=System.currentTimeMillis() %>" defer></script>
-
-<!-- 에디터 -->
-
-
-
 <!-- 공통 커스텀 알림창 -->
 <style>
     .backgnd-block{

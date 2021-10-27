@@ -34,6 +34,4 @@ public interface PostMapper {
 	void update(Map<String, Object> map);
 
 	void delete(Map<String, Object> map);
-
-    String overlapBbs(Map<String, Object> param);
 }

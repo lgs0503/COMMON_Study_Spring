@@ -147,7 +147,7 @@
 }
 
 /* layer css */
-.layer-member{
+.layer-form{
     position: fixed;
     z-index: 200;
     top:50%;
@@ -188,6 +188,29 @@
 }
 .layer-col{
     width: 333px;
+}
+.layer-col-post{
+    width: 700px;
+}
+.layer-post-work{
+    height: 500px;
+}
+.layer-tr-post{
+    margin-bottom: 20px;
+    height: 25px;
+    line-height: 25px;
+}
+.layer-tr-post > label{
+    display: inline-block;
+    width: 110px;
+    line-height: 25px;
+}
+.layer-tr-post > input{
+    width: 80%;
+    height: 25px;
+}
+.layer-tr-post-file > input{
+    width: 200px;
 }
 .layer-tr{
     margin-bottom: 15px;
@@ -312,7 +335,7 @@
     .layer-work{
         display: block;
     }
-    .layer-member{
+    .layer-form{
         position: absolute;
         top:70%;
     }
@@ -327,5 +350,23 @@
         margin-bottom: 20px;
         width: 100%;
         padding : 0px;
+    }
+    .layer-col-post {
+        width: 300px;
+    }
+    .layer-tr-post > label{
+        width: 50px;
+    }
+    .layer-tr-post > input{
+        width: 90%;
+    }
+    .layer-tr-post{
+        height: 40px;
+    }
+    .layer-tr-post-file{
+        height: 65px;
+    }
+    .layer-post-work {
+        height: 600px;
     }
 }

@@ -217,7 +217,7 @@
         }
 
         //$('#layer-member').draggable({handle: ".layer-header"});
-        openLayer("layer-member");
+        openLayer("layer-form");
     };
 
 
@@ -292,7 +292,7 @@
 </script>
 <form id="regi-form">
     <input type="hidden" id="memberImageNo" name="memberImageNo">
-    <div class="layer-member" id="layer-member">
+    <div class="layer-form" id="layer-form">
         <div class="layer-header">
             <div class="layer-title">회원정보</div>
             <div class="later-close-btn" id="btn-layer-close">
