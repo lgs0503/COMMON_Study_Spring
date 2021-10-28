@@ -97,6 +97,9 @@ public class PostController {
 	String insertPost(@RequestParam Map<String, Object> param
 			, HttpSession session
 			, HttpServletRequest request) throws Exception {
+		if(session.getAttribute("id") != null){
+			param.put("insertId", session.getAttribute("id"));
+		}
 
 		postService.add(param);
 

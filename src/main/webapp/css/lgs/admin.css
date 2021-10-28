@@ -193,11 +193,13 @@
     width: 700px;
 }
 .layer-post-work{
-    height: 500px;
+    height: 550px;
 }
+.layer-tr-content{
+     height: 700px;
+ }
 .layer-tr-post{
     margin-bottom: 20px;
-    height: 25px;
     line-height: 25px;
 }
 .layer-tr-post > label{
@@ -207,6 +209,10 @@
 }
 .layer-tr-post > input{
     width: 80%;
+    height: 25px;
+}
+.layer-tr-post > select{
+    width: 150px;
     height: 25px;
 }
 .layer-tr-post-file > input{
@@ -360,13 +366,13 @@
     .layer-tr-post > input{
         width: 90%;
     }
-    .layer-tr-post{
-        height: 40px;
+    .layer-tr-post > select{
+        width: 90%;
     }
     .layer-tr-post-file{
         height: 65px;
     }
     .layer-post-work {
-        height: 600px;
+        height: 780px;
     }
 }

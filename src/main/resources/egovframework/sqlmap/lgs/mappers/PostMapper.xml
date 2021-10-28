@@ -61,25 +61,34 @@
 		,	POST_STATUS
 		)
 		VALUES
-		(
+		(	( SELECT NVL(MAX(POST_NO), 0) + 1
+		       FROM POST )
+		,	#{bbs}
+		,	#{postTitle}
+		,	#{postContent}
+		,	#{insertId}
+		,	SYSDATE
+		,	SYSDATE
+		,	NULL
+		,	NULL
+		,	#{postStatus}
 		)
 	</insert>
 
 	<update id="update" parameterType="java.util.HashMap">
 		UPDATE	POST
-		SET 	POST_TITLE
-			,	POST_CONTENT
-			,	INSERT_USER_ID
-			,	UPDATE_DATE
-			,	FILE_NO
-			,	FILE_NO2
-			,	POST_STATUS
+		SET 	POST_TITLE		= #{postTitle}
+			,	POST_CONTENT	= #{postContent}
+			,	UPDATE_DATE		= SYSDATE
+			,	FILE_NO			= NULL
+			,	FILE_NO2		= NULL
+			,	POST_STATUS		= #{postStatus}
 		WHERE	BBS_NO			= #{bbs}
 	</update>
 
 	<delete id="delete" parameterType="java.util.HashMap">
 		DELETE
-		FROM	BBS
-		WHERE	BBS_NO = #{bbs}
+		FROM	POST
+		WHERE	POST_NO = #{post}
 	</delete>
 </mapper>

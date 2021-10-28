@@ -45,6 +45,9 @@
 
         $content.summernote('reset');
 
+        comboLoad("combo-poststatus-layer", "P001", "SELECT");
+        comboLoad("combo-bbs-layer", "BBS", "SELECT");
+
         let layerType = "I";
 
         const btnSave = document.getElementById("btn-save");
@@ -161,7 +164,6 @@
 </script>
 <form id="post-form">
     <input type="hidden" name="post" id="post">
-    <input type="hidden" name="bbs" id="bbs">
     <div class="layer-form" id="layer-form">
         <div class="layer-header">
             <div class="layer-title">게시글정보</div>
@@ -173,15 +175,25 @@
             <div class="layer-col-post">
                 <div class="layer-tr-post">
                     <label>제목</label>
-                    <input type="text" name="post-title" id="post-title" placeholder="게시글제목" maxlength="15">
+                    <input type="text" name="postTitle" id="post-title" placeholder="게시글제목" maxlength="15">
+                </div>
+                <div class="layer-tr-post">
+                    <textarea id="post-content" name="postContent"></textarea>
+                </div>
+                <div class="layer-tr-post">
+                    <input type="hidden" name="postStatus" id="bbs">
+                    <label>게시판</label>
+                    <select id="combo-bbs-layer"></select>
+                </div>
+                <div class="layer-tr-post">
+                    <input type="hidden" name="postStatus" id="poststatus">
+                    <label>타입</label>
+                    <select id="combo-poststatus-layer"></select>
                 </div>
                 <div class="layer-tr-post layer-tr-post-file">
                     <label>파일</label>
                     <input type="file" name="file1" id="file1" >
                     <input type="file" name="file2" id="file2" >
-                </div>
-                <div class="layer-tr-post">
-                    <textarea id="post-content" name="post-content"></textarea>
                 </div>
             </div>
         </div>
