@@ -19,6 +19,7 @@ import lgs.cmmn.service.CmmnService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,8 +31,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * CmmnController 공통 컨트롤러
@@ -51,6 +54,9 @@ public class CmmnController {
     */
 	@Value("#{globalProperties['upload.filepath']}")
     private String filePath;
+
+    @Value("#{globalProperties['upload.summerNotePath']}")
+    private String summerNotePath;
 
     /**
      * name : selectCode (AJAX)
@@ -123,5 +129,37 @@ public class CmmnController {
             System.out.println(e);
         }
         return "redirect:form";
+    }
+
+    @RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json")
+    @ResponseBody
+    public ModelAndView uploadSummernoteImageFile(@RequestParam("file") MultipartFile multi
+            , HttpServletRequest request
+            , HttpServletResponse response
+            , Model model) {
+
+        ModelAndView mv = new ModelAndView("jsonView");
+        try {
+            /* 폴더생성 */
+            Utils.makeDir(filePath);
+
+            String originFilename = multi.getOriginalFilename();
+            String fileName = originFilename.substring(0, originFilename.lastIndexOf("."));
+            String extName = originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
+            String saveFileName = Utils.genSaveFileName();
+            long size = multi.getSize();
+
+            if (!multi.isEmpty()) {
+                File file = new File(filePath, saveFileName+extName);
+                multi.transferTo(file);
+                mv.addObject("url", summerNotePath+saveFileName+extName);
+
+                return mv;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return mv;
+
     }
 }

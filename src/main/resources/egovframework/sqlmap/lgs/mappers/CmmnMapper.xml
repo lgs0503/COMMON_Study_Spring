@@ -14,6 +14,8 @@
 	<select id="selectBbsCode" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT		BBS_NAME AS CODE_NAME
 			 ,		BBS_NO AS CODE_VAL
+			 ,		COMMENT_USE_YN
+			 ,		FILE_USE_YN
 		FROM		BBS
 		WHERE		USE_YN = 'Y'
 		ORDER BY	BBS_NAME ASC

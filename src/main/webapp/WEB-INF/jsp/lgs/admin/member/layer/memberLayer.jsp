@@ -42,6 +42,9 @@
             let data = {id: param};
             let url = '/admin/member/read';
 
+            comboLoad("combo-gender-layer", "G001", "SELECT");
+            comboLoad("combo-quiz-layer", "PW001", "SELECT");
+
             ajaxLoad(url, data, "json", function(result){
 
                 const sessionId = document.getElementById("sessionId").value;
@@ -89,9 +92,6 @@
                 document.getElementById(value).value = "";
             });
         }
-
-        comboLoad("combo-gender-layer", "G001", "SELECT");
-        comboLoad("combo-quiz-layer", "PW001", "SELECT");
 
         /* 주소 찾기 버튼 클릭 */
         btnLoaction.onclick = function(){

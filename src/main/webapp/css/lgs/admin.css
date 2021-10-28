@@ -223,6 +223,9 @@
     height: 25px;
     line-height: 25px;
 }
+#file-form{
+    display: none;
+}
 .layer-rowspan{
     height: 52px;
     position: relative;

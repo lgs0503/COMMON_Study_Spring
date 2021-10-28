@@ -106,6 +106,11 @@ function comboLoad(selectId, upperCode, type){
             option.value = value["CODE_VAL"];
             option.text = value["CODE_NAME"];
 
+            if(upperCode == 'BBS'){ /* 게시판 조회 */
+                option.dataset.comment =  value["COMMENT_USE_YN"];
+                option.dataset.file =  value["FILE_USE_YN"];
+            }
+
             sel.appendChild(option);
         });
 
@@ -304,4 +309,15 @@ function requiredChk(iptId, text){
     } else {
         return false;
     }
+}
+/* 서머노트 이미지 파일 업로드 */
+function uploadSummernoteImageFile(file, editor) {
+    let url = "/uploadSummernoteImageFile";
+    let data = new FormData();
+    data.append("file", file);
+
+    ajaxLoad(url, data, "json", function(result){
+        alert(result.url);
+        $(editor).summernote('insertImage', result.url);
+    }, false, false);
 }

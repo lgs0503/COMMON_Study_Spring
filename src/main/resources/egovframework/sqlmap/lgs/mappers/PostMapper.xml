@@ -14,7 +14,7 @@
 			,   A.INSERT_USER_ID
 		FROM    POST A
 			,   BBS B
-		WHERE	A.BBS_NO  = B.BBS_NO
+		WHERE	A.BBS_NO  = B.BBS_NO (+)
 		<if test="name != null and name != ''">
 		AND		A.POST_TITLE LIKE '%' || #{name} || '%'
 		</if>
@@ -37,11 +37,14 @@
 			,	A.BBS_NO
 			,	A.POST_TITLE
 			,	A.POST_CONTENT
+			,   A.POST_STATUS
 			,	A.INSERT_USER_ID
 			,	A.INSERT_DATE
 			,	A.UPDATE_DATE
 			,	A.FILE_NO
 			,	A.FILE_NO2
+			, 	FN_GET_FILE_DATA(A.FILE_NO, 'FULLNAME') AS FILE_NAME
+			, 	FN_GET_FILE_DATA(A.FILE_NO2, 'FULLNAME') AS FILE_NAME2
 		FROM	POST A
 		WHERE	A.POST_NO = #{post}
 	</select>
@@ -69,8 +72,8 @@
 		,	#{insertId}
 		,	SYSDATE
 		,	SYSDATE
-		,	NULL
-		,	NULL
+		,	#{postFileOne}
+		,	#{postFileTwo}
 		,	#{postStatus}
 		)
 	</insert>
@@ -80,10 +83,11 @@
 		SET 	POST_TITLE		= #{postTitle}
 			,	POST_CONTENT	= #{postContent}
 			,	UPDATE_DATE		= SYSDATE
-			,	FILE_NO			= NULL
-			,	FILE_NO2		= NULL
+			,	FILE_NO			= #{postFileOne}
+			,	FILE_NO2		= #{postFileTwo}
 			,	POST_STATUS		= #{postStatus}
 		WHERE	BBS_NO			= #{bbs}
+		  AND	POST_NO			= #{post}
 	</update>
 
 	<delete id="delete" parameterType="java.util.HashMap">

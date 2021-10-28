@@ -124,6 +124,7 @@
 			</li>
 			<li class="nav-main"><a href="#">기타관리</a>
 				<ul class="nav-sub">
+					<li><a href="/admin/comment">댓글관리</a></li>
 					<li><a href="/admin/banner">배너관리</a></li>
 					<li><a href="/admin/popup">팝업관리</a></li>
 				</ul>
@@ -176,6 +177,7 @@
 		</li>
 		<li class="moba-nav-main"><a href="#">기타관리</a>
 			<ul class="moba-nav-sub">
+				<li><a href="/admin/comment">댓글관리</a></li>
 				<li><a href="/admin/banner">배너관리</a></li>
 				<li><a href="/admin/popup">팝업관리</a></li>
 			</ul>

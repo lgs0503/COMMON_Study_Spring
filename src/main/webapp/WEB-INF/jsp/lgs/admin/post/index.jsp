@@ -113,7 +113,7 @@
 
 			for(let i = 0 ; i < listDtl.length ; i++){
 				listDtl[i].onclick = function () {
-					loadLayer("U", this.innerText);
+					loadLayer("U", this.innerText.replace("공지", ""));
 				}
 			}
 		});
